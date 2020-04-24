@@ -7,13 +7,29 @@
                 </router-link>
             </div>
             <div class="nav_module">
-                <div class="nav_item">文库</div>
-                <div class="nav_item">论坛</div>
+                <div class="nav_item">
+                    <router-link to="/">
+                        文库
+                    </router-link>
+                </div>
+                <div class="nav_item">
+                    <router-link to="/">
+                        论坛
+                    </router-link>
+                </div>
             </div>
             <div class="nav_user" :style="{ width: logoWidth + 'px' }">
                 <div class="login_register">
-                    <div class="nav_item">登录</div>
-                    <div class="nav_item">注册</div>
+                    <div class="nav_item">
+                        <router-link to="/">
+                            登录
+                        </router-link>
+                    </div>
+                    <div class="nav_item">
+                        <router-link to="/">
+                            注册
+                        </router-link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,11 +127,14 @@
 
     .nav_item {
         display: inline-block;
-        color: #dcdee2;
         font-size: 23px;
         font-family: YouYuan;
         line-height: 60px;
         margin: 0 10px;
+    }
+
+    .nav_item a{
+        color: #dcdee2;
     }
 
     .nav_module {
@@ -127,7 +146,7 @@
         float: left;
     }
 
-    .login_register{
+    .login_register {
         float: right;
         width: 132px;
         margin-right: 10%;
@@ -145,6 +164,7 @@
         color: #fff;
         padding-top: 30px;
         text-align: center;
+        font-family: YouYuan;
         background-color: #515a6e;
     }
 
