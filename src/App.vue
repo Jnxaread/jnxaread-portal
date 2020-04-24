@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="nav_user" :style="{ width: logoWidth + 'px' }">
-                <div class="login_register">
+                <div class="signIn_signUp">
                     <div class="nav_item">
                         <router-link to="/">
                             登录
@@ -146,7 +146,7 @@
         float: left;
     }
 
-    .login_register {
+    .signIn_signUp {
         float: right;
         width: 132px;
         margin-right: 10%;
