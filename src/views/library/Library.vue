@@ -1,204 +1,204 @@
 <template>
     <div class="library">
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
             </div>
         </div>
-        <div class="fiction">
+        <div class="fictionInfo">
             <div class="updateInfo">
                 <div class="title">作品名称</div>
                 <div class="chapter">章节名称</div>
                 <div class="updateTime">更新时间</div>
             </div>
-            <div class="fictionInfo">
+            <div class="briefInfo">
                 <div class="author">作者</div>
                 <div class="count">作品字数、点击量等相关信息</div>
                 <div class="label">作品标签</div>
@@ -218,13 +218,13 @@
         width: 100%;
     }
 
-    .fiction {
+    .fictionInfo {
         width: 100%;
         height: 120px;
         background-color: #f5f5f5;
         border: 1px solid #c4c4c4;
         border-radius: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 6px;
     }
 
     .updateInfo {
@@ -250,7 +250,7 @@
         font-size: 16px;
     }
 
-    .fictionInfo {
+    .briefInfo {
         float: right;
     }
 
