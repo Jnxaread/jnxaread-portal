@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Library from '../views/library/Library.vue';
-import Fiction from '../views/library/Fiction.vue';
+import Library from '../views/library/Library';
+import Fiction from '../views/library/Fiction';
+import Chapter from '../views/library/Chapter';
 
 Vue.use(VueRouter)
 
@@ -18,9 +19,14 @@ const routes = [
         component: Library
     },
     {
-        path:'/fiction',
-        name:'Fiction',
-        component:Fiction
+        path: '/fiction',
+        name: 'Fiction',
+        component: Fiction
+    },
+    {
+        path: '/chapter',
+        name: 'Chapter',
+        component: Chapter
     },
 ];
 
