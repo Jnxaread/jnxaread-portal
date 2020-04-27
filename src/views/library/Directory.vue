@@ -1,12 +1,12 @@
 <template>
-    <div class="fiction">
-        <div class="detail">
-            <div class="title">小说标题</div>
-            <div class="author">作者</div>
-            <div class="label">标签</div>
-            <div class="brief">简介</div>
+    <div class="directory">
+        <div class="fiction">
+            <div class="fiction_title">诡秘之主</div>
+            <div class="fiction_author">作者:遥望千山</div>
+            <div class="fiction_wordCount">字数:3567</div>
+            <div class="fiction_label">标签:<span>【同人】【种田】【书耽】【长佩】</span></div>
         </div>
-        <div class="directory">
+        <div class="directory_main">
             <table class="table_chapter">
                 <tr class="table_header">
                     <th>章节号</th>
@@ -73,102 +73,57 @@
                 </tr>
             </table>
         </div>
-        <div class="commentList">
-            <div class="commentList_title">书评区</div>
-            <div class="comment">
-                <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
-                </div>
-                <div class="comment_content">主要内容</div>
-            </div>
-            <div class="comment">
-                <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
-                </div>
-                <div class="comment_content">主要内容</div>
-            </div>
-            <div class="comment">
-                <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
-                </div>
-                <div class="comment_content">主要内容</div>
-            </div>
-            <div class="comment">
-                <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
-                </div>
-                <div class="comment_content">主要内容</div>
-            </div>
-            <div class="comment">
-                <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
-                </div>
-                <div class="comment_content">主要内容</div>
-            </div>
-            <div class="comment">
-                <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
-                </div>
-                <div class="comment_content">主要内容</div>
-            </div>
-        </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Fiction"
+        name: "Directory"
     }
 </script>
 
-<style scoped>
-    .fiction {
+<style scoped lang="scss">
+    .directory {
         width: 100%;
+
     }
 
-    .detail {
+    .fiction {
         width: 100%;
         background-color: #f5f5f5;
         border: 1px solid #c4c4c4;
         border-radius: 6px;
-        padding: 20px 50px;
+        padding: 15px 25px;
         margin-bottom: 6px;
     }
 
-    .title {
+    .fiction_title {
         font-size: 1.8em;
         font-weight: bolder;
-        text-align: center;
-        margin: 10px 0;
+        margin-bottom: 10px;
     }
 
-    .author {
-        font-size: 1.3em;
-        font-weight: bold;
-        text-align: center;
-        margin: 20px 0;
-    }
-
-    .label {
+    .fiction_author {
         font-size: 1.2em;
-        font-weight: bolder;
-        text-align: center;
-        margin: 20px 0;
+        margin-right: 20px;
+        display: inline-block;
     }
 
-    .brief {
+    .fiction_wordCount {
         font-size: 1.2em;
-        text-align: center;
-        margin: 20px 0;
+        margin-right: 20px;
+        display: inline-block;
     }
 
-    .directory {
+    .fiction_label {
+        font-size: 1.2em;
+        display: inline-block;
+        span {
+            font-weight: bold;
+        }
+    }
+
+    .directory_main {
         width: 100%;
         background-color: #f5f5f5;
         border: 1px solid #c4c4c4;
@@ -231,48 +186,4 @@
     .chapter_submitTime {
         text-align: center;
     }
-
-    .commentList{
-    }
-
-    .commentList_title{
-        font-size: 1.8em;
-        font-weight: bolder;
-        text-align: center;
-        margin: 20px 0;
-    }
-
-    .comment {
-        width: 100%;
-        background-color: #f5f5f5;
-        border: 1px solid #c4c4c4;
-        border-radius: 6px;
-        padding: 10px 15px;
-        margin-bottom: 6px;
-    }
-
-    .comment_header{
-        padding: 0 20px;
-        border-bottom: 1px solid #c4c4c4;
-    }
-
-    .comment_author{
-        font-size: 1.2em;
-        font-weight: bolder;
-        margin: 10px 0;
-        display: inline-block;
-    }
-
-    .comment_submitTime{
-        font-size: 1.1em;
-        margin: 10px 15px;
-        display: inline-block;
-    }
-
-    .comment_content{
-        font-size: 1.3em;
-        padding: 10px 40px;
-        line-height: 38px;
-    }
-
 </style>

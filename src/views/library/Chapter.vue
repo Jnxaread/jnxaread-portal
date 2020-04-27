@@ -201,7 +201,7 @@
         <div class="comment">
             <div class="comment_header">
                 <div class="comment_author">发布者</div>
-                <div class="comment_submitTime">发布时间</div>
+                <div class="comment_submitTime">2020-04-25 19:32:56</div>
             </div>
             <div class="comment_content">主要内容</div>
         </div>
