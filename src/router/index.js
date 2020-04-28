@@ -8,6 +8,7 @@ import Directory from '../views/library/Directory';
 import SignIn from '../views/user/SignIn';
 import SignUp from '../views/user/SignUp';
 import UCenter from '../views/user/UCenter';
+import Forum from '../views/forum/Forum';
 
 Vue.use(VueRouter);
 
@@ -51,6 +52,11 @@ const routes = [
         path:'/ucenter',
         name:'UCenter',
         component:UCenter
+    },
+    {
+        path:'/forum',
+        name:'Forum',
+        component:Forum
     }
 ];
 

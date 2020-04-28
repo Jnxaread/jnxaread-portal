@@ -13,7 +13,7 @@
                     </router-link>
                 </div>
                 <div class="nav_item">
-                    <router-link to="/">
+                    <router-link to="/forum">
                         论坛
                     </router-link>
                 </div>
