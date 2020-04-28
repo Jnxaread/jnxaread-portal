@@ -5,6 +5,8 @@ import Library from '../views/library/Library';
 import Fiction from '../views/library/Fiction';
 import Chapter from '../views/library/Chapter';
 import Directory from '../views/library/Directory';
+import SignIn from '../views/user/SignIn';
+import SignUp from '../views/user/SignUp';
 
 Vue.use(VueRouter)
 
@@ -34,6 +36,16 @@ const routes = [
         name: 'Directory',
         component: Directory
     },
+    {
+        path: '/signIn',
+        name: 'SignIn',
+        component: SignIn
+    },
+    {
+        path: '/signUp',
+        name: 'SignUp',
+        component: SignUp
+    }
 ];
 
 const router = new VueRouter({

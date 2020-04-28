@@ -21,12 +21,12 @@
             <div class="nav_user" :style="{ width: logoWidth + 'px' }">
                 <div class="signIn_signUp">
                     <div class="nav_item">
-                        <router-link to="/">
+                        <router-link to="/signIn">
                             登录
                         </router-link>
                     </div>
                     <div class="nav_item">
-                        <router-link to="/">
+                        <router-link to="/signUp">
                             注册
                         </router-link>
                     </div>
@@ -62,7 +62,7 @@
             }
         },
         mounted() {
-            this.minHeight = document.documentElement.clientHeight - 170;
+            this.minHeight = document.documentElement.clientHeight - 170 - 10;
             this.logoWidth = (window.innerWidth - 1217) / 2;
         },
         computed: {
