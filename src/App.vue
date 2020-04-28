@@ -112,7 +112,8 @@
     .header {
         width: 100%;
         height: 60px;
-        background-color: #515a6e;
+        /*background-color: #515a6e;*/
+        background-color: #222;
     }
 
     .logo {
@@ -165,7 +166,8 @@
         padding-top: 30px;
         text-align: center;
         font-family: YouYuan;
-        background-color: #515a6e;
+        /*background-color: #515a6e;*/
+        background-color: #222;
     }
 
     .about a {
