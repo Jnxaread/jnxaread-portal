@@ -7,8 +7,9 @@ import Chapter from '../views/library/Chapter';
 import Directory from '../views/library/Directory';
 import SignIn from '../views/user/SignIn';
 import SignUp from '../views/user/SignUp';
+import UCenter from '../views/user/UCenter';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
     /*{
@@ -45,6 +46,11 @@ const routes = [
         path: '/signUp',
         name: 'SignUp',
         component: SignUp
+    },
+    {
+        path:'/ucenter',
+        name:'UCenter',
+        component:UCenter
     }
 ];
 
