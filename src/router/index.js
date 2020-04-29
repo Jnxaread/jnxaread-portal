@@ -9,7 +9,8 @@ import SignIn from '../views/user/SignIn';
 import SignUp from '../views/user/SignUp';
 import UCenter from '../views/user/UCenter';
 import Forum from '../views/forum/Forum';
-import Topic from '../views/forum/Topic'
+import Topic from '../views/forum/Topic';
+import Submit from '../views/forum/Submit';
 
 Vue.use(VueRouter);
 
@@ -63,6 +64,11 @@ const routes = [
         path: '/topic',
         name: 'Topic',
         component: Topic
+    },
+    {
+        path:'/submit',
+        name:'Submit',
+        component:Submit
     }
 ];
 

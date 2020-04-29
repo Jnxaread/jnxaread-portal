@@ -24,7 +24,7 @@
                             <router-link to="/">发表作品</router-link>
                         </DropdownItem>
                         <DropdownItem class="toSubmit">
-                            <router-link to="/">发表帖子</router-link>
+                            <router-link to="/submit">发表帖子</router-link>
                         </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
