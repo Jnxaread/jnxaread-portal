@@ -118,8 +118,6 @@
 <style lang="scss">
     .app {
         background-color: #FFFFFF;
-        /*取消双击选中文字*/
-        user-select: none;
     }
 
     .header {
@@ -127,6 +125,8 @@
         height: 60px;
         /*background-color: #515a6e;*/
         background-color: #222;
+        /*取消双击选中文字*/
+        user-select: none;
     }
 
     .logo {
@@ -208,6 +208,8 @@
         font-family: YouYuan;
         /*background-color: #515a6e;*/
         background-color: #222;
+        /*取消双击选中文字*/
+        user-select: none;
     }
 
     .about a {

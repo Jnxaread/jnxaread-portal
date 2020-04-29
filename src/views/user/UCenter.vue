@@ -82,6 +82,7 @@
         display: inline-block;
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
+        user-select: none;
     }
 
     .tabPane:hover {

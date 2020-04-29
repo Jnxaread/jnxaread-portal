@@ -192,7 +192,7 @@
                     嗯，肯定是疯了。
                 </p>
             </div>
-            <div class="paging">
+            <div class="turningBox">
                 <div class="turing">上一章</div>
                 <div class="directory">目录</div>
                 <div class="turing">下一章</div>
@@ -227,6 +227,8 @@
         border-radius: 6px;
         padding: 20px 50px;
         margin-bottom: 6px;
+        /*取消双击选中文字*/
+        user-select: none;
     }
 
     .title {
@@ -251,7 +253,7 @@
         line-height: 38px;
     }
 
-    .paging {
+    .turningBox {
         font-size: 1.3em;
         font-weight: bolder;
         font-family: YouYuan;
@@ -268,6 +270,7 @@
         display: inline-block;
         border-radius: 6px;
         margin: 0 10px;
+        cursor: pointer;
     }
 
     .directory {
@@ -278,6 +281,7 @@
         border: 2px solid #666;
         border-radius: 6px;
         margin: 0 10px;
+        cursor: pointer;
     }
 
     .comment {

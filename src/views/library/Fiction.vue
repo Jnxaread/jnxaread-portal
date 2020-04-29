@@ -124,6 +124,8 @@
         border: 2px solid #666;
         border-radius: 6px;
         margin: 0 10px;
+        cursor: pointer;
+        user-select: none;
     }
 
     .commentArea {

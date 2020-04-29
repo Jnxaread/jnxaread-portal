@@ -9,6 +9,7 @@ import SignIn from '../views/user/SignIn';
 import SignUp from '../views/user/SignUp';
 import UCenter from '../views/user/UCenter';
 import Forum from '../views/forum/Forum';
+import Topic from '../views/forum/Topic'
 
 Vue.use(VueRouter);
 
@@ -49,14 +50,19 @@ const routes = [
         component: SignUp
     },
     {
-        path:'/ucenter',
-        name:'UCenter',
-        component:UCenter
+        path: '/ucenter',
+        name: 'UCenter',
+        component: UCenter
     },
     {
-        path:'/forum',
-        name:'Forum',
-        component:Forum
+        path: '/forum',
+        name: 'Forum',
+        component: Forum
+    },
+    {
+        path: '/topic',
+        name: 'Topic',
+        component: Topic
     }
 ];
 
