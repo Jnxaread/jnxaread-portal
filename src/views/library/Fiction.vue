@@ -1,80 +1,19 @@
 <template>
     <div class="fiction">
-        <div class="detail">
-            <div class="title">小说标题</div>
-            <div class="author">作者</div>
-            <div class="label">标签</div>
-            <div class="brief">简介</div>
+        <div class="fiction_main">
+            <div class="detail">
+                <div class="title">小说标题</div>
+                <div class="author">作者</div>
+                <div class="label">标签</div>
+                <div class="brief">简介</div>
+            </div>
+            <div class="turningBox">
+                <div class="turning">开始阅读</div>
+                <div class="turning">章节目录</div>
+            </div>
         </div>
-        <div class="directory">
-            <table class="table_chapter">
-                <tr class="table_header">
-                    <th>章节号</th>
-                    <th>标题</th>
-                    <th>概要</th>
-                    <th>字数</th>
-                    <th>查看</th>
-                    <th>评论</th>
-                    <th>发布时间</th>
-                </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">2000</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
-                </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">1</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴里塞，好些年没吃过老妈做的饭了，当年做的挺好吃的饭，如今除了吃出了怀旧的味道以外</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
-                </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">1</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴里塞，好些年没吃过老妈做的饭了，当年做的挺好吃的饭，如今除了吃出了怀旧的味道以外</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
-                </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">1</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴里塞，好些年没吃过老妈做的饭了，当年做的挺好吃的饭，如今除了吃出了怀旧的味道以外</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
-                </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">1</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴里塞，好些年没吃过老妈做的饭了，当年做的挺好吃的饭，如今除了吃出了怀旧的味道以外</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
-                </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">1</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴里塞，好些年没吃过老妈做的饭了，当年做的挺好吃的饭，如今除了吃出了怀旧的味道以外</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
-                </tr>
-            </table>
-        </div>
-        <div class="commentList">
-            <div class="commentList_title">书评区</div>
+        <div class="commentArea">
+            <div class="commentArea_title">书评区</div>
             <div class="comment">
                 <div class="comment_header">
                     <div class="comment_author">发布者</div>
@@ -132,13 +71,16 @@
         width: 100%;
     }
 
-    .detail {
+    .fiction_main {
         width: 100%;
         background-color: #f5f5f5;
         border: 1px solid #c4c4c4;
         border-radius: 6px;
-        padding: 20px 50px;
         margin-bottom: 6px;
+    }
+
+    .detail {
+        padding: 20px 50px;
     }
 
     .title {
@@ -168,78 +110,30 @@
         margin: 20px 0;
     }
 
-    .directory {
-        width: 100%;
-        background-color: #f5f5f5;
-        border: 1px solid #c4c4c4;
+    .turningBox {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .turning {
+        width: 570px;
+        height: 38px;
+        font-weight: bold;
+        line-height: 34px;
+        display: inline-block;
+        border: 2px solid #666;
         border-radius: 6px;
-        padding: 10px 15px;
-        margin-bottom: 6px;
+        margin: 0 10px;
     }
 
-    .table_chapter {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 5px;
+    .commentArea {
     }
 
-    .table_header {
-        height: 40px;
-        font-size: 1.3em;
-        font-weight: bold;
-        border-bottom: 2px solid #999;
-    }
-
-    .table_body {
-        border-bottom: 1px solid #ddd;
-    }
-
-    .chapter_number {
-        width: 6%;
-        font-size: 1.2em;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .chapter_title {
-        width: 20%;
-        font-size: 1.2em;
-        font-weight: bold;
-        text-align: center;
-        padding: 8px 0;
-    }
-
-    .chapter_brief {
-        width: 45%;
-        font-size: 1.1em;
-        font-weight: bold;
-        padding: 8px 0;
-    }
-
-    .chapter_wordCount {
-        text-align: center;
-    }
-
-    .chapter_viewCount {
-        text-align: center;
-    }
-
-    .chapter_commentCount {
-        text-align: center;
-    }
-
-    .chapter_submitTime {
-        text-align: center;
-    }
-
-    .commentList{
-    }
-
-    .commentList_title{
-        font-size: 1.8em;
+    .commentArea_title {
+        font-size: 1.6em;
         font-weight: bolder;
         text-align: center;
-        margin: 20px 0;
+        margin: 15px 0;
     }
 
     .comment {
@@ -251,25 +145,25 @@
         margin-bottom: 6px;
     }
 
-    .comment_header{
+    .comment_header {
         padding: 0 20px;
         border-bottom: 1px solid #c4c4c4;
     }
 
-    .comment_author{
+    .comment_author {
         font-size: 1.2em;
         font-weight: bolder;
         margin: 10px 0;
         display: inline-block;
     }
 
-    .comment_submitTime{
+    .comment_submitTime {
         font-size: 1.1em;
         margin: 10px 15px;
         display: inline-block;
     }
 
-    .comment_content{
+    .comment_content {
         font-size: 1.3em;
         padding: 10px 40px;
         line-height: 38px;

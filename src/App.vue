@@ -160,7 +160,7 @@
         margin: 0 15px;
     }
 
-    .toSubmit{
+    .toSubmit {
         a {
             color: #333333;
         }
