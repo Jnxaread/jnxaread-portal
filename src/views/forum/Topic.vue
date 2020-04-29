@@ -20,6 +20,9 @@
                 <p>copy from 酒酿咸鱼/gemstone</p>
                 <p>祝：大家聊天开心^_^</p>
             </div>
+            <div class="reply_operate">
+                <a @click="showModal(0)">回复</a>
+            </div>
         </div>
         <div class="replyArea">
             <div class="detail">
@@ -31,13 +34,40 @@
                     <div class="info_submitTime">2020-04-25 19:32:56</div>
                     <div class="info_floor">1楼</div>
                 </div>
-                <div class="content">主要内容</div>
+                <div class="content">
+                    <div class="reply_quote">
+                        <div class="quote_icon_e">
+                            <div class="reply_quote_head">
+                                <span class="reply_quote_info">红昭愿 发表于 2020-04-16 15:36:45</span>
+                                <span class="reply_quote_floor">9楼</span>
+                            </div>
+                            被引用的内容
+                        </div>
+                    </div>
+                    主要内容
+                </div>
+                <div class="reply_operate">
+                    <a @click="showModal(1)">回复</a>
+                </div>
             </div>
         </div>
         <div class="submitArea">
             <editor ref="editor" :isClear="isClear"></editor>
             <Button class="submit_button" type="primary" size="large" @click="submitReply(0)">回复</Button>
         </div>
+        <Modal class="modal_reply" v-model="modal" footer-hide width="1000">
+            <div class="reply_quote" v-if="isShowQu">
+                <div class="quote_icon_e">
+                    <div class="reply_quote_head">
+                        <span class="reply_quote_info">红昭愿 发表于 2014-06-18 22:36:44</span>
+                        <span class="reply_quote_floor">1楼</span>
+                    </div>
+                    <div class="modal_reply_overflow">啦啦啦啦啦啦啦啦</div>
+                </div>
+            </div>
+            <editor ref="editor_qu" :isClear="isClear"></editor>
+            <Button class="submit_button" type="primary" size="large" @click="submitReply(1)">回复</Button>
+        </Modal>
     </div>
 </template>
 
@@ -47,6 +77,36 @@
     export default {
         name: "Topic",
         components: {Editor},
+        data() {
+            return {
+                topic: {},
+                replyList: [],
+                pageReplyList: [],
+                newReply: {},
+                toQuote: {},
+                quoteFloor: 0,
+                modal: false,
+                isShowQu: true,
+                isClear: false,
+                paging: {
+                    currentPage: 1,
+                    pageSize: 50,
+                    total: 0,
+                },
+            }
+        },
+        methods: {
+            showModal(floor) {
+                if (floor == 0) {
+                    this.isShowQu = false;
+                } else {
+                    this.isShowQu = true;
+                    this.toQuote = this.replyList[floor - 1];
+                    this.quoteFloor = floor;
+                }
+                this.modal = true;
+            },
+        }
     }
 </script>
 
@@ -103,6 +163,64 @@
         margin-top: 20px;
     }
 
+    .reply_quote {
+        width: 100%;
+        margin: 10px 0px 25px 0px;
+        padding: 10px 10px 10px 65px;
+        border-radius: 10px;
+        background: #e8eaec url("../../assets/icons/icon_quote_s.gif") no-repeat 20px 6px;
+    }
+
+    .quote_icon_e {
+        padding: 0px 65px 10px 0px;
+        background: url("../../assets/icons/icon_quote_e.gif") no-repeat 98% 100%;
+    }
+
+    .reply_quote_info {
+        font-size: 1em;
+        color: #808695;
+    }
+
+    .reply_quote_floor {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: darkgrey;
+        margin-left: 15px;
+    }
+
+    .reply_operate {
+        width: 100%;
+        height: 50px;
+        opacity: 0.2;
+        user-select: none;
+        line-height: 50px;
+        padding: 0px 15px;
+        margin-top: 15px;
+        background: url("../../assets/icons/lattice.png") left top repeat-x;
+
+        a {
+            color: #333333;
+            padding: 5px 10px 5px 25px;
+            background: url("../../assets/icons/fastreply.gif") no-repeat 0 50%;
+        }
+    }
+
+    .reply_operate:hover {
+        width: 100%;
+        height: 50px;
+        opacity: 1;
+        line-height: 50px;
+        padding: 0px 15px;
+        margin-top: 15px;
+        background: url("../../assets/icons/lattice.png") left top repeat-x;
+
+        a {
+            color: #333333;
+            padding: 5px 10px 5px 25px;
+            background: url("../../assets/icons/fastreply.gif") no-repeat 0 50%;
+        }
+    }
+
     .submitArea {
         width: 100%;
         background-color: #f5f5f5;
@@ -114,5 +232,19 @@
 
     .submit_button {
         width: 120px;
+    }
+
+    .modal_reply /deep/ .ivu-modal-body {
+        padding: 45px 30px 30px 30px !important;
+    }
+
+    .modal_reply_overflow {
+        width: 800px;
+        height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 </style>
