@@ -17,15 +17,26 @@
                         论坛
                     </router-link>
                 </div>
+                <Dropdown>
+                    <div class="nav_item_create">创作</div>
+                    <DropdownMenu slot="list">
+                        <DropdownItem class="toSubmit">
+                            <router-link to="/">发表作品</router-link>
+                        </DropdownItem>
+                        <DropdownItem class="toSubmit">
+                            <router-link to="/">发表帖子</router-link>
+                        </DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
             </div>
             <div class="nav_user" :style="{ width: logoWidth + 'px' }">
                 <div class="signIn_signUp">
-                    <div class="nav_item">
+                    <div class="nav_item_sign">
                         <router-link to="/signIn">
                             登录
                         </router-link>
                     </div>
-                    <div class="nav_item">
+                    <div class="nav_item_sign">
                         <router-link to="/signUp">
                             注册
                         </router-link>
@@ -38,7 +49,7 @@
         </div>
         <div class="footer">
             <div class="about">
-                <router-link to="/">网站介绍</router-link>
+                <router-link to="/">关于我们</router-link>
                 |
                 <router-link to="/">联系方式</router-link>
                 |
@@ -107,6 +118,8 @@
 <style lang="scss">
     .app {
         background-color: #FFFFFF;
+        /*取消双击选中文字*/
+        user-select: none;
     }
 
     .header {
@@ -131,11 +144,38 @@
         font-size: 23px;
         font-family: YouYuan;
         line-height: 60px;
-        margin: 0 10px;
+        margin: 0 15px;
+
+        a {
+            color: #dcdee2;
+        }
     }
 
-    .nav_item a{
+    .nav_item_create {
+        display: inline-block;
         color: #dcdee2;
+        font-size: 23px;
+        font-family: YouYuan;
+        line-height: 60px;
+        margin: 0 15px;
+    }
+
+    .toSubmit{
+        a {
+            color: #333333;
+        }
+    }
+
+    .nav_item_sign {
+        display: inline-block;
+        font-size: 23px;
+        font-family: YouYuan;
+        line-height: 60px;
+        margin: 0 10px;
+
+        a {
+            color: #dcdee2;
+        }
     }
 
     .nav_module {

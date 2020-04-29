@@ -80,8 +80,6 @@
         padding: 8px 12px;
         margin-right: 8px;
         display: inline-block;
-        /*取消双击选中文字*/
-        user-select:none;
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
     }
