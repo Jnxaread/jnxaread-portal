@@ -10,7 +10,7 @@
                     <Input type="password" v-model="form.password"/>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" @click="login">登录</Button>
+                    <Button class="button_login" type="primary" @click="login">登录</Button>
                 </FormItem>
             </Form>
         </div>
@@ -81,9 +81,20 @@
     .form {
         width: 80%;
         margin: 30px auto;
+    }
 
-        Button {
-            width: 100%;
-        }
+    .button_login{
+        width: 100%;
+        border: 0;
+        box-shadow: none;
+        background-color: #999;
+    }
+
+    .ivu-btn:focus {
+        box-shadow: none;
+    }
+
+    .ivu-btn:active {
+        box-shadow: none;
     }
 </style>

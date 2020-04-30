@@ -165,6 +165,17 @@
 
     .form_button {
         width: 100%;
+        border: 0;
+        box-shadow: none;
+        background-color: #999;
+    }
+
+    .ivu-btn:focus {
+        box-shadow: none;
+    }
+
+    .ivu-btn:active {
+        box-shadow: none;
     }
 
     .emailCode_button {
