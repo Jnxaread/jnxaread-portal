@@ -11,6 +11,7 @@ import UCenter from '../views/user/UCenter';
 import Forum from '../views/forum/Forum';
 import Topic from '../views/forum/Topic';
 import Submit from '../views/forum/Submit';
+import Create from '../views/library/Create'
 
 Vue.use(VueRouter);
 
@@ -66,9 +67,14 @@ const routes = [
         component: Topic
     },
     {
-        path:'/submit',
-        name:'Submit',
-        component:Submit
+        path: '/submit',
+        name: 'Submit',
+        component: Submit
+    },
+    {
+        path: '/create',
+        name: 'Create',
+        component: Create
     }
 ];
 

@@ -44,20 +44,24 @@
         width: 95%;
         padding: 10px 30px;
         margin: 20px auto;
+
+        h2 {
+            text-align: center;
+        }
     }
 
     .topic_top {
         width: 100%;
-        margin-top: 20px;
+        margin-top: 30px;
     }
 
-    .topic_top /deep/ .ivu-input {
+    /*.topic_top /deep/ .ivu-input {
         background-color: #f5f5f5;
     }
 
     .topic_top /deep/ .ivu-input-word-count {
         background-color: #f5f5f5;
-    }
+    }*/
 
     .topic_top /deep/ .ivu-input:focus {
         box-shadow: none;
@@ -88,6 +92,10 @@
     .topic_content {
         width: 100%;
         margin-top: 15px;
+    }
+
+    .topic_content /deep/ .w-e-text {
+        background-color: #fff;
     }
 
     .submit_button {

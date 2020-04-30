@@ -21,7 +21,7 @@
                     <div class="nav_item_create">创作</div>
                     <DropdownMenu slot="list">
                         <DropdownItem class="toSubmit">
-                            <router-link to="/">发表作品</router-link>
+                            <router-link to="/create">创建作品</router-link>
                         </DropdownItem>
                         <DropdownItem class="toSubmit">
                             <router-link to="/submit">发表帖子</router-link>
