@@ -131,6 +131,80 @@
                 timeCount: 120,
             }
         },
+        methods: {
+            handleSubmit(name) {
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        this.register();
+                    } else {
+                        this.$Message.error('请正确填写表单!');
+                    }
+                })
+            },
+            getEmailCode() {
+                let reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+                if (!reg.test(this.form.email)) {
+                    this.$Message.error('邮箱格式错误！')
+                    return;
+                }
+                this.buttonShow = 1;
+                let params = this.qs.stringify({email: this.form.email});
+                this.axios.post("/user/emailCode", params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.instance('error', resp.msg);
+                        this.buttonShow = 0;
+                        return;
+                    }
+                    this.$Message.success('验证码发送成功！');
+                    this.buttonShow = 2;
+                    const TIME_COUNT = 120;
+                    this.timer = setInterval(() => {
+                        if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
+                            this.timeCount--
+                        } else {
+                            this.buttonShow = 0;
+                            clearInterval(this.timer);
+                            this.timer = null;
+                            this.timeCount = 120;
+                        }
+                    }, 1000);
+                })
+            },
+            register() {
+                this.form.terminal = navigator.userAgent;
+                let params = this.qs.stringify(this.form);
+                this.axios.post("/user/signUp", params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.instance('error', resp.msg);
+                        return;
+                    }
+                    this.$store.commit('setUser', resp.data);
+                    let content = '<p style="font-size: 16px">你现在已经是一个红领巾啦，快去发帖庆祝吧。。。</p>';
+                    this.instance('success', content);
+                })
+            },
+            instance(type, content) {
+                switch (type) {
+                    case 'success':
+                        this.$Modal.success({
+                            title: '操作成功！',
+                            content: content,
+                            onOk: () => {
+                                this.$router.push('/');
+                            },
+                        });
+                        break;
+                    case 'error':
+                        this.$Modal.error({
+                            title: '操作失败！',
+                            content: content
+                        });
+                        break;
+                }
+            }
+        }
     }
 </script>
 
