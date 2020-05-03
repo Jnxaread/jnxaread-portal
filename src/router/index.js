@@ -10,8 +10,9 @@ import SignUp from '../views/user/SignUp';
 import UCenter from '../views/user/UCenter';
 import Forum from '../views/forum/Forum';
 import Topic from '../views/forum/Topic';
-import Submit from '../views/forum/Submit';
-import Create from '../views/library/Create'
+import NewTopic from '../views/forum/NewTopic';
+import NewFiction from '../views/library/NewFiction'
+import NewChapter from '../views/library/NewChapter'
 
 Vue.use(VueRouter);
 
@@ -67,14 +68,19 @@ const routes = [
         component: Topic
     },
     {
-        path: '/submit',
-        name: 'Submit',
-        component: Submit
+        path: '/new/topic',
+        name: 'NewTopic',
+        component: NewTopic
     },
     {
-        path: '/create',
-        name: 'Create',
-        component: Create
+        path: '/new/fiction',
+        name: 'NewFiction',
+        component: NewFiction
+    },
+    {
+        path:'/new/chapter',
+        name:'NewChapter',
+        component:NewChapter
     }
 ];
 

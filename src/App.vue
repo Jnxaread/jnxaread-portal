@@ -21,16 +21,19 @@
                     <div class="nav_item_create">创作</div>
                     <DropdownMenu slot="list">
                         <DropdownItem class="toSubmit">
-                            <router-link to="/create">创建作品</router-link>
+                            <router-link to="/new/fiction">创建作品</router-link>
                         </DropdownItem>
                         <DropdownItem class="toSubmit">
-                            <router-link to="/submit">发表帖子</router-link>
+                            <router-link to="/new/chapter">发布章节</router-link>
+                        </DropdownItem>
+                        <DropdownItem class="toSubmit">
+                            <router-link to="/new/topic">发表帖子</router-link>
                         </DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
             </div>
             <div class="nav_user" :style="{ width: logoWidth + 'px' }">
-                <div class="signIn_signUp">
+                <div class="signIn_signUp" v-if="!isLogin">
                     <div class="nav_item_sign">
                         <router-link to="/signIn">
                             登录
@@ -41,6 +44,9 @@
                             注册
                         </router-link>
                     </div>
+                </div>
+                <div class="userInfo" v-else>
+                    {{ user.username }}
                 </div>
             </div>
         </div>
@@ -104,12 +110,6 @@
                     /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
                 );
                 return flag;
-            },
-            toLogin() {
-                this.$router.push('/toLogin');
-            },
-            toRegister() {
-                this.$router.push('/toRegister');
             },
         }
     }
@@ -191,6 +191,16 @@
         float: right;
         width: 132px;
         margin-right: 10%;
+    }
+
+    .userInfo {
+        float:right;
+        color: #c5c8ce;
+        font-size: 1.6em;
+        font-weight: bold;
+        font-family: YouYuan;
+        line-height: 60px;
+        margin-right: 20%;
     }
 
     .main {

@@ -8,10 +8,12 @@ import qs from 'qs';
 import moment from 'moment';
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
+import global from './global/global.js'
 
 Vue.use(VueAxios, axios);
 Vue.prototype.qs = qs;
 Vue.use(ViewUI);
+Vue.use(global);
 
 Vue.config.productionTip = false;
 

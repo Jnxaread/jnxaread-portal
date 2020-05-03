@@ -1,10 +1,10 @@
 <template>
-    <div class="submit">
+    <div class="newChapter">
         <div class="container">
-            <h2>发表帖子</h2>
+            <div class="prompt">发布章节 /《三寸人间》</div>
             <div class="topic_top">
                 <div class="topic_label">
-                    <Input maxlength="4" size="large" placeholder="四字标签" style="width: 86px;"/>
+                    <InputNumber min="1" max="10000" size="large" placeholder="章节号" style="width: 86px;"/>
                 </div>
                 <div class="topic_title">
                     <Input maxlength="35" show-word-limit size="large" placeholder="请输入标题" style="width: 60%;"/>
@@ -13,7 +13,7 @@
             </div>
             <div class="topic_content">
                 <editor ref="editor"></editor>
-                <Button class="submit_button" type="primary" size="large" @click="submitTopic">发表帖子</Button>
+                <Button class="submit_button" type="primary" size="large" @click="submitTopic">保存章节</Button>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
 </script>
 
 <style scoped lang="scss">
-    .submit {
+    .newChapter {
         width: 100%;
         background-color: #f5f5f5;
         border: 1px solid #c4c4c4;
@@ -45,9 +45,15 @@
         padding: 10px 30px;
         margin: 20px auto;
 
-        h2 {
-            text-align: center;
-        }
+    h2 {
+        text-align: center;
+    }
+    }
+
+    .prompt{
+        font-size: 1.8em;
+        font-weight: bold;
+        font-family: YouYuan;
     }
 
     .topic_top {
@@ -77,16 +83,16 @@
         margin-left: 15px;
         display: inline;
 
-        Input {
-            display: inline;
-        }
+    Input {
+        display: inline;
+    }
 
-        span {
-            display: inline;
-            font-size: 1.15em;
-            margin-left: 15px;
-            line-height: 38px;
-        }
+    span {
+        display: inline;
+        font-size: 1.15em;
+        margin-left: 15px;
+        line-height: 38px;
+    }
     }
 
     .topic_content {

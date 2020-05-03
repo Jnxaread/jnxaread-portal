@@ -49,7 +49,22 @@
                     ],
                 },
             }
-        }
+        },
+        methods: {
+            login() {
+                this.form.terminal = navigator.userAgent;
+                let params = this.qs.stringify(this.form);
+                this.axios.post("/user/signIn", params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.instance('error', resp.msg);
+                        return;
+                    }
+                    this.$store.commit("setUser", resp.data);
+                    this.$router.push("/").then();
+                })
+            },
+        },
     }
 </script>
 
