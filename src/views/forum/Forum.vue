@@ -15,11 +15,11 @@
                         【<span>{{ notice.label }}</span>】
                     </td>
                     <td :class="index==noticeList.length-1?'title':'title border_bottom'">
-                        <router-link :to="'/toNotice?id='+notice.id">{{ notice.title }}</router-link>
+                        <router-link :to="'/notice?id='+notice.id">{{ notice.title }}</router-link>
                     </td>
                     <td :class="index==noticeList.length-1?'author':'author border_bottom'">
                         <h3>{{ notice.username }}</h3>
-                        <p>{{ notice.submitTime | dateFormat }}</p>
+                        <p>{{ notice.createTime | dateFormat }}</p>
                     </td>
                     <td :class="index==noticeList.length-1?'reply_view':'reply_view border_bottom'">
                         <p>{{ notice.viewCount }}</p>
@@ -46,11 +46,11 @@
                         【<span>{{ topic.label }}</span>】
                     </td>
                     <td :class="index==topicList.length-1?'title':'title border_bottom'">
-                        <router-link :to="'/toTopic?id='+topic.id">{{ topic.title }}</router-link>
+                        <router-link :to="'/topic?id='+topic.id">{{ topic.title }}</router-link>
                     </td>
                     <td :class="index==topicList.length-1?'author':'author border_bottom'">
                         <h3>{{ topic.username }}</h3>
-                        <p>{{ topic.submitTime | dateFormat }}</p>
+                        <p>{{ topic.createTime | dateFormat }}</p>
                     </td>
                     <td :class="index==topicList.length-1?'reply_view':'reply_view border_bottom'">
                         <h3>{{ topic.replyCount }}</h3>
@@ -88,6 +88,49 @@
                 }
             }
         },
+        created: function () {
+            this.init();
+        },
+        methods: {
+            init() {
+                this.getNoticeList();
+                this.getTopicList();
+            },
+            getNoticeList() {
+                let initParams = {
+                    'terminal': navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/forum/list/notice', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.noticeList = resp.data;
+                });
+            },
+            getTopicList() {
+                let initParams = {
+                    'page': this.paging.currentPage,
+                    'terminal': navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/forum/list/topic', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.topicList = resp.data.topicList;
+                    this.paging.total = resp.data.topicCount;
+                });
+            },
+            changePage(page) {
+                this.paging.currentPage = page;
+                this.getTopicList();
+            },
+        }
     }
 </script>
 
@@ -111,6 +154,7 @@
         border: 1px solid #c4c4c4;
         border-radius: 6px;
         padding: 15px 25px;
+        overflow: hidden;
     }
 
     .notice_label {
@@ -207,7 +251,7 @@
 
     .paging_box {
         float: right;
-        margin: 20px 0px 0px 0px;
+        margin: 20px 0px 10px 0px;
     }
 
 </style>

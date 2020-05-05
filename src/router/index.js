@@ -10,9 +10,10 @@ import SignUp from '../views/user/SignUp';
 import UCenter from '../views/user/UCenter';
 import Forum from '../views/forum/Forum';
 import Topic from '../views/forum/Topic';
+import Notice from '../views/forum/Notice'
 import NewTopic from '../views/forum/NewTopic';
-import NewFiction from '../views/library/NewFiction'
-import NewChapter from '../views/library/NewChapter'
+import NewFiction from '../views/library/NewFiction';
+import NewChapter from '../views/library/NewChapter';
 
 Vue.use(VueRouter);
 
@@ -68,6 +69,11 @@ const routes = [
         component: Topic
     },
     {
+        path: '/notice',
+        name: 'Notice',
+        component: Notice
+    },
+    {
         path: '/new/topic',
         name: 'NewTopic',
         component: NewTopic
@@ -78,9 +84,9 @@ const routes = [
         component: NewFiction
     },
     {
-        path:'/new/chapter',
-        name:'NewChapter',
-        component:NewChapter
+        path: '/new/chapter',
+        name: 'NewChapter',
+        component: NewChapter
     }
 ];
 

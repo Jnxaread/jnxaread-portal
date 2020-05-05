@@ -80,13 +80,13 @@
                 this.topic.content = this.$store.getters.getContent;
                 this.topic.terminal = navigator.userAgent;
                 let params = this.qs.stringify(this.topic);
-                this.axios.post('/submitTopic', params).then(response => {
+                this.axios.post('forum/new/topic', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
                         return;
                     }
-                    this.$router.push({path: '/toTopic', query: {id: resp.data}}).then();
+                    this.$router.push({path: '/topic', query: {id: resp.data}}).then();
                 })
             },
         }
