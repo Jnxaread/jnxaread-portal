@@ -2,26 +2,28 @@
     <div class="create">
         <div class="container">
             <h1>创建作品</h1>
-            <Form class="fiction_form" label-position="right" label-width="90">
+            <Form class="fiction_form" :model="form" label-position="right" :label-width="90">
                 <FormItem label="作品类别">
-                    <Select size="large" placeholder="请选择作品类别">
-                        <Option>原创</Option>
-                        <Option>同人</Option>
+                    <Select v-model="form.category" size="large" placeholder="请选择作品类别">
+                        <Option v-for="category in categoryList" :value="category.value" :key="category.value">
+                            {{category.label}}
+                        </Option>
                     </Select>
                 </FormItem>
                 <FormItem label="作品名称">
-                    <Input maxlength="18" show-word-limit size="large" placeholder="请输入作品名称"/>
+                    <Input v-model="form.title" maxlength="18" show-word-limit size="large" placeholder="请输入作品名称"/>
                 </FormItem>
                 <FormItem label="作品简介">
-                    <Input type="textarea" maxlength="255" show-word-limit rows="6" placeholder="请输入作品简介"/>
+                    <Input v-model="form.introduction" type="textarea" maxlength="255" show-word-limit :rows="6"
+                           placeholder="请输入作品简介"/>
                 </FormItem>
                 <FormItem label="作品标签">
-                    <Tag color="gold" size="large">渣攻贱受</Tag>
-                    <Tag color="gold" size="large">甜宠</Tag>
-                    <Button class="button_addTag" type="dashed">+</Button>
+                    <Tag v-for="tag in form.tag" :key="tag" color="gold" size="large">{{tag}}</Tag>
+                    <Button class="button_addTag" type="dashed" @click="addTag()">+</Button>
+                    <Button class="button_addTag" type="dashed" @click="clearTag()">-</Button>
                 </FormItem>
                 <FormItem class="form_create">
-                    <Button class="button_create" type="primary" size="large" @click="submitfiction">创建作品</Button>
+                    <Button class="button_create" type="primary" size="large" @click="submitFiction()">创建作品</Button>
                 </FormItem>
             </Form>
         </div>
@@ -30,7 +32,78 @@
 
 <script>
     export default {
-        name: "Create",
+        name: "NewFiction",
+        data() {
+            return {
+                form: {
+                    category: null,
+                    title: '',
+                    introduction: '',
+                    tag: [],
+                    terminal: '',
+                },
+                categoryList: [
+                    {
+                        value: 0,
+                        label: '原创'
+                    },
+                    {
+                        value: 1,
+                        label: '同人'
+                    },
+                ],
+                tagTemp: '',
+            }
+        },
+        methods: {
+            init() {
+            },
+            addTag() {
+                if (this.form.tag.length >= 3) {
+                    this.$Message.warning('最多只能添加3个标签');
+                    return;
+                }
+                this.$Modal.confirm({
+                    render: (h) => {
+                        return h('Input', {
+                            props: {
+                                autofocus: true,
+                                // size:'large',
+                                placeholder: '请输入标签'
+                            },
+                            on: {
+                                input: (val) => {
+                                    this.tagTemp = val;
+                                }
+                            }
+                        })
+                    },
+                    onOk: () => {
+                        for (let i = 0; i < this.form.tag.length; i++) {
+                            if (this.form.tag[i] === this.tagTemp) {
+                                return;
+                            }
+                        }
+                        this.form.tag.push(this.tagTemp);
+                    }
+                })
+            },
+            clearTag() {
+                this.form.tag.pop();
+            },
+            submitFiction() {
+                this.form.terminal = navigator.userAgent;
+                let params = this.qs.stringify(this.form);
+                this.axios.post("/library/new/fiction", params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.$router.push('/library/fiction').then();
+                })
+            },
+        }
     }
 </script>
 

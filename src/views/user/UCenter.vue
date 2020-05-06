@@ -9,7 +9,7 @@
                 <p>M国度有备份</p>
             </div>
         </div>
-        <div class="creationInfo">
+        <div class="worksInfo">
             <div class="tabHeader">
                 <div class="tabPane">作品</div>
                 <div class="tabPane">评论</div>
@@ -38,6 +38,7 @@
     }
 
     .userInfo {
+        width: 100%;
         background-color: #f5f5f5;
         border: 1px solid #c4c4c4;
         border-radius: 6px;
@@ -61,7 +62,7 @@
         padding-top: 25px;
     }
 
-    .creationInfo {
+    .worksInfo {
         width: 100%;
         background-color: #f5f5f5;
         border: 1px solid #c4c4c4;

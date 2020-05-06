@@ -156,12 +156,8 @@
                     this.$refs.editor_qu.getContent();
                 }
                 let validate = this.$store.getters.getContent;
-                let validateA = validate.replace(/ /g, '');
-                let validateB = validateA.replace(/<p>/g, '');
-                let validateC = validateB.replace(/<\/p>/g, '');
-                let validateD = validateC.replace(/&nbsp;/g, '');
-                let validateE = validateD.replace(/<br>/g, '');
-                if (validateE.length == 0) {
+                let inspection = this.inspection(validate);
+                if (!inspection) {
                     this.$Message.error('请输入内容！');
                     return;
                 }

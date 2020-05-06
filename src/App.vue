@@ -115,7 +115,7 @@
     }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
     .app {
         background-color: #FFFFFF;
     }

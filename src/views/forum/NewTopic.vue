@@ -7,7 +7,8 @@
                     <Input v-model="topic.label" maxlength="4" size="large" placeholder="四字标签" style="width: 86px;"/>
                 </div>
                 <div class="topic_title">
-                    <Input v-model="topic.title" maxlength="35" show-word-limit size="large" placeholder="请输入标题" style="width: 60%;"/>
+                    <Input v-model="topic.title" maxlength="35" show-word-limit size="large" placeholder="请输入标题"
+                           style="width: 60%;"/>
                     <span>最多输入35个字符</span>
                 </div>
             </div>
@@ -68,12 +69,8 @@
                     return
                 }
                 let validate = this.$store.getters.getContent;
-                let validateA = validate.replace(/ /g, '');
-                let validateB = validateA.replace(/<p>/g, '');
-                let validateC = validateB.replace(/<\/p>/g, '');
-                let validateD = validateC.replace(/&nbsp;/g, '');
-                let validateE = validateD.replace(/<br>/g, '');
-                if (validateE.length == 0) {
+                let inspection = this.inspection(validate);
+                if (!inspection) {
                     this.$Message.error('请输入内容！');
                     return;
                 }

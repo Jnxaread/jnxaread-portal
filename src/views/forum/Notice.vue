@@ -41,7 +41,7 @@
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.$Message.error(resp.msg);
-                        this.$router.push('/');
+                        this.$router.push('/forum').then();
                         return;
                     }
                     this.notice = resp.data;
