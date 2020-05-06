@@ -200,7 +200,7 @@
         font-weight: bold;
         font-family: YouYuan;
         line-height: 60px;
-        margin-right: 20%;
+        margin-right: 15%;
     }
 
     .main {

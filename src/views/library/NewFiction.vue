@@ -4,7 +4,7 @@
             <h1>创建作品</h1>
             <Form class="fiction_form" :model="form" label-position="right" :label-width="90">
                 <FormItem label="作品类别">
-                    <Select v-model="form.category" size="large" placeholder="请选择作品类别">
+                    <Select v-model="form.categoryId" size="large" placeholder="请选择作品类别">
                         <Option v-for="category in categoryList" :value="category.value" :key="category.value">
                             {{category.label}}
                         </Option>
@@ -36,7 +36,7 @@
         data() {
             return {
                 form: {
-                    category: null,
+                    categoryId: null,
                     title: '',
                     introduction: '',
                     tag: [],
@@ -44,11 +44,11 @@
                 },
                 categoryList: [
                     {
-                        value: 0,
+                        value: 1,
                         label: '原创'
                     },
                     {
-                        value: 1,
+                        value: 2,
                         label: '同人'
                     },
                 ],
@@ -100,7 +100,7 @@
                         this.$Message.error(resp.msg);
                         return;
                     }
-                    this.$router.push('/library/fiction').then();
+                    this.$router.push('/fiction').then();
                 })
             },
         }
