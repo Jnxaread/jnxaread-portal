@@ -77,10 +77,29 @@
         components: {Editor},
         data() {
             return {
+                fiction:{},
                 modal: false,
             }
         },
         methods: {
+            init() {
+            },
+            getFiction() {
+                let initParams = {
+                    'id': this.$route.query.id,
+                    'page': this.paging.currentPage,
+                    'terminal': navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/library/detail/fiction', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.fiction=resp.data.fiction;
+                })
+            },
             submitComment() {
                 this.modal = true;
             }

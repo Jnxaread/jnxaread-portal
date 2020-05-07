@@ -100,7 +100,7 @@
                         this.$Message.error(resp.msg);
                         return;
                     }
-                    this.$router.push('/fiction').then();
+                    this.$router.push('/fiction?id=' + resp.data).then();
                 })
             },
         }

@@ -108,7 +108,7 @@
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.$Message.error(resp.msg);
-                        this.$router.push('/');
+                        this.$router.push('/').then();
                         return;
                     }
                     this.topic = resp.data.topic;
@@ -193,25 +193,6 @@
                 this.paging.currentPage = page;
                 this.getTopic();
             },
-            instance(type, content) {
-                switch (type) {
-                    case 'success':
-                        this.$Modal.success({
-                            title: '操作成功！',
-                            content: content,
-                            onOk: () => {
-                                this.$router.push('/');
-                            },
-                        });
-                        break;
-                    case 'error':
-                        this.$Modal.error({
-                            title: '操作失败！',
-                            content: content
-                        });
-                        break;
-                }
-            }
         }
     }
 </script>
