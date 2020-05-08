@@ -90,7 +90,7 @@
                 },
             }
         },
-        created: function () {
+        created() {
             this.init();
         },
         methods: {

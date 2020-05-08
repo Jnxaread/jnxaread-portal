@@ -2,10 +2,14 @@
     <div class="fiction">
         <div class="fiction_main">
             <div class="detail">
-                <div class="title">小说标题</div>
-                <div class="author">作者</div>
-                <div class="label">标签</div>
-                <div class="brief">简介</div>
+                <div class="title">{{fiction.title}}</div>
+                <div class="author">{{fiction.author}}</div>
+                <div class="label_box">
+                    <div class="label" v-for="tag in fiction.tags" :key="tag">
+                        【{{tag}}】
+                    </div>
+                </div>
+                <div class="brief">{{fiction.introduction}}</div>
             </div>
             <div class="turningBox">
                 <div class="turning">开始阅读</div>
@@ -16,7 +20,7 @@
             <div class="commentArea_head">
                 <div class="commentArea_title">书评区 >></div>
                 <div class="commentArea_submit">
-                    <Button class="button_submit" type="primary" size="large" @click="submitComment()">发表书评</Button>
+                    <Button class="button_submit" type="primary" size="large" @click="writeComment()">发表书评</Button>
                 </div>
             </div>
             <div class="comment">
@@ -63,8 +67,8 @@
             </div>
         </div>
         <Modal class="modal_comment" v-model="modal" footer-hide width="1000">
-            <editor ref="editor_qu" :isClear="isClear"></editor>
-            <Button class="submit_button" type="primary" size="large">发表评论</Button>
+            <editor ref="editor" :isClear="isClear"></editor>
+            <Button class="submit_button" type="primary" size="large" @click="submitComment()">发表评论</Button>
         </Modal>
     </div>
 </template>
@@ -77,17 +81,25 @@
         components: {Editor},
         data() {
             return {
-                fiction:{},
+                fiction: {
+                    tags: [],
+                },
+                newComment:{},
+                isClear: false,
                 modal: false,
             }
         },
+        created() {
+            this.init();
+        },
         methods: {
             init() {
+                this.getFiction();
             },
             getFiction() {
                 let initParams = {
                     'id': this.$route.query.id,
-                    'page': this.paging.currentPage,
+                    // 'page': this.paging.currentPage,
                     'terminal': navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
@@ -97,11 +109,35 @@
                         this.$Message.error(resp.msg);
                         return;
                     }
-                    this.fiction=resp.data.fiction;
+                    this.fiction = resp.data;
                 })
             },
-            submitComment() {
+            writeComment(){
                 this.modal = true;
+            },
+            submitComment() {
+                this.$refs.editor.getContent();
+                let validate = this.$store.getters.getContent;
+                let inspection = this.inspection(validate);
+                if (!inspection) {
+                    this.$Message.error('请输入内容！');
+                    return;
+                }
+                this.newComment.fictionId = this.$route.query.id;
+                this.newComment.content = this.$store.getters.getContent;
+                this.newComment.terminal = navigator.userAgent;
+                let params = this.qs.stringify(this.newComment);
+                this.axios.post('/library/new/comment', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.instance('error', resp.msg);
+                        return;
+                    }
+                    this.isClear = true;
+                    this.$refs.editor.editorContent = '';
+                    this.modal = false;
+                    this.getFiction();
+                })
             }
         }
     }
@@ -138,11 +174,15 @@
         margin: 20px 0;
     }
 
-    .label {
-        font-size: 1.2em;
-        font-weight: bolder;
+    .label_box{
         text-align: center;
-        margin: 20px 0;
+    }
+
+    .label {
+        display: inline-block;
+        font-size: 1.1em;
+        font-weight: bolder;
+        margin: 15px 0;
     }
 
     .brief {
