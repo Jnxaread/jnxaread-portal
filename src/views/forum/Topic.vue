@@ -22,7 +22,7 @@
                         <Icon type="md-person" size="22"/>
                         <span>{{ reply.username }}</span>
                     </div>
-                    <div class="info_submitTime">{{ reply.submitTime | dateFormat }}</div>
+                    <div class="info_submitTime">{{ reply.createTime | dateFormat }}</div>
                     <div class="info_floor">{{ reply.floor }}楼</div>
                 </div>
                 <div class="content">

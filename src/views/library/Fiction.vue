@@ -23,47 +23,15 @@
                     <Button class="button_submit" type="primary" size="large" @click="writeComment()">发表书评</Button>
                 </div>
             </div>
-            <div class="comment">
-                <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
-                </div>
-                <div class="comment_content">主要内容</div>
+            <div class="comment" v-if="this.comments.length==0">
+                <div class="comment_content">还没有评论，快来评论吧！</div>
             </div>
-            <div class="comment">
+            <div class="comment" v-else v-for="(comment,index) in comments" :key="index">
                 <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
+                    <div class="comment_author">{{comment.username}}</div>
+                    <div class="comment_submitTime">{{ comment.createTime | dateFormat }}</div>
                 </div>
-                <div class="comment_content">主要内容</div>
-            </div>
-            <div class="comment">
-                <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
-                </div>
-                <div class="comment_content">主要内容</div>
-            </div>
-            <div class="comment">
-                <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
-                </div>
-                <div class="comment_content">主要内容</div>
-            </div>
-            <div class="comment">
-                <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
-                </div>
-                <div class="comment_content">主要内容</div>
-            </div>
-            <div class="comment">
-                <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
-                </div>
-                <div class="comment_content">主要内容</div>
+                <div class="comment_content" v-html="comment.content"></div>
             </div>
         </div>
         <Modal class="modal_comment" v-model="modal" footer-hide width="1000">
@@ -84,7 +52,8 @@
                 fiction: {
                     tags: [],
                 },
-                newComment:{},
+                comments: [],
+                newComment: {},
                 isClear: false,
                 modal: false,
             }
@@ -109,10 +78,11 @@
                         this.$Message.error(resp.msg);
                         return;
                     }
-                    this.fiction = resp.data;
+                    this.fiction = resp.data.fiction;
+                    this.comments = resp.data.comments;
                 })
             },
-            writeComment(){
+            writeComment() {
                 this.modal = true;
             },
             submitComment() {
@@ -174,7 +144,7 @@
         margin: 20px 0;
     }
 
-    .label_box{
+    .label_box {
         text-align: center;
     }
 

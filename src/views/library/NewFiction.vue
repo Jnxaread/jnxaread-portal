@@ -18,9 +18,9 @@
                            placeholder="请输入作品简介"/>
                 </FormItem>
                 <FormItem label="作品标签">
-                    <Tag v-for="tag in form.tag" :key="tag" color="gold" size="large">{{tag}}</Tag>
+                    <Tag v-for="tag in form.tags" :key="tag" color="gold" size="large">{{tag}}</Tag>
                     <Button class="button_addTag" type="dashed" @click="addTag()">+</Button>
-                    <Button class="button_addTag" type="dashed" @click="clearTag()">-</Button>
+                    <Button class="button_addTag" type="dashed" @click="clearTags()">-</Button>
                 </FormItem>
                 <FormItem class="form_create">
                     <Button class="button_create" type="primary" size="large" @click="submitFiction()">创建作品</Button>
@@ -39,7 +39,7 @@
                     categoryId: null,
                     title: '',
                     introduction: '',
-                    tag: [],
+                    tags: [],
                     terminal: '',
                 },
                 categoryList: [
@@ -59,7 +59,7 @@
             init() {
             },
             addTag() {
-                if (this.form.tag.length >= 3) {
+                if (this.form.tags.length >= 3) {
                     this.$Message.warning('最多只能添加3个标签');
                     return;
                 }
@@ -79,17 +79,17 @@
                         })
                     },
                     onOk: () => {
-                        for (let i = 0; i < this.form.tag.length; i++) {
-                            if (this.form.tag[i] === this.tagTemp) {
+                        for (let i = 0; i < this.form.tags.length; i++) {
+                            if (this.form.tags[i] === this.tagTemp) {
                                 return;
                             }
                         }
-                        this.form.tag.push(this.tagTemp);
+                        this.form.tags.push(this.tagTemp);
                     }
                 })
             },
-            clearTag() {
-                this.form.tag.pop();
+            clearTags() {
+                this.form.tags.pop();
             },
             submitFiction() {
                 this.form.terminal = navigator.userAgent;
