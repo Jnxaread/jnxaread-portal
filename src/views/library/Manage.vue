@@ -28,7 +28,7 @@
         },
         methods:{
             goNewChapter(){
-                this.$router.push('/new/chapter').then();
+                this.$router.push({path: '/new/chapter', query: {id: 1}}).then();
             },
         }
     }
