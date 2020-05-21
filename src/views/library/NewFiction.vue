@@ -55,8 +55,18 @@
                 tagTemp: '',
             }
         },
+        created: function () {
+            this.init();
+        },
         methods: {
             init() {
+                if (!this.$store.getters.isLogin) {
+                    this.$Message['warning']({
+                        background: true,
+                        content: '只有登录后才能发帖'
+                    });
+                    this.$router.push('/signIn').then();
+                }
             },
             addTag() {
                 if (this.form.tags.length >= 3) {

@@ -14,6 +14,7 @@ import Notice from '../views/forum/Notice'
 import NewTopic from '../views/forum/NewTopic';
 import NewFiction from '../views/library/NewFiction';
 import NewChapter from '../views/library/NewChapter';
+import Manage from '../views/library/Manage';
 
 Vue.use(VueRouter);
 
@@ -87,6 +88,11 @@ const routes = [
         path: '/new/chapter',
         name: 'NewChapter',
         component: NewChapter
+    },
+    {
+        path: '/manage',
+        name: 'Manage',
+        component: Manage
     }
 ];
 

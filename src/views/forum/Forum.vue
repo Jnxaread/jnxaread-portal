@@ -82,13 +82,13 @@
                     pageSize: 45,
                     total: 0,
                 },
-                form: {
+                /*form: {
                     page: 1,
                     terminal: ''
-                }
+                }*/
             }
         },
-        created: function () {
+        created() {
             this.init();
         },
         methods: {

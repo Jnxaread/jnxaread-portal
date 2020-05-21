@@ -24,7 +24,7 @@
                             <router-link to="/new/fiction">创建作品</router-link>
                         </DropdownItem>
                         <DropdownItem class="toSubmit">
-                            <router-link to="/new/chapter">发布章节</router-link>
+                            <router-link to="/manage">管理作品</router-link>
                         </DropdownItem>
                         <DropdownItem class="toSubmit">
                             <router-link to="/new/topic">发表帖子</router-link>
