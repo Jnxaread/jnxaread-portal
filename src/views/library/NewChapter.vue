@@ -1,13 +1,15 @@
 <template>
     <div class="newChapter">
         <div class="container">
-            <div class="prompt">发布章节 / {{}}</div>
+            <div class="prompt">发布章节 / {{fiction.title}}</div>
             <div class="topic_top">
                 <div class="topic_label">
-                    <InputNumber v-model="newChapter.number" :min="1" :max="10000" size="large" placeholder="章节号" style="width: 86px;"/>
+                    <InputNumber v-model="newChapter.number" :min="1" :max="10000" size="large" placeholder="章节号"
+                                 style="width: 86px;"/>
                 </div>
                 <div class="topic_title">
-                    <Input v-model="newChapter.title" maxlength="35" show-word-limit size="large" placeholder="请输入标题" style="width: 60%;"/>
+                    <Input v-model="newChapter.title" maxlength="35" show-word-limit size="large" placeholder="请输入标题"
+                           style="width: 60%;"/>
                     <span>最多输入35个字符</span>
                 </div>
             </div>
@@ -27,7 +29,7 @@
         components: {Editor},
         data() {
             return {
-                fiction:{},
+                fiction: this.$route.query.fiction,
                 newChapter: {
                     fictionId: null,
                     number: null,
@@ -45,7 +47,7 @@
                 if (!this.$store.getters.isLogin) {
                     this.$Message['warning']({
                         background: true,
-                        content: '只有登录后才能发帖'
+                        content: '您还未登录，请登录'
                     });
                     this.$router.push('/signIn').then();
                 }

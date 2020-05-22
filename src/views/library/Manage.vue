@@ -39,7 +39,7 @@
                 if (!this.$store.getters.isLogin) {
                     this.$Message['warning']({
                         background: true,
-                        content: '您还未登录，请先登录'
+                        content: '您还未登录，请登录'
                     });
                     this.$router.push('/signIn').then();
                     return;
@@ -48,8 +48,8 @@
             },
             getOwnFictionList() {
                 let initParams = {
-                    'page': this.paging.currentPage,
-                    'terminal': navigator.userAgent
+                    page: this.paging.currentPage,
+                    terminal: navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
                 this.axios.post('/library/list/fiction/own', params).then(response => {

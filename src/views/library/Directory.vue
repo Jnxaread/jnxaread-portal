@@ -17,59 +17,18 @@
                     <th>评论</th>
                     <th>发布时间</th>
                 </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">2000</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
+                <tr class="table_body" v-for="(chapter,index) in chapterList" :key="index">
+                    <td class="chapter_number">{{chapter.number}}</td>
+                    <td class="chapter_title">
+                        <router-link :to="'/chapter?id='+chapter.id">
+                            {{chapter.title}}
+                        </router-link>
+                    </td>
                     <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
-                </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">1</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴里塞，好些年没吃过老妈做的饭了，当年做的挺好吃的饭，如今除了吃出了怀旧的味道以外</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
-                </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">1</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴里塞，好些年没吃过老妈做的饭了，当年做的挺好吃的饭，如今除了吃出了怀旧的味道以外</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
-                </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">1</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴里塞，好些年没吃过老妈做的饭了，当年做的挺好吃的饭，如今除了吃出了怀旧的味道以外</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
-                </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">1</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴里塞，好些年没吃过老妈做的饭了，当年做的挺好吃的饭，如今除了吃出了怀旧的味道以外</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
-                </tr>
-                <tr class="table_body">
-                    <td class="chapter_number">1</td>
-                    <td class="chapter_title">精神小伙不请自来</td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴里塞，好些年没吃过老妈做的饭了，当年做的挺好吃的饭，如今除了吃出了怀旧的味道以外</td>
-                    <td class="chapter_wordCount">3156</td>
-                    <td class="chapter_viewCount">12569</td>
-                    <td class="chapter_commentCount">217</td>
-                    <td class="chapter_submitTime">2020-04-25</td>
+                    <td class="chapter_wordCount">{{chapter.wordCount}}</td>
+                    <td class="chapter_viewCount">{{chapter.viewCount}}</td>
+                    <td class="chapter_commentCount">{{chapter.commentCount}}</td>
+                    <td class="chapter_submitTime">{{chapter.createTime | dateFormat}}</td>
                 </tr>
             </table>
         </div>
@@ -78,7 +37,55 @@
 
 <script>
     export default {
-        name: "Directory"
+        name: "Directory",
+        data() {
+            return {
+                fiction:{},
+                chapterList: [],
+            }
+        },
+        created() {
+            this.init();
+        },
+        methods: {
+            init() {
+                this.getFictionBrief();
+            },
+            getFictionBrief(){
+                let initParams = {
+                    'id': this.$route.query.id,
+                    // 'page': this.paging.currentPage,
+                    'terminal': navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/library/brief/fiction', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.fiction = resp.data;
+                    this.getChapterList();
+                })
+            },
+            getChapterList() {
+                let initParams = {
+                    fictionId: this.fiction.id,
+                    terminal: navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/library/list/chapter', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        this.$router.push('/signIn').then();
+                        return;
+                    }
+                    this.chapterList = resp.data;
+                    // this.paging.total = resp.data.fictionCount;
+                });
+            }
+        }
     }
 </script>
 
@@ -118,6 +125,7 @@
     .fiction_label {
         font-size: 1.2em;
         display: inline-block;
+
         span {
             font-weight: bold;
         }
@@ -162,6 +170,13 @@
         font-weight: bold;
         text-align: center;
         padding: 8px 0;
+        a {
+            color: #515a6e;
+        }
+
+        a:hover {
+            color: #2d8cf0;
+        }
     }
 
     .chapter_brief {

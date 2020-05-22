@@ -1,16 +1,19 @@
 <template>
     <div class="chapter">
         <div class="detail">
-            <div class="title">精神小伙不请自来</div>
+            <div class="titleBox">
+                <div class="title">第{{chapter.number}}章</div>
+                <div class="title">{{chapter.title}}</div>
+            </div>
             <div class="info">
-                <div class="info_item">作者：遥望千山</div>
-                <div class="info_item">字数：3145</div>
-                <div class="info_item">更新时间：2020-04-25</div>
+                <div class="info_item">作者：{{chapter.author}}</div>
+                <div class="info_item">字数：{{chapter.wordCount}}</div>
+                <div class="info_item">更新时间：{{chapter.createTime | dateFormat}}</div>
             </div>
             <div class="content" v-html="chapter.content"></div>
             <div class="turningBox">
                 <div class="turing">上一章</div>
-                <div class="directory">目录</div>
+                <div class="directory" @click="goDirectory()">目录</div>
                 <div class="turing">下一章</div>
             </div>
         </div>
@@ -18,20 +21,20 @@
             <div class="commentArea_head">
                 <div class="commentArea_title">评论区 >></div>
                 <div class="commentArea_submit">
-                    <Button class="button_submit" type="primary" size="large" @click="submitComment()">发表评论</Button>
+                    <Button class="button_submit" type="primary" size="large" @click="goWriteComment()">发表评论</Button>
                 </div>
             </div>
-            <div class="comment">
+            <div class="comment" v-for="(comment,index) in comments" :key="index">
                 <div class="comment_header">
-                    <div class="comment_author">发布者</div>
-                    <div class="comment_submitTime">2020-04-25 19:32:56</div>
+                    <div class="comment_author">{{comment.username}}</div>
+                    <div class="comment_submitTime">{{comment.createTime | dateFormat}}</div>
                 </div>
-                <div class="comment_content">主要内容</div>
+                <div class="comment_content" v-html="comment.content"></div>
             </div>
         </div>
         <Modal class="modal_comment" v-model="modal" footer-hide width="1000">
-            <editor ref="editor_qu" :isClear="isClear"></editor>
-            <Button class="submit_button" type="primary" size="large">发表评论</Button>
+            <editor ref="editor" :isClear="isClear"></editor>
+            <Button class="submit_button" type="primary" size="large" @click="submitComment()">发表评论</Button>
         </Modal>
     </div>
 </template>
@@ -44,19 +47,21 @@
         components: {Editor},
         data() {
             return {
-                chapter:{},
+                chapter: {},
+                comments: [],
+                newComment: {},
                 isClear: false,
                 modal: false,
             }
         },
-        created(){
+        created() {
             this.init();
         },
         methods: {
-            init(){
+            init() {
                 this.getChapter();
             },
-            getChapter(){
+            getChapter() {
                 let initParams = {
                     'id': this.$route.query.id,
                     'terminal': navigator.userAgent
@@ -69,11 +74,39 @@
                         this.$router.push('/library').then();
                         return;
                     }
-                    this.chapter = resp.data;
+                    this.chapter = resp.data.chapter;
+                    this.comments = resp.data.comments;
                 });
             },
-            submitComment() {
+            goDirectory(){
+                this.$router.push('/directory?id='+this.chapter.fictionId).then();
+            },
+            goWriteComment() {
                 this.modal = true;
+            },
+            submitComment() {
+                this.$refs.editor.getContent();
+                let validate = this.$store.getters.getContent;
+                let inspection = this.inspection(validate);
+                if (!inspection) {
+                    this.$Message.error('请输入内容！');
+                    return;
+                }
+                this.newComment.chapterId = this.$route.query.id;
+                this.newComment.content = this.$store.getters.getContent;
+                this.newComment.terminal = navigator.userAgent;
+                let params = this.qs.stringify(this.newComment);
+                this.axios.post('/library/new/comment', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.instance('error', resp.msg);
+                        return;
+                    }
+                    this.isClear = true;
+                    this.$refs.editor.editorContent = '';
+                    this.modal = false;
+                    this.getChapter();
+                })
             }
         }
     }
@@ -96,10 +129,16 @@
         user-select: none;
     }
 
-    .title {
+    .titleBox {
         font-size: 1.9em;
         font-weight: bold;
         text-align: center;
+        margin: 25px 0 40px 0;
+    }
+
+    .title {
+        display: inline-block;
+        margin: 0 10px;
     }
 
     .info {

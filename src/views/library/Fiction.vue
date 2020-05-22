@@ -13,14 +13,14 @@
             </div>
             <div class="turningBox">
                 <div class="turning">开始阅读</div>
-                <div class="turning">章节目录</div>
+                <div class="turning" @click="goDirectory()">章节目录</div>
             </div>
         </div>
         <div class="commentArea">
             <div class="commentArea_head">
                 <div class="commentArea_title">书评区 >></div>
                 <div class="commentArea_submit">
-                    <Button class="button_submit" type="primary" size="large" @click="writeComment()">发表书评</Button>
+                    <Button class="button_submit" type="primary" size="large" @click="goWriteComment()">发表书评</Button>
                 </div>
             </div>
             <div class="comment" v-if="this.comments.length==0">
@@ -82,7 +82,10 @@
                     this.comments = resp.data.comments;
                 })
             },
-            writeComment() {
+            goDirectory(){
+                this.$router.push('/directory?id='+this.fiction.id).then();
+            },
+            goWriteComment() {
                 this.modal = true;
             },
             submitComment() {
