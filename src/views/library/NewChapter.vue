@@ -1,7 +1,7 @@
 <template>
     <div class="newChapter">
         <div class="container">
-            <div class="prompt">发布章节 /《三寸人间》</div>
+            <div class="prompt">发布章节 / {{}}</div>
             <div class="topic_top">
                 <div class="topic_label">
                     <InputNumber v-model="newChapter.number" :min="1" :max="10000" size="large" placeholder="章节号" style="width: 86px;"/>
@@ -27,8 +27,9 @@
         components: {Editor},
         data() {
             return {
+                fiction:{},
                 newChapter: {
-                    fictionId: this.$route.query.id,
+                    fictionId: null,
                     number: null,
                     title: '',
                     content: '',

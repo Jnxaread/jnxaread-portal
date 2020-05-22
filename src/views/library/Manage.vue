@@ -1,8 +1,8 @@
 <template>
     <div class="manage">
-        <div class="fictionInfo">
+        <div class="fictionInfo" v-for="(fiction,index) in fictionList" :key="index">
             <div class="briefInfo">
-                <div class="title">作品名称</div>
+                <div class="title">{{fiction.title}}</div>
                 <div class="label">【作品标签】</div>
                 <div class="count">章节数、字数、评论数等</div>
             </div>
@@ -11,7 +11,7 @@
                 <div class="lastChapter">上次更新章节：<span>第37章 天剑奇缘</span></div>
                 <div class="operate">
                     <Button class="operate_button" type="info">修改标签</Button>
-                    <Button class="operate_button" type="info" @click="goNewChapter()">发布章节</Button>
+                    <Button class="operate_button" type="info" @click="goNewChapter(fiction)">发布章节</Button>
                 </div>
             </div>
         </div>
@@ -21,14 +21,50 @@
 <script>
     export default {
         name: "Manage",
-        data(){
-            return{
-
+        data() {
+            return {
+                fictionList: [],
+                paging: {
+                    currentPage: 1,
+                    pageSize: 30,
+                    total: 0,
+                },
             }
         },
-        methods:{
-            goNewChapter(){
-                this.$router.push({path: '/new/chapter', query: {id: 1}}).then();
+        created() {
+            this.init();
+        },
+        methods: {
+            init() {
+                if (!this.$store.getters.isLogin) {
+                    this.$Message['warning']({
+                        background: true,
+                        content: '您还未登录，请先登录'
+                    });
+                    this.$router.push('/signIn').then();
+                    return;
+                }
+                this.getOwnFictionList();
+            },
+            getOwnFictionList() {
+                let initParams = {
+                    'page': this.paging.currentPage,
+                    'terminal': navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/library/list/fiction/own', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        this.$router.push('/signIn').then();
+                        return;
+                    }
+                    this.fictionList = resp.data.fictionList;
+                    this.paging.total = resp.data.fictionCount;
+                });
+            },
+            goNewChapter(fiction) {
+                this.$router.push({path: '/new/chapter', query: {fiction: fiction}}).then();
             },
         }
     }
@@ -96,7 +132,8 @@
 
     .lastChapter {
         font-size: 1.2em;
-        span{
+
+        span {
             font-weight: bold;
         }
     }
