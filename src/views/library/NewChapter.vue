@@ -29,9 +29,9 @@
         components: {Editor},
         data() {
             return {
-                fiction: this.$route.query.fiction,
+                fiction:{},
                 newChapter: {
-                    fictionId: null,
+                    fictionId: this.$route.query.id,
                     number: null,
                     title: '',
                     content: '',
@@ -51,6 +51,23 @@
                     });
                     this.$router.push('/signIn').then();
                 }
+                this.getFictionBrief();
+            },
+            getFictionBrief(){
+                let initParams = {
+                    'id': this.$route.query.id,
+                    // 'page': this.paging.currentPage,
+                    'terminal': navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/library/brief/fiction', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.fiction = resp.data;
+                })
             },
             submitChapter() {
                 this.$refs.editor.getContent();

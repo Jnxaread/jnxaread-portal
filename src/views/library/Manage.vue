@@ -2,7 +2,11 @@
     <div class="manage">
         <div class="fictionInfo" v-for="(fiction,index) in fictionList" :key="index">
             <div class="briefInfo">
-                <div class="title">{{fiction.title}}</div>
+                <div class="title">
+                    <router-link :to="'/fiction?id='+fiction.id">
+                        {{fiction.title}}
+                    </router-link>
+                </div>
                 <div class="label">【作品标签】</div>
                 <div class="count">章节数、字数、评论数等</div>
             </div>
@@ -11,7 +15,7 @@
                 <div class="lastChapter">上次更新章节：<span>第37章 天剑奇缘</span></div>
                 <div class="operate">
                     <Button class="operate_button" type="info">修改标签</Button>
-                    <Button class="operate_button" type="info" @click="goNewChapter(fiction)">发布章节</Button>
+                    <Button class="operate_button" type="info" @click="goNewChapter(fiction.id)">发布章节</Button>
                 </div>
             </div>
         </div>
@@ -63,8 +67,8 @@
                     this.paging.total = resp.data.fictionCount;
                 });
             },
-            goNewChapter(fiction) {
-                this.$router.push({path: '/new/chapter', query: {fiction: fiction}}).then();
+            goNewChapter(fictionId) {
+                this.$router.push({path: '/new/chapter', query: {id: fictionId}}).then();
             },
         }
     }
