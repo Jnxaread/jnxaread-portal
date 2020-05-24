@@ -10,7 +10,14 @@
                 <div class="labelBox">
                     <div class="label" v-for="(tag,index) in fiction.tags" :key="index">【{{tag}}】</div>
                 </div>
-                <div class="count">章节数、字数、评论数等</div>
+                <div class="count">
+                    <Icon class="count_icon" custom="iconfont icon-entypopencil" size="18"/>
+                    {{fiction.wordCount}}
+                    <Icon class="count_icon" type="md-eye" size="18"/>
+                    {{fiction.viewCount}}
+                    <Icon class="count_icon" type="md-text" size="18"/>
+                    {{fiction.commentCount}}
+                </div>
             </div>
             <div class="operateInfo">
                 <div class="lastTime">上次更新时间：<span>{{fiction.lastTime | dateFormat }}</span></div>
@@ -77,17 +84,18 @@
 </script>
 
 <style scoped lang="scss">
+    @import "../../assets/icons/custom/pencil/iconfont.css";
+
     .manage {
         width: 100%;
     }
 
     .fictionInfo {
         width: 100%;
-        line-height: 40px;
         background-color: #f5f5f5;
         border: 1px solid #c4c4c4;
         border-radius: 10px;
-        padding: 12px 20px;
+        padding: 6px 20px;
         margin-bottom: 6px;
         overflow: hidden;
     }
@@ -101,6 +109,7 @@
         font-size: 1.4em;
         font-weight: bolder;
         margin-left: 8px;
+        line-height: 40px;
 
         a {
             color: #515a6e;
@@ -112,7 +121,8 @@
     }
 
     .labelBox {
-        /*height: 35px;*/
+        height: 35px;
+        line-height: 35px;
         font-size: 1.2em;
         font-weight: lighter;
     }
@@ -122,8 +132,14 @@
     }
 
     .count {
+        height: 35px;
+        line-height: 35px;
         font-size: 1.2em;
         margin-left: 6px;
+    }
+
+    .count_icon {
+        margin: 0 0 0 0.5em;
     }
 
     .operateInfo {
@@ -134,7 +150,7 @@
 
     .lastTime {
         font-size: 1.2em;
-        font-weight: lighter;
+        line-height: 40px;
 
         span {
             font-weight: bold;
@@ -143,6 +159,8 @@
 
     .lastChapter {
         font-size: 1.2em;
+        height: 35px;
+        line-height: 35px;
 
         span {
             font-weight: bold;
@@ -150,6 +168,8 @@
     }
 
     .operate {
+        height: 35px;
+        line-height: 35px;
     }
 
     .operate_button {

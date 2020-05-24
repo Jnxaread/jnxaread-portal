@@ -10,7 +10,14 @@
             </div>
             <div class="briefInfo">
                 <div class="author">{{fiction.author}}</div>
-                <div class="count">作品字数、点击量等相关信息</div>
+                <div class="count">
+                    <Icon class="count_icon" custom="iconfont icon-entypopencil" size="22"/>
+                    {{fiction.wordCount}}
+                    <Icon class="count_icon" type="md-eye" size="22"/>
+                    {{fiction.viewCount}}
+                    <Icon class="count_icon" type="md-text" size="22"/>
+                    {{fiction.commentCount}}
+                </div>
                 <div class="labelBox">
                     <div class="label" v-for="(tag,index) in fiction.tags" :key="index">【{{tag}}】</div>
                 </div>
@@ -60,6 +67,8 @@
 </script>
 
 <style scoped lang="scss">
+    @import "../../assets/icons/custom/pencil/iconfont.css";
+
     .library {
         width: 100%;
     }
@@ -126,6 +135,10 @@
         font-size: 16px;
         font-weight: bold;
         margin-right: 6px;
+    }
+
+    .count_icon {
+        margin: 0 0 0 0.5em;
     }
 
     .labelBox {
