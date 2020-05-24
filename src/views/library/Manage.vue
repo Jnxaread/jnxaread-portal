@@ -7,12 +7,14 @@
                         {{fiction.title}}
                     </router-link>
                 </div>
-                <div class="label">【作品标签】</div>
+                <div class="labelBox">
+                    <div class="label" v-for="(tag,index) in fiction.tags" :key="index">【{{tag}}】</div>
+                </div>
                 <div class="count">章节数、字数、评论数等</div>
             </div>
             <div class="operateInfo">
-                <div class="lastTime">上次更新时间：<span>2020-05-16</span></div>
-                <div class="lastChapter">上次更新章节：<span>第37章 天剑奇缘</span></div>
+                <div class="lastTime">上次更新时间：<span>{{fiction.lastTime | dateFormat }}</span></div>
+                <div class="lastChapter">上次更新章节：<span>第{{fiction.lastNumber}}章 {{fiction.lastChapter}}</span></div>
                 <div class="operate">
                     <Button class="operate_button" type="info">修改标签</Button>
                     <Button class="operate_button" type="info" @click="goNewChapter(fiction.id)">发布章节</Button>
@@ -109,9 +111,14 @@
         }
     }
 
-    .label {
+    .labelBox {
+        /*height: 35px;*/
         font-size: 1.2em;
         font-weight: lighter;
+    }
+
+    .label {
+        display: inline-block;
     }
 
     .count {

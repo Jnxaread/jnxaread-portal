@@ -5,8 +5,8 @@
                 <div class="title">
                     <router-link :to="'/fiction?id='+fiction.id">{{ fiction.title }}</router-link>
                 </div>
-                <div class="chapter">章节名称</div>
-                <div class="updateTime">更新时间</div>
+                <div class="chapter">第{{fiction.lastNumber}}章 {{fiction.lastChapter}}</div>
+                <div class="updateTime">{{fiction.lastTime | dateFormat }}</div>
             </div>
             <div class="briefInfo">
                 <div class="author">{{fiction.author}}</div>
