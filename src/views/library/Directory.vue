@@ -1,17 +1,22 @@
 <template>
     <div class="directory">
         <div class="fiction">
-            <div class="fiction_title">诡秘之主</div>
-            <div class="fiction_author">作者:遥望千山</div>
-            <div class="fiction_wordCount">字数:3567</div>
-            <div class="fiction_label">标签:<span>【同人】【种田】【书耽】【长佩】</span></div>
+            <div class="fiction_title">{{fiction.title}}</div>
+            <div class="fiction_author">作者：<span>{{fiction.author}}</span></div>
+            <div class="fiction_wordCount">字数：<span>{{fiction.wordCount}}</span></div>
+            <div class="labelBox">
+                标签:
+                <div class="label" v-for="(tag,index) in fiction.tags" :key="index">
+                    【{{tag}}】
+                </div>
+            </div>
         </div>
         <div class="directory_main">
             <table class="table_chapter">
                 <tr class="table_header">
                     <th>章节号</th>
                     <th>标题</th>
-                    <th>概要</th>
+                    <!--<th>概要</th>-->
                     <th>字数</th>
                     <th>查看</th>
                     <th>评论</th>
@@ -24,7 +29,7 @@
                             {{chapter.title}}
                         </router-link>
                     </td>
-                    <td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴</td>
+                    <!--<td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴</td>-->
                     <td class="chapter_wordCount">{{chapter.wordCount}}</td>
                     <td class="chapter_viewCount">{{chapter.viewCount}}</td>
                     <td class="chapter_commentCount">{{chapter.commentCount}}</td>
@@ -111,24 +116,32 @@
     }
 
     .fiction_author {
-        font-size: 1.2em;
         margin-right: 20px;
         display: inline-block;
+        span{
+            font-size: 1.2em;
+            font-weight: bold;
+        }
     }
 
     .fiction_wordCount {
-        font-size: 1.2em;
         margin-right: 20px;
+        display: inline-block;
+        span{
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    }
+
+    .labelBox {
         display: inline-block;
     }
 
-    .fiction_label {
+    .label{
         font-size: 1.2em;
+        font-weight: bold;
         display: inline-block;
-
-        span {
-            font-weight: bold;
-        }
+        /*margin: 0 0.1em;*/
     }
 
     .directory_main {
@@ -165,7 +178,7 @@
     }
 
     .chapter_title {
-        width: 20%;
+        /*width: 20%;*/
         font-size: 1.2em;
         font-weight: bold;
         text-align: center;
@@ -199,6 +212,7 @@
     }
 
     .chapter_submitTime {
+        width:15%;
         text-align: center;
     }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="library">
-        <div class="fictionInfo" v-for="(fiction,index) in fictionList" :key="index">
+        <div class="fictionInfo" v-for="(fiction,index) in fictions" :key="index">
             <div class="updateInfo">
                 <div class="title">
                     <router-link :to="'/fiction?id='+fiction.id">{{ fiction.title }}</router-link>
@@ -19,7 +19,7 @@
                     {{fiction.commentCount}}
                 </div>
                 <div class="labelBox">
-                    <div class="label" v-for="(tag,index) in fiction.tags" :key="index">【{{tag}}】</div>
+                    <div class="label" v-for="(tag,index) in fiction.tags" :key="index">{{tag}}</div>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
         name: "Library",
         data() {
             return {
-                fictionList: [],
+                fictions: [],
                 paging: {
                     currentPage: 1,
                     pageSize: 45,
@@ -58,7 +58,7 @@
                         this.$Message.error(resp.msg);
                         return;
                     }
-                    this.fictionList = resp.data.fictionList;
+                    this.fictions = resp.data.fictions;
                     this.paging.total = resp.data.fictionCount;
                 });
             },
@@ -143,12 +143,14 @@
 
     .labelBox {
         height: 35px;
-        font-size: 16px;
+        font-size: 1.1em;
+        font-weight: bold;
+        font-style: italic;
     }
 
     .label {
         display: inline-block;
-        /*margin: 0 30px;*/
+        margin: 0 0.1em;
     }
 
 </style>

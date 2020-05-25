@@ -8,7 +8,7 @@
                     </router-link>
                 </div>
                 <div class="labelBox">
-                    <div class="label" v-for="(tag,index) in fiction.tags" :key="index">【{{tag}}】</div>
+                    <div class="label" v-for="(tag,index) in fiction.tags" :key="index">{{tag}}</div>
                 </div>
                 <div class="count">
                     <Icon class="count_icon" custom="iconfont icon-entypopencil" size="18"/>
@@ -123,12 +123,14 @@
     .labelBox {
         height: 35px;
         line-height: 35px;
-        font-size: 1.2em;
-        font-weight: lighter;
+        font-size: 1.1em;
+        font-weight: bolder;
+        font-style: italic;
     }
 
     .label {
         display: inline-block;
+        margin: 0 0.1em;
     }
 
     .count {
