@@ -75,11 +75,9 @@
         data() {
             return {
                 topic: {},
-                replyList: [],
                 replies: [],
                 newReply: {},
                 toQuote: {},
-                quoteFloor: 0,
                 modal: false,
                 isShowQu: true,
                 isClear: false,
