@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="replyArea">
-            <div class="detail" v-for="(reply, index) in pageReplyList" :key="index">
+            <div class="detail" v-for="(reply, index) in replies" :key="index">
                 <div class="info">
                     <div class="info_author">
                         <Icon type="md-person" size="22"/>
@@ -29,16 +29,16 @@
                     <div class="reply_quote" v-if="reply.quote!=0">
                         <div class="quote_icon_e">
                             <div class="reply_quote_head">
-                                <span class="reply_quote_info">{{ replyList[reply.quoteIndex].username }} 发表于 {{ replyList[reply.quoteIndex].submitTime | dateFormat }}</span>
-                                <span class="reply_quote_floor">{{ replyList[reply.quoteIndex].floor }}楼</span>
+                                <span class="reply_quote_info">{{reply.quotedReply.username}} 发表于 {{ reply.quotedReply.submitTime | dateFormat }}</span>
+                                <span class="reply_quote_floor">{{ reply.quotedReply.floor }}楼</span>
                             </div>
-                            <span v-html="replyList[reply.quoteIndex].content"></span>
+                            <span v-html="reply.quotedReply.content"></span>
                         </div>
                     </div>
                     <span v-html="reply.content"></span>
                 </div>
                 <div class="reply_operate">
-                    <a @click="showModal(reply.floor)">回复</a>
+                    <a @click="showModal(reply)">回复</a>
                 </div>
             </div>
             <div class="paging_box">
@@ -76,7 +76,7 @@
             return {
                 topic: {},
                 replyList: [],
-                pageReplyList: [],
+                replies: [],
                 newReply: {},
                 toQuote: {},
                 quoteFloor: 0,
@@ -112,48 +112,18 @@
                         return;
                     }
                     this.topic = resp.data.topic;
-                    this.pageReplyList = resp.data.replyList;
-                    for (let i = 0; i < this.pageReplyList.length; i++) {
-                        if (this.pageReplyList[i].quote != 0) {
-                            this.pageReplyList[i].quoteIndex = this.pageReplyList[i].quote - 1;
-                        }
-                    }
-                    let lastIndex_f = this.replyList.length - 1;
-                    if (this.replyList.length == 0 || this.replyList[lastIndex_f].floor < resp.data.replyList[0].floor) {
-                        for (let i = 0; i < resp.data.replyList.length; i++) {
-                            this.replyList.push(resp.data.replyList[i]);
-                        }
-                    }
-                    let lastIndex_s = this.replyList.length - 1;
-                    let respLastIndex = resp.data.replyList.length - 1;
-                    if (this.replyList.length != 0 && this.replyList[lastIndex_s].floor >= resp.data.replyList[0].floor && this.replyList[lastIndex_s].floor < resp.data.replyList[respLastIndex].floor) {
-                        for (let i = 0; i < resp.data.replyList.length; i++) {
-                            if (this.replyList[lastIndex_s].floor < resp.data.replyList[i].floor) {
-                                this.replyList.push(resp.data.replyList[i]);
-                            }
-                        }
-                    } else if (this.replyList.length != 0 && this.replyList[0].floor < resp.data.replyList[0].floor && this.replyList[lastIndex_s].floor > resp.data.replyList[respLastIndex].floor) {
-                        for (let i = 0; i < this.replyList.length; i++) {
-                            if (this.replyList[i].floor == resp.data.replyList[0].floor) {
-                                break;
-                            } else if (this.replyList[i].floor > resp.data.replyList[0].floor) {
-                                for (let j = 0; j < resp.data.replyList.length; j++) {
-                                    this.replyList.splice(i, 0, resp.data.replyList[j]);
-                                }
-                                break;
-                            }
-                        }
-                    }
+                    this.replies = resp.data.replies;
                     this.paging.total = resp.data.replyCount;
                     this.isClear = false;
                 });
             },
             submitReply(num) {
                 if (num == 0) {
-                    this.quoteFloor = 0;
                     this.$refs.editor.getContent();
+                    this.newReply.quote = 0;
                 } else {
                     this.$refs.editor_qu.getContent();
+                    this.newReply.quote = this.toQuote.id;
                 }
                 let validate = this.$store.getters.getContent;
                 let inspection = this.inspection(validate);
@@ -162,7 +132,6 @@
                     return;
                 }
                 this.newReply.topicId = this.$route.query.id;
-                this.newReply.quote = this.quoteFloor;
                 this.newReply.content = this.$store.getters.getContent;
                 this.newReply.terminal = navigator.userAgent;
                 let params = this.qs.stringify(this.newReply);
@@ -179,13 +148,12 @@
                     this.getTopic();
                 })
             },
-            showModal(floor) {
-                if (floor == 0) {
+            showModal(quotedReply) {
+                if (quotedReply == 0) {
                     this.isShowQu = false;
                 } else {
                     this.isShowQu = true;
-                    this.toQuote = this.replyList[floor - 1];
-                    this.quoteFloor = floor;
+                    this.toQuote = quotedReply;
                 }
                 this.modal = true;
             },

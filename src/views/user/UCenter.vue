@@ -7,9 +7,9 @@
         <div class="worksInfo">
             <div class="tabHeader">
                 <div :class="tabMain===1?'tabPane_selected':'tabPane'" @click="showPane(1)">作品</div>
-                <div :class="tabMain===2?'tabPane_selected':'tabPane'" @click="showPane(2)">评论</div>
+                <!--<div :class="tabMain===2?'tabPane_selected':'tabPane'" @click="showPane(2)">评论</div>-->
                 <div :class="tabMain===3?'tabPane_selected':'tabPane'" @click="showPane(3)">主题</div>
-                <div :class="tabMain===4?'tabPane_selected':'tabPane'" @click="showPane(4)">回复</div>
+                <!--<div :class="tabMain===4?'tabPane_selected':'tabPane'" @click="showPane(4)">回复</div>-->
             </div>
             <div class="tabMain" v-if="tabMain===1">
                 <div class="fictionInfo" v-for="(fiction,index) in fictions" :key="index">
@@ -37,10 +37,20 @@
                 </div>
             </div>
             <div class="tabMain" v-else-if="tabMain===2">
-                差可快了之神！101
+                插卡快乐之神！101
             </div>
             <div class="tabMain" v-else-if="tabMain===3">
-                差可快了之神！102
+                <div class="topicInfo" v-for="(topic,index) in topicList" :key="index">
+                    <div class="topic_title">【{{topic.label}}】{{topic.title}}</div>
+                    <div class="topic_right">
+                        <Icon class="count_icon" type="md-text" size="22"/>
+                        {{topic.replyCount}}
+                        <Icon class="count_icon" type="md-eye" size="22"/>
+                        {{topic.viewCount}}
+                        <Icon class="count_icon" type="md-calendar" size="22"/>
+                        {{topic.createTime | dateFormat}}
+                    </div>
+                </div>
             </div>
             <div class="tabMain" v-else>
                 差可快了之神！103
@@ -57,6 +67,7 @@
                 animated: false,
                 tabMain: 1,
                 fictions: [],
+                topicList: [],
                 paging: {
                     currentPage: 1,
                     pageSize: 45,
@@ -69,11 +80,11 @@
                 return this.$store.getters.getUser;
             }
         },
-        created(){
+        created() {
             this.init();
         },
         methods: {
-            init(){
+            init() {
                 this.getFictionList();
             },
             getFictionList() {
@@ -88,8 +99,24 @@
                         this.$Message.error(resp.msg);
                         return;
                     }
-                    this.fictions = resp.data.fictionList;
+                    this.fictions = resp.data.fictions;
                     this.paging.total = resp.data.fictionCount;
+                });
+            },
+            getTopicList() {
+                let initParams = {
+                    // 'page': this.paging.currentPage,
+                    // 'terminal': navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/forum/list/topic', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.topicList = resp.data.topicList;
+                    this.paging.total = resp.data.topicCount;
                 });
             },
             showPane(num) {
@@ -98,6 +125,7 @@
                 } else if (num === 2) {
                     this.tabMain = 2;
                 } else if (num === 3) {
+                    this.getTopicList();
                     this.tabMain = 3;
                 } else {
                     this.tabMain = 4;
@@ -265,6 +293,27 @@
     .label {
         display: inline-block;
         margin: 0 0.1em;
+    }
+
+    .topicInfo {
+        width: 100%;
+        height: 50px;
+        padding: 0 0.5em;
+        overflow: hidden;
+        line-height: 50px;
+        border-bottom: 1px solid #e8e8e8;
+    }
+
+    .topic_title {
+        float: left;
+        font-size: 1.3em;
+        font-weight: bold;
+    }
+
+    .topic_right {
+        float: right;
+        font-size: 16px;
+        font-weight: bold;
     }
 
 </style>
