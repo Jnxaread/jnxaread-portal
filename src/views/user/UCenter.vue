@@ -7,9 +7,9 @@
         <div class="worksInfo">
             <div class="tabHeader">
                 <div :class="tabMain===1?'tabPane_selected':'tabPane'" @click="showPane(1)">作品</div>
-                <!--<div :class="tabMain===2?'tabPane_selected':'tabPane'" @click="showPane(2)">评论</div>-->
+                <div :class="tabMain===2?'tabPane_selected':'tabPane'" @click="showPane(2)">评论</div>
                 <div :class="tabMain===3?'tabPane_selected':'tabPane'" @click="showPane(3)">主题</div>
-                <!--<div :class="tabMain===4?'tabPane_selected':'tabPane'" @click="showPane(4)">回复</div>-->
+                <div :class="tabMain===4?'tabPane_selected':'tabPane'" @click="showPane(4)">回复</div>
             </div>
             <div class="tabMain" v-if="tabMain===1">
                 <div class="fictionInfo" v-for="(fiction,index) in fictions" :key="index">
@@ -37,7 +37,13 @@
                 </div>
             </div>
             <div class="tabMain" v-else-if="tabMain===2">
-                插卡快乐之神！101
+                <div class="commentInfo" v-for="(comment,index) in comments" :key="index">
+                    <div class="comment_head">
+                        <div class="reply_title">{{comment.fictionTitle}}</div>
+                        <div class="comment_time">发表于 {{comment.createTime | dateFormat}}</div>
+                    </div>
+                    <div class="comment_content" v-html="comment.content"></div>
+                </div>
             </div>
             <div class="tabMain" v-else-if="tabMain===3">
                 <div class="topicInfo" v-for="(topic,index) in topicList" :key="index">
@@ -53,7 +59,31 @@
                 </div>
             </div>
             <div class="tabMain" v-else>
-                差可快了之神！103
+                <div class="replyInfo" v-for="(reply, index) in replies" :key="index">
+                    <div class="reply_head">
+                        <div class="reply_title">
+                            <router-link :to="'/topic?id='+reply.topicId">
+                                {{reply.topicTitle}}
+                            </router-link>
+                        </div>
+                        <div class="head_right">
+                            <div class="reply_time">发表于 {{ reply.createTime | dateFormat }}</div>
+                            <div class="reply_floor">{{ reply.floor }}楼</div>
+                        </div>
+                    </div>
+                    <div class="reply_body">
+                        <div class="reply_quote" v-if="reply.quote!=0">
+                            <div class="quote_icon_e">
+                                <div class="reply_quote_head">
+                                    <span class="reply_quote_info">{{reply.quotedReply.username}} 发表于 {{ reply.quotedReply.submitTime | dateFormat }}</span>
+                                    <span class="reply_quote_floor">{{ reply.quotedReply.floor }}楼</span>
+                                </div>
+                                <span v-html="reply.quotedReply.content"></span>
+                            </div>
+                        </div>
+                        <span v-html="reply.content"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -67,7 +97,9 @@
                 animated: false,
                 tabMain: 1,
                 fictions: [],
+                comments: [],
                 topicList: [],
+                replies: [],
                 paging: {
                     currentPage: 1,
                     pageSize: 45,
@@ -103,7 +135,23 @@
                     this.paging.total = resp.data.fictionCount;
                 });
             },
-            getTopicList() {
+            getUserCommentList() {
+                let initParams = {
+                    userId: this.user.id
+                    // 'page': this.paging.currentPage,
+                    // 'terminal': navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/library/list/comment', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.comments = resp.data;
+                });
+            },
+            getUserTopicList() {
                 let initParams = {
                     // 'page': this.paging.currentPage,
                     // 'terminal': navigator.userAgent
@@ -119,16 +167,34 @@
                     this.paging.total = resp.data.topicCount;
                 });
             },
+            getUserReplies() {
+                let initParams = {
+                    userId: this.user.id
+                    // 'page': this.paging.currentPage,
+                    // 'terminal': navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/forum/list/reply', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.replies = resp.data;
+                });
+            },
             showPane(num) {
                 if (num === 1) {
                     this.tabMain = 1;
                 } else if (num === 2) {
                     this.tabMain = 2;
+                    this.getUserCommentList();
                 } else if (num === 3) {
-                    this.getTopicList();
                     this.tabMain = 3;
+                    this.getUserTopicList();
                 } else {
                     this.tabMain = 4;
+                    this.getUserReplies();
                 }
             }
         }
@@ -295,6 +361,35 @@
         margin: 0 0.1em;
     }
 
+    .commentInfo {
+        width: 100%;
+        padding: 1em 1.5em;
+        overflow: hidden;
+        /*border: 1px solid #e8e8e8;*/
+        border: 1px solid #c5c8ce;
+        border-radius: 8px;
+        margin: 5px 0;
+    }
+
+    .comment_head {
+        overflow: hidden;
+    }
+
+    .comment_time {
+        float: right;
+        margin-right: 1em;
+        font-size: 1.2em;
+    }
+
+    .comment_content {
+        font-size: 1.2em;
+        line-height: 32px;
+        margin: 0 15px 0 2.5em;
+        padding: 0.5em 1.5em;
+        border-radius: 6px;
+        background-color: #e3e5e8;
+    }
+
     .topicInfo {
         width: 100%;
         height: 50px;
@@ -314,6 +409,106 @@
         float: right;
         font-size: 16px;
         font-weight: bold;
+    }
+
+    .replyInfo {
+        width: 100%;
+        padding: 1em 1.5em;
+        overflow: hidden;
+        /*border: 1px solid #e8e8e8;*/
+        border: 1px solid #c5c8ce;
+        border-radius: 8px;
+        margin: 5px 0;
+    }
+
+    .reply_head {
+        padding-bottom: 2px;
+        border-bottom: 1px solid #c4c4c4;
+        overflow: hidden;
+    }
+
+    .reply_title {
+        float: left;
+        font-size: 1.3em;
+        font-weight: bold;
+        padding: 0 1em 0.5em 1em;
+
+        a {
+            color: #515a6e;
+        }
+
+        a:hover {
+            color: #2d8cf0;
+        }
+    }
+
+    .head_right {
+        float: right;
+    }
+
+    .reply_time {
+        display: inline-block;
+        margin: 0 0.5em;
+        font-size: 1.2em;
+    }
+
+    .reply_floor {
+        display: inline-block;
+        color: #999;
+        margin: 0 0.5em;
+        font-size: 1.4em;
+        font-weight: bold;
+    }
+
+    .head_author {
+        display: inline-block;
+        padding: 0px 0 0 15px;
+        /*border-right: 2px solid #a9a9a9;*/
+
+        span {
+            margin-left: 5px;
+        }
+    }
+
+    .head_submitTime {
+        display: inline-block;
+        padding: 0 15px;
+    }
+
+    .head_floor {
+        float: right;
+    }
+
+    .reply_body {
+        font-size: 1.3em;
+        line-height: 38px;
+        padding: 0 15px;
+        margin-top: 10px;
+    }
+
+    .reply_quote {
+        width: 100%;
+        margin: 10px 0px 15px 0px;
+        padding: 10px 10px 10px 65px;
+        border-radius: 10px;
+        background: #e8eaec url("../../assets/icons/icon_quote_s.gif") no-repeat 20px 6px;
+    }
+
+    .quote_icon_e {
+        padding: 0px 65px 10px 0px;
+        background: url("../../assets/icons/icon_quote_e.gif") no-repeat 98% 100%;
+    }
+
+    .reply_quote_info {
+        font-size: 1em;
+        color: #808695;
+    }
+
+    .reply_quote_floor {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: darkgrey;
+        margin-left: 15px;
     }
 
 </style>
