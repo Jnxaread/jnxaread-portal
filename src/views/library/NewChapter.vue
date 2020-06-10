@@ -122,7 +122,7 @@
     .prompt {
         font-size: 1.8em;
         font-weight: bold;
-        font-family: YouYuan;
+        font-family: YouYuan,serif;
     }
 
     .topic_top {

@@ -185,7 +185,7 @@
     .turningBox {
         font-size: 1.3em;
         font-weight: bolder;
-        font-family: YouYuan;
+        font-family: YouYuan,serif;
         text-align: center;
         margin: 60px 0 25px 0;
     }

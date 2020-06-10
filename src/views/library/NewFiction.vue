@@ -132,14 +132,14 @@
         margin: 20px auto;
 
         h1 {
-            font-family: YouYuan;
+            font-family: YouYuan,serif;
             text-align: center;
         }
     }
 
     .fiction_form {
         margin-top: 30px;
-        font-family: YouYuan;
+        font-family: YouYuan,serif;
     }
 
     .fiction_form /deep/ .ivu-form-item-label {

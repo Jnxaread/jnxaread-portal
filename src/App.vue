@@ -135,14 +135,14 @@
         color: #fff;
         font-size: 32px;
         font-weight: bold;
-        font-family: YouYuan;
+        font-family: YouYuan,serif;
         text-align: center;
     }
 
     .nav_item {
         display: inline-block;
         font-size: 23px;
-        font-family: YouYuan;
+        font-family: YouYuan,serif;
         line-height: 60px;
         margin: 0 15px;
 
@@ -155,7 +155,7 @@
         display: inline-block;
         color: #dcdee2;
         font-size: 23px;
-        font-family: YouYuan;
+        font-family: YouYuan,serif;
         line-height: 60px;
         margin: 0 15px;
     }
@@ -169,7 +169,7 @@
     .nav_item_sign {
         display: inline-block;
         font-size: 23px;
-        font-family: YouYuan;
+        font-family: YouYuan,serif;
         line-height: 60px;
         margin: 0 10px;
 
@@ -195,12 +195,12 @@
 
     .userInfo {
         float:right;
+        width: 50%;
         color: #c5c8ce;
         font-size: 1.6em;
         font-weight: bold;
-        font-family: YouYuan;
+        font-family: YouYuan,serif;
         line-height: 60px;
-        margin-right: 15%;
     }
 
     .main {
@@ -215,7 +215,7 @@
         color: #fff;
         padding-top: 30px;
         text-align: center;
-        font-family: YouYuan;
+        font-family: YouYuan,serif;
         /*background-color: #515a6e;*/
         background-color: #222;
         /*取消双击选中文字*/
