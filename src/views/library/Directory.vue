@@ -22,7 +22,7 @@
                     <th>评论</th>
                     <th>发布时间</th>
                 </tr>
-                <tr class="table_body" v-for="(chapter,index) in chapterList" :key="index">
+                <tr class="table_body" v-for="(chapter,index) in chapters" :key="index">
                     <td class="chapter_number">{{chapter.number}}</td>
                     <td class="chapter_title">
                         <router-link :to="'/chapter?id='+chapter.id">
@@ -45,8 +45,8 @@
         name: "Directory",
         data() {
             return {
-                fiction:{},
-                chapterList: [],
+                fiction: {},
+                chapters: [],
             }
         },
         created() {
@@ -56,7 +56,7 @@
             init() {
                 this.getFictionBrief();
             },
-            getFictionBrief(){
+            getFictionBrief() {
                 let initParams = {
                     'id': this.$route.query.id,
                     // 'page': this.paging.currentPage,
@@ -70,10 +70,10 @@
                         return;
                     }
                     this.fiction = resp.data;
-                    this.getChapterList();
+                    this.getChapters();
                 })
             },
-            getChapterList() {
+            getChapters() {
                 let initParams = {
                     fictionId: this.fiction.id,
                     terminal: navigator.userAgent
@@ -86,7 +86,8 @@
                         this.$router.push('/signIn').then();
                         return;
                     }
-                    this.chapterList = resp.data;
+                    this.chapters = resp.data;
+                    sessionStorage.setItem(this.fiction.id, JSON.stringify(this.chapters));
                     // this.paging.total = resp.data.fictionCount;
                 });
             }
@@ -118,7 +119,8 @@
     .fiction_author {
         margin-right: 20px;
         display: inline-block;
-        span{
+
+        span {
             font-size: 1.2em;
             font-weight: bold;
         }
@@ -127,7 +129,8 @@
     .fiction_wordCount {
         margin-right: 20px;
         display: inline-block;
-        span{
+
+        span {
             font-size: 1.2em;
             font-weight: bold;
         }
@@ -137,7 +140,7 @@
         display: inline-block;
     }
 
-    .label{
+    .label {
         font-size: 1.2em;
         font-weight: bold;
         display: inline-block;
@@ -183,6 +186,7 @@
         font-weight: bold;
         text-align: center;
         padding: 8px 0;
+
         a {
             color: #515a6e;
         }
@@ -212,7 +216,7 @@
     }
 
     .chapter_submitTime {
-        width:15%;
+        width: 15%;
         text-align: center;
     }
 </style>

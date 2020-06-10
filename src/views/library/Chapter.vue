@@ -12,9 +12,9 @@
             </div>
             <div class="content" v-html="chapter.content"></div>
             <div class="turningBox">
-                <div class="turing">上一章</div>
+                <div class="turing" @click="preChapter()">上一章</div>
                 <div class="directory" @click="goDirectory()">目录</div>
-                <div class="turing">下一章</div>
+                <div class="turing" @click="nexChapter()">下一章</div>
             </div>
         </div>
         <div class="commentArea">
@@ -24,7 +24,10 @@
                     <Button class="button_submit" type="primary" size="large" @click="goWriteComment()">发表评论</Button>
                 </div>
             </div>
-            <div class="comment" v-for="(comment,index) in comments" :key="index">
+            <div class="comment" v-if="comments.length==0">
+                <div class="comment_content">本章还没有评论，快来发表评论吧......</div>
+            </div>
+            <div class="comment" v-else v-for="(comment,index) in comments" :key="index">
                 <div class="comment_header">
                     <div class="comment_author">{{comment.username}}</div>
                     <div class="comment_submitTime">{{comment.createTime | dateFormat}}</div>
@@ -78,8 +81,30 @@
                     this.comments = resp.data.comments;
                 });
             },
-            goDirectory(){
-                this.$router.push('/directory?id='+this.chapter.fictionId).then();
+            preChapter() {
+                let chapters = JSON.parse(sessionStorage.getItem(this.chapter.fictionId));
+                for (let i = 0; i < chapters.length; i++) {
+                    if (chapters[i].id === this.chapter.id) {
+                        if (i === 0) return;
+                        this.$router.push('/chapter?id=' + chapters[i - 1].id).then();
+                        this.getChapter();
+                        return;
+                    }
+                }
+            },
+            nexChapter() {
+                let chapters = JSON.parse(sessionStorage.getItem(this.chapter.fictionId));
+                for (let i = 0; i < chapters.length; i++) {
+                    if (chapters[i].id === this.chapter.id) {
+                        if (i === chapters.length - 1) return;
+                        this.$router.push('/chapter?id=' + chapters[i + 1].id).then();
+                        this.getChapter();
+                        return;
+                    }
+                }
+            },
+            goDirectory() {
+                this.$router.push('/directory?id=' + this.chapter.fictionId).then();
             },
             goWriteComment() {
                 this.modal = true;

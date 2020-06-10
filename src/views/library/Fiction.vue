@@ -12,7 +12,7 @@
                 <div class="brief">{{fiction.introduction}}</div>
             </div>
             <div class="turningBox">
-                <div class="turning">开始阅读</div>
+                <div class="turning" @click="goReading()">开始阅读</div>
                 <div class="turning" @click="goDirectory()">章节目录</div>
             </div>
         </div>
@@ -52,6 +52,7 @@
                 fiction: {
                     tags: [],
                 },
+                // chapter1: {},
                 comments: [],
                 newComment: {},
                 isClear: false,
@@ -80,10 +81,43 @@
                     }
                     this.fiction = resp.data.fiction;
                     this.comments = resp.data.comments;
+                    // this.getChapterBrief();
                 })
             },
-            goDirectory(){
-                this.$router.push('/directory?id='+this.fiction.id).then();
+            /*getChapterBrief() {
+                let initParams = {
+                    fictionId: this.fiction.id,
+                    number: 1
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/library/brief/chapter', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.instance('error', resp.msg);
+                        return;
+                    }
+                    this.chapter1 = resp.data;
+                })
+            },*/
+            goReading() {
+                let initParams = {
+                    fictionId: this.fiction.id,
+                    terminal: navigator.userAgent
+                };
+                let params = this.qs.stringify(initParams);
+                this.axios.post('/library/list/chapter', params).then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    sessionStorage.setItem(this.fiction.id, JSON.stringify(resp.data));
+                    // this.paging.total = resp.data.fictionCount;
+                    this.$router.push('/chapter?id=' + resp.data[0].id).then();
+                });
+            },
+            goDirectory() {
+                this.$router.push('/directory?id=' + this.fiction.id).then();
             },
             goWriteComment() {
                 this.modal = true;
