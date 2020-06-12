@@ -46,7 +46,16 @@
                     </div>
                 </div>
                 <div class="userInfo" v-else>
-                    {{ user.username }}
+                    <Dropdown>
+                        <a href="javascript:void(0)">
+                            {{user.username}}
+                            <Icon type="ios-arrow-down"></Icon>
+                        </a>
+                        <DropdownMenu slot="list">
+                            <DropdownItem @click.native="goToUCenter()">个人中心</DropdownItem>
+                            <DropdownItem divided @click.native="logout()">退出登录</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 </div>
             </div>
         </div>
@@ -111,6 +120,20 @@
                 );
                 return flag;
             },
+            goToUCenter() {
+                this.$router.push('/ucenter').then();
+            },
+            logout() {
+                this.axios.post("/user/logout").then(response => {
+                    let resp = response.data;
+                    if (resp.status != 200) {
+                        this.instance('error', resp.msg);
+                        return;
+                    }
+                    this.$store.commit('setUser', null);
+                    this.$router.push("/").then();
+                });
+            },
         }
     }
 </script>
@@ -135,14 +158,14 @@
         color: #fff;
         font-size: 32px;
         font-weight: bold;
-        font-family: YouYuan,serif;
+        font-family: YouYuan, serif;
         text-align: center;
     }
 
     .nav_item {
         display: inline-block;
         font-size: 23px;
-        font-family: YouYuan,serif;
+        font-family: YouYuan, serif;
         line-height: 60px;
         margin: 0 15px;
 
@@ -155,7 +178,7 @@
         display: inline-block;
         color: #dcdee2;
         font-size: 23px;
-        font-family: YouYuan,serif;
+        font-family: YouYuan, serif;
         line-height: 60px;
         margin: 0 15px;
     }
@@ -169,7 +192,7 @@
     .nav_item_sign {
         display: inline-block;
         font-size: 23px;
-        font-family: YouYuan,serif;
+        font-family: YouYuan, serif;
         line-height: 60px;
         margin: 0 10px;
 
@@ -194,13 +217,17 @@
     }
 
     .userInfo {
-        float:right;
+        float: right;
         width: 50%;
         color: #c5c8ce;
         font-size: 1.6em;
         font-weight: bold;
-        font-family: YouYuan,serif;
+        font-family: YouYuan, serif;
         line-height: 60px;
+
+        a {
+            color: #dcdee2;
+        }
     }
 
     .main {
@@ -215,7 +242,7 @@
         color: #fff;
         padding-top: 30px;
         text-align: center;
-        font-family: YouYuan,serif;
+        font-family: YouYuan, serif;
         /*background-color: #515a6e;*/
         background-color: #222;
         /*取消双击选中文字*/

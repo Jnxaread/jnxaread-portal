@@ -4,8 +4,9 @@
             <div class="prompt">发布章节 / {{fiction.title}}</div>
             <div class="topic_top">
                 <div class="topic_label">
-                    <InputNumber v-model="newChapter.number" :min="1" :max="10000" size="large" placeholder="章节号"
-                                 style="width: 86px;"/>
+                    <!--<InputNumber v-model="newChapter.number" :min="1" :max="10000" size="large" placeholder="章节号"
+                                 style="width: 86px;"/>-->
+                    第 {{fiction.maxNumber}} 章
                 </div>
                 <div class="topic_title">
                     <Input v-model="newChapter.title" maxlength="35" show-word-limit size="large" placeholder="请输入标题"
@@ -145,6 +146,7 @@
     .topic_label {
         width: 20%;
         display: inline;
+        font-size: 1.4em;
     }
 
     .topic_title {
