@@ -73,7 +73,7 @@
                     'terminal': navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
-                this.axios.post('/library/detail/fiction', params).then(response => {
+                this.axios.post(this.api.library.fictionDetail, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.$Message.error(resp.msg);
@@ -105,7 +105,7 @@
                     terminal: navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
-                this.axios.post('/library/list/chapter', params).then(response => {
+                this.axios.post(this.api.library.chapters, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.$Message.error(resp.msg);

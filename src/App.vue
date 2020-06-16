@@ -124,7 +124,7 @@
                 this.$router.push('/ucenter').then();
             },
             logout() {
-                this.axios.post("/user/logout").then(response => {
+                this.axios.post(this.api.user.logout).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);

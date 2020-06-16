@@ -30,7 +30,7 @@
         components: {Editor},
         data() {
             return {
-                fiction:{},
+                fiction: {},
                 newChapter: {
                     fictionId: this.$route.query.id,
                     number: null,
@@ -54,7 +54,7 @@
                 }
                 this.getFictionBrief();
             },
-            getFictionBrief(){
+            getFictionBrief() {
                 let initParams = {
                     'id': this.$route.query.id,
                     // 'page': this.paging.currentPage,
@@ -68,6 +68,7 @@
                         return;
                     }
                     this.fiction = resp.data;
+                    this.newChapter.number = this.fiction.lastNumber + 1;
                 })
             },
             submitChapter() {
@@ -123,7 +124,7 @@
     .prompt {
         font-size: 1.8em;
         font-weight: bold;
-        font-family: YouYuan,serif;
+        font-family: YouYuan, serif;
     }
 
     .topic_top {

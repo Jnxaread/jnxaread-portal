@@ -52,7 +52,7 @@
                     'terminal': navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
-                this.axios.post('/library/list/fiction', params).then(response => {
+                this.axios.post(this.api.library.fictions, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.$Message.error(resp.msg);
