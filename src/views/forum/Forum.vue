@@ -88,6 +88,11 @@
                 }*/
             }
         },
+        computed: {
+            isLogin: function () {
+                return this.$store.getters.isLogin;
+            },
+        },
         created() {
             this.init();
         },
@@ -98,7 +103,9 @@
             },
             getNoticeList() {
                 let initParams = {
-                    'terminal': navigator.userAgent
+                    level: this.isLogin ? this.$store.getters.getUser.level : 0,
+                    page: this.paging.currentPage,
+                    terminal: navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
                 this.axios.post('/forum/list/notice', params).then(response => {
@@ -112,8 +119,9 @@
             },
             getTopicList() {
                 let initParams = {
-                    'page': this.paging.currentPage,
-                    'terminal': navigator.userAgent
+                    level: this.isLogin ? this.$store.getters.getUser.level : 0,
+                    page: this.paging.currentPage,
+                    terminal: navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
                 this.axios.post('/forum/list/topic', params).then(response => {
@@ -139,7 +147,7 @@
         width: 100%;
     }
 
-    .noticeArea{
+    .noticeArea {
         /*height: 100px;*/
         background-color: #f5f5f5;
         border: 1px solid #c4c4c4;
@@ -148,7 +156,7 @@
         margin-bottom: 6px;
     }
 
-    .topicArea{
+    .topicArea {
         /*height: 300px;*/
         background-color: #f5f5f5;
         border: 1px solid #c4c4c4;

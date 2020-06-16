@@ -22,6 +22,9 @@
                     <Button class="button_addTag" type="dashed" @click="addTag()">+</Button>
                     <Button class="button_addTag" type="dashed" @click="clearTags()">-</Button>
                 </FormItem>
+                <FormItem label="限制等级">
+                    <InputNumber :max="5" :min="0" v-model="form.restricted"></InputNumber>
+                </FormItem>
                 <FormItem class="form_create">
                     <Button class="button_create" type="primary" size="large" @click="submitFiction()">创建作品</Button>
                 </FormItem>
@@ -40,6 +43,7 @@
                     title: '',
                     introduction: '',
                     tags: [],
+                    restricted: 0,
                     terminal: '',
                 },
                 categoryList: [
@@ -132,14 +136,14 @@
         margin: 20px auto;
 
         h1 {
-            font-family: YouYuan,serif;
+            font-family: YouYuan, serif;
             text-align: center;
         }
     }
 
     .fiction_form {
         margin-top: 30px;
-        font-family: YouYuan,serif;
+        font-family: YouYuan, serif;
     }
 
     .fiction_form /deep/ .ivu-form-item-label {

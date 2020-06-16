@@ -14,8 +14,14 @@
             </div>
             <div class="topic_content">
                 <editor ref="editor"></editor>
-                <Button class="submit_button" type="primary" size="large" @click="submitTopic">发表帖子</Button>
             </div>
+            <div class="restrictedBox">
+                <div class="restrictedTitle">限制等级</div>
+                <div class="restrictedInput">
+                    <InputNumber :max="5" :min="0" size="large" v-model="topic.restricted"></InputNumber>
+                </div>
+            </div>
+                <Button class="submit_button" type="primary" size="large" @click="submitTopic">发表帖子</Button>
         </div>
     </div>
 </template>
@@ -32,6 +38,7 @@
                     label: '',
                     title: '',
                     content: '',
+                    restricted:0,
                     terminal: ''
                 }
             }
@@ -147,6 +154,23 @@
 
     .topic_content /deep/ .w-e-text {
         background-color: #fff;
+    }
+
+    .restrictedBox{
+        margin-bottom: 15px;
+    }
+
+    .restrictedTitle{
+        display: inline-block;
+        font-size: 1.25rem;
+        font-family: YouYuan, serif;
+        line-height: 40px;
+        margin-right: 1rem;
+    }
+
+    .restrictedInput{
+        display: inline-block;
+        vertical-align: bottom;
     }
 
     .submit_button {

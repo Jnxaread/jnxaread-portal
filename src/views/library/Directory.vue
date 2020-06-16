@@ -49,6 +49,11 @@
                 chapters: [],
             }
         },
+        computed: {
+            isLogin: function () {
+                return this.$store.getters.isLogin;
+            },
+        },
         created() {
             this.init();
         },
@@ -76,6 +81,7 @@
             getChapters() {
                 let initParams = {
                     fictionId: this.fiction.id,
+                    level: this.isLogin ? this.$store.getters.getUser.level : 0,
                     terminal: navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);

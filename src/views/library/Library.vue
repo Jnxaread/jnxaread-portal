@@ -39,6 +39,11 @@
                 },
             }
         },
+        computed: {
+            isLogin: function () {
+                return this.$store.getters.isLogin;
+            },
+        },
         created() {
             this.init();
         },
@@ -48,8 +53,10 @@
             },
             getFictionList() {
                 let initParams = {
-                    'page': this.paging.currentPage,
-                    'terminal': navigator.userAgent
+                    userId: 0,
+                    level: this.isLogin ? this.$store.getters.getUser.level : 0,
+                    page: this.paging.currentPage,
+                    terminal: navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.fictions, params).then(response => {
