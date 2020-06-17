@@ -108,6 +108,9 @@
             }
         },
         computed: {
+            isLogin: function () {
+                return this.$store.getters.isLogin;
+            },
             user: function () {
                 return this.$store.getters.getUser;
             }
@@ -121,11 +124,12 @@
             },
             getFictionList() {
                 let initParams = {
-                    'page': this.paging.currentPage,
-                    'terminal': navigator.userAgent
+                    userId: this.user.id,
+                    page: this.paging.currentPage,
+                    terminal: navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
-                this.axios.post('/library/list/fiction', params).then(response => {
+                this.axios.post(this.api.library.fictions, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.$Message.error(resp.msg);
@@ -137,9 +141,7 @@
             },
             getUserCommentList() {
                 let initParams = {
-                    userId: this.user.id
-                    // 'page': this.paging.currentPage,
-                    // 'terminal': navigator.userAgent
+                    userId: this.user.id,
                 };
                 let params = this.qs.stringify(initParams);
                 this.axios.post('/library/list/comment', params).then(response => {
@@ -153,8 +155,9 @@
             },
             getUserTopicList() {
                 let initParams = {
-                    // 'page': this.paging.currentPage,
-                    // 'terminal': navigator.userAgent
+                    userId: this.user.id,
+                    page: this.paging.currentPage,
+                    terminal: navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
                 this.axios.post('/forum/list/topic', params).then(response => {
@@ -169,9 +172,9 @@
             },
             getUserReplies() {
                 let initParams = {
-                    userId: this.user.id
-                    // 'page': this.paging.currentPage,
-                    // 'terminal': navigator.userAgent
+                    userId: this.user.id,
+                    page: this.paging.currentPage,
+                    terminal: navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
                 this.axios.post('/forum/list/reply', params).then(response => {

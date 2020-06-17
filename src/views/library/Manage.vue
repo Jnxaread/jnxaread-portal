@@ -23,8 +23,9 @@
                 <div class="lastTime">上次更新时间：<span>{{fiction.lastTime | dateFormat }}</span></div>
                 <div class="lastChapter">上次更新章节：<span>第{{fiction.lastNumber}}章 {{fiction.lastChapter}}</span></div>
                 <div class="operate">
-                    <Button class="operate_button" type="info">修改标签</Button>
+                    <Button class="operate_button" type="info" @click="goManageChapter(fiction.id)">管理章节</Button>
                     <Button class="operate_button" type="info" @click="goNewChapter(fiction.id)">发布章节</Button>
+                    <Button class="operate_button" type="info">修改标签</Button>
                 </div>
             </div>
         </div>
@@ -75,6 +76,9 @@
                     this.fictionList = resp.data.fictionList;
                     this.paging.total = resp.data.fictionCount;
                 });
+            },
+            goManageChapter(fictionId) {
+                this.$router.push({path: '/directory', query: {id: fictionId}}).then();
             },
             goNewChapter(fictionId) {
                 this.$router.push({path: '/new/chapter', query: {id: fictionId}}).then();

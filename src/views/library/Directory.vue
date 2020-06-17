@@ -21,6 +21,7 @@
                     <th>查看</th>
                     <th>评论</th>
                     <th>发布时间</th>
+                    <th v-if="isManage">操作</th>
                 </tr>
                 <tr class="table_body" v-for="(chapter,index) in chapters" :key="index">
                     <td class="chapter_number">{{chapter.number}}</td>
@@ -34,6 +35,11 @@
                     <td class="chapter_viewCount">{{chapter.viewCount}}</td>
                     <td class="chapter_commentCount">{{chapter.commentCount}}</td>
                     <td class="chapter_submitTime">{{chapter.createTime | dateFormat}}</td>
+                    <td class="chapter_operate" v-if="isManage">
+                        <Button class="chapter_button" size="small" type="primary">修改</Button>
+                        <Button class="chapter_button" size="small" type="warning">隐藏</Button>
+                        <Button class="chapter_button" size="small" type="error">删除</Button>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -47,6 +53,16 @@
             return {
                 fiction: {},
                 chapters: [],
+                isManage: false,
+            }
+        },
+        beforeRouteEnter(to, from, next) {
+            if (from.path === '/manage') {
+                next(vm => {
+                    vm.isManage = true;
+                })
+            } else {
+                next();
             }
         },
         computed: {
@@ -68,7 +84,7 @@
                     'terminal': navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
-                this.axios.post('/library/brief/fiction', params).then(response => {
+                this.axios.post(this.api.library.fictionBrief, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.$Message.error(resp.msg);
@@ -81,11 +97,10 @@
             getChapters() {
                 let initParams = {
                     fictionId: this.fiction.id,
-                    level: this.isLogin ? this.$store.getters.getUser.level : 0,
                     terminal: navigator.userAgent
                 };
                 let params = this.qs.stringify(initParams);
-                this.axios.post('/library/list/chapter', params).then(response => {
+                this.axios.post(this.api.library.chapters, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.$Message.error(resp.msg);
@@ -224,5 +239,14 @@
     .chapter_submitTime {
         width: 15%;
         text-align: center;
+    }
+
+    .chapter_operate {
+        width: 20%;
+        text-align: center;
+    }
+
+    .chapter_button {
+        margin: 0 0.5rem;
     }
 </style>

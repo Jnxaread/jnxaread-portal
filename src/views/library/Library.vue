@@ -54,7 +54,6 @@
             getFictionList() {
                 let initParams = {
                     userId: 0,
-                    level: this.isLogin ? this.$store.getters.getUser.level : 0,
                     page: this.paging.currentPage,
                     terminal: navigator.userAgent
                 };

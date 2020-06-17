@@ -6,5 +6,6 @@ export default {
         fictions: '/library/list/fiction',
         chapters: '/library/list/chapter',
         fictionDetail: '/library/detail/fiction',
+        fictionBrief:'/library/brief/fiction',
     }
 };
