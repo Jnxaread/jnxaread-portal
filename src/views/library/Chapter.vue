@@ -65,11 +65,10 @@
                 this.getChapter();
             },
             getChapter() {
-                let initParams = {
+                let params = {
                     'id': this.$route.query.id,
-                    'terminal': navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post('/library/detail/chapter', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -119,9 +118,8 @@
                 }
                 this.newComment.chapterId = this.$route.query.id;
                 this.newComment.content = this.$store.getters.getContent;
-                this.newComment.terminal = navigator.userAgent;
-                let params = this.qs.stringify(this.newComment);
-                this.axios.post('/library/new/comment', params).then(response => {
+                // let params = this.qs.stringify(this.newComment);
+                this.axios.post('/library/new/comment', this.newComment).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);

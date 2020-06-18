@@ -96,12 +96,11 @@
                 this.getTopic();
             },
             getTopic() {
-                let initParams = {
+                let params = {
                     'id': this.$route.query.id,
                     'page': this.paging.currentPage,
-                    'terminal': navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post('/forum/detail/topic', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -131,9 +130,8 @@
                 }
                 this.newReply.topicId = this.$route.query.id;
                 this.newReply.content = this.$store.getters.getContent;
-                this.newReply.terminal = navigator.userAgent;
-                let params = this.qs.stringify(this.newReply);
-                this.axios.post('/forum/new/reply', params).then(response => {
+                // let params = this.qs.stringify(this.newReply);
+                this.axios.post('/forum/new/reply', this.newReply).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);

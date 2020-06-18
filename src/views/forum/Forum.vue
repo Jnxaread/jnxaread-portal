@@ -102,12 +102,11 @@
                 this.getTopicList();
             },
             getNoticeList() {
-                let initParams = {
+                let params = {
                     level: this.isLogin ? this.$store.getters.getUser.level : 0,
                     page: this.paging.currentPage,
-                    terminal: navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post('/forum/list/notice', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -118,12 +117,10 @@
                 });
             },
             getTopicList() {
-                let initParams = {
-                    level: this.isLogin ? this.$store.getters.getUser.level : 0,
+                let params = {
                     page: this.paging.currentPage,
-                    terminal: navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post('/forum/list/topic', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {

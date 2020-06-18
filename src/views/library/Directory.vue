@@ -78,12 +78,11 @@
                 this.getFictionBrief();
             },
             getFictionBrief() {
-                let initParams = {
+                let params = {
                     'id': this.$route.query.id,
                     // 'page': this.paging.currentPage,
-                    'terminal': navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.fictionBrief, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -95,11 +94,10 @@
                 })
             },
             getChapters() {
-                let initParams = {
+                let params = {
                     fictionId: this.fiction.id,
-                    terminal: navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.chapters, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {

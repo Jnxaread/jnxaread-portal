@@ -53,6 +53,7 @@
                         </a>
                         <DropdownMenu slot="list">
                             <DropdownItem @click.native="goToUCenter()">个人中心</DropdownItem>
+                            <DropdownItem @click.native="goToSetting()">个人设置</DropdownItem>
                             <DropdownItem divided @click.native="logout()">退出登录</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
@@ -122,6 +123,9 @@
             },
             goToUCenter() {
                 this.$router.push('/ucenter').then();
+            },
+            goToSetting(){
+                this.$router.push('/setting').then();
             },
             logout() {
                 this.axios.post(this.api.user.logout).then(response => {

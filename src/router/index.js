@@ -15,13 +15,14 @@ import NewTopic from '../views/forum/NewTopic';
 import NewFiction from '../views/library/NewFiction';
 import NewChapter from '../views/library/NewChapter';
 import Manage from '../views/library/Manage';
+import Setting from '../views/user/Setting'
 
 /**
  * 重写路由的push方法
  */
 const routerPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
-    return routerPush.call(this, location).catch(error=> error)
+    return routerPush.call(this, location).catch(error => error)
 };
 
 Vue.use(VueRouter);
@@ -101,6 +102,11 @@ const routes = [
         path: '/manage',
         name: 'Manage',
         component: Manage
+    },
+    {
+        path: '/setting',
+        name: 'Setting',
+        component: Setting
     }
 ];
 

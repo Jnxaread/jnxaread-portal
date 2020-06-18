@@ -86,7 +86,6 @@
                     email: '',
                     emailCode: '',
                     gender: '',
-                    terminal: '',
                 },
                 ruleValidate: {
                     account: [
@@ -148,8 +147,8 @@
                     return;
                 }
                 this.buttonShow = 1;
-                let params = this.qs.stringify({email: this.form.email});
-                this.axios.post("/user/emailCode", params).then(response => {
+                // let params = this.qs.stringify({email: this.form.email});
+                this.axios.post("/user/emailCode", {email: this.form.email}).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
@@ -172,9 +171,8 @@
                 })
             },
             register() {
-                this.form.terminal = navigator.userAgent;
-                let params = this.qs.stringify(this.form);
-                this.axios.post("/user/signUp", params).then(response => {
+                // let params = this.qs.stringify(this.form);
+                this.axios.post("/user/signUp", this.form).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);

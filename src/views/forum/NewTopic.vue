@@ -39,7 +39,6 @@
                     title: '',
                     content: '',
                     restricted:0,
-                    terminal: ''
                 }
             }
         },
@@ -82,9 +81,8 @@
                     return;
                 }
                 this.topic.content = this.$store.getters.getContent;
-                this.topic.terminal = navigator.userAgent;
-                let params = this.qs.stringify(this.topic);
-                this.axios.post('forum/new/topic', params).then(response => {
+                // let params = this.qs.stringify(this.topic);
+                this.axios.post('forum/new/topic', this.topic).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);

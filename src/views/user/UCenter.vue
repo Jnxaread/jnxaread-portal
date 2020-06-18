@@ -2,6 +2,12 @@
     <div class="ucenter">
         <div class="userInfo">
             <div class="username">{{user.username}}</div>
+            <div class="middleBox">
+                <span>等级 Lv{{user.level}}</span>
+                <span>作品 {{user.fictionCount}}</span>
+                <span>章节 {{user.chapterCount}}</span>
+            </div>
+            <div class="signature">{{user.signature}}</div>
             <div class="introduction" v-html="user.introduction"></div>
         </div>
         <div class="worksInfo">
@@ -123,12 +129,11 @@
                 this.getFictionList();
             },
             getFictionList() {
-                let initParams = {
+                let params = {
                     userId: this.user.id,
                     page: this.paging.currentPage,
-                    terminal: navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.fictions, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -140,10 +145,10 @@
                 });
             },
             getUserCommentList() {
-                let initParams = {
+                let params = {
                     userId: this.user.id,
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post('/library/list/comment', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -154,12 +159,11 @@
                 });
             },
             getUserTopicList() {
-                let initParams = {
+                let params = {
                     userId: this.user.id,
                     page: this.paging.currentPage,
-                    terminal: navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post('/forum/list/topic', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -171,12 +175,11 @@
                 });
             },
             getUserReplies() {
-                let initParams = {
+                let params = {
                     userId: this.user.id,
                     page: this.paging.currentPage,
-                    terminal: navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post('/forum/list/reply', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -221,6 +224,21 @@
     .username {
         font-size: 1.6em;
         font-weight: bold;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .middleBox {
+        font-size: 1.15rem;
+        text-align: center;
+        margin-bottom: 5px;
+        span{
+            margin: 0 0.5rem;
+        }
+    }
+
+    .signature {
+        font-size: 1.15rem;
         text-align: center;
         padding-bottom: 20px;
         border-bottom: 1px solid #e8e8e8;

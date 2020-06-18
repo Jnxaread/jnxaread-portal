@@ -43,7 +43,6 @@
                     title: '',
                     content: '',
                     restricted: 0,
-                    terminal: navigator.userAgent
                 },
             }
         },
@@ -62,12 +61,11 @@
                 this.getFictionBrief();
             },
             getFictionBrief() {
-                let initParams = {
+                let params = {
                     'id': this.$route.query.id,
                     // 'page': this.paging.currentPage,
-                    'terminal': navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post('/library/brief/fiction', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -95,8 +93,8 @@
                     return;
                 }
                 this.newChapter.content = this.$store.getters.getContent;
-                let params = this.qs.stringify(this.newChapter);
-                this.axios.post('library/new/chapter', params).then(response => {
+                // let params = this.qs.stringify(this.newChapter);
+                this.axios.post('library/new/chapter', this.newChapter).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);

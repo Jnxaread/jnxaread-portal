@@ -52,12 +52,11 @@
                 this.getFictionList();
             },
             getFictionList() {
-                let initParams = {
+                let params = {
                     userId: 0,
                     page: this.paging.currentPage,
-                    terminal: navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.fictions, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {

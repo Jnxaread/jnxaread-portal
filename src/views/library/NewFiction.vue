@@ -44,7 +44,6 @@
                     introduction: '',
                     tags: [],
                     restricted: 0,
-                    terminal: '',
                 },
                 categoryList: [
                     {
@@ -106,9 +105,8 @@
                 this.form.tags.pop();
             },
             submitFiction() {
-                this.form.terminal = navigator.userAgent;
-                let params = this.qs.stringify(this.form);
-                this.axios.post("/library/new/fiction", params).then(response => {
+                // let params = this.qs.stringify(this.form);
+                this.axios.post("/library/new/fiction", this.form).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.$Message.error(resp.msg);

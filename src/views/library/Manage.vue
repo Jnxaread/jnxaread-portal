@@ -61,11 +61,10 @@
                 this.getOwnFictionList();
             },
             getOwnFictionList() {
-                let initParams = {
+                let params = {
                     page: this.paging.currentPage,
-                    terminal: navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post('/library/list/fiction/own', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {

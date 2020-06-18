@@ -32,11 +32,10 @@
                 this.getNotice();
             },
             getNotice() {
-                let initParams = {
+                let params = {
                     'id': this.$route.query.id,
-                    'terminal': navigator.userAgent
                 };
-                let params = this.qs.stringify(initParams);
+                // let params = this.qs.stringify(initParams);
                 this.axios.post('/forum/detail/notice', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
