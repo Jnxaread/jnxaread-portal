@@ -23,10 +23,10 @@
                 </FormItem>
                 <FormItem prop="emailCode" label="邮箱验证码">
                     <Input v-model="form.emailCode" placeholder="请输入邮箱验证码">
-                        <Button slot="append" class="emailCode_button" v-if="buttonShow==0" @click="getEmailCode">
+                        <Button slot="append" class="emailCode_button" v-if="buttonShow===0" @click="getEmailCode">
                             <span>获取验证码</span>
                         </Button>
-                        <Button slot="append" v-else-if="buttonShow==1">
+                        <Button slot="append" v-else-if="buttonShow===1">
                             <span>正在发送验证码</span>
                         </Button>
                         <Button slot="append" v-else>
@@ -147,7 +147,6 @@
                     return;
                 }
                 this.buttonShow = 1;
-                // let params = this.qs.stringify({email: this.form.email});
                 this.axios.post("/user/emailCode", {email: this.form.email}).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
