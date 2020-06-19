@@ -41,22 +41,22 @@
                     <th align="center">回复 / 查看</th>
                     <th align="center">最后发表</th>
                 </tr>
-                <tr class="tr_topic" v-for="(topic, index) in topicList" :key="index">
-                    <td :class="index==topicList.length-1?'label':'label border_bottom'" align="center">
+                <tr class="tr_topic" v-for="(topic, index) in topics" :key="index">
+                    <td :class="index==topics.length-1?'label':'label border_bottom'" align="center">
                         【<span>{{ topic.label }}</span>】
                     </td>
-                    <td :class="index==topicList.length-1?'title':'title border_bottom'">
+                    <td :class="index==topics.length-1?'title':'title border_bottom'">
                         <router-link :to="'/topic?id='+topic.id">{{ topic.title }}</router-link>
                     </td>
-                    <td :class="index==topicList.length-1?'author':'author border_bottom'">
+                    <td :class="index==topics.length-1?'author':'author border_bottom'">
                         <h3>{{ topic.username }}</h3>
                         <p>{{ topic.createTime | dateFormat }}</p>
                     </td>
-                    <td :class="index==topicList.length-1?'reply_view':'reply_view border_bottom'">
+                    <td :class="index==topics.length-1?'reply_view':'reply_view border_bottom'">
                         <h3>{{ topic.replyCount }}</h3>
                         <p>{{ topic.viewCount }}</p>
                     </td>
-                    <td :class="index==topicList.length-1?'latestReply':'latestReply border_bottom'">
+                    <td :class="index==topics.length-1?'latestReply':'latestReply border_bottom'">
                         <h3>{{ topic.lastReply }}</h3>
                         <p>{{ topic.lastSubmit | dateFormat }}</p>
                     </td>
@@ -76,7 +76,7 @@
         data() {
             return {
                 noticeList: [],
-                topicList: [],
+                topics: [],
                 paging: {
                     currentPage: 1,
                     pageSize: 45,
@@ -118,16 +118,16 @@
             },
             getTopicList() {
                 let params = {
+                    userId: 0,
                     page: this.paging.currentPage,
                 };
-                // let params = this.qs.stringify(initParams);
-                this.axios.post('/forum/list/topic', params).then(response => {
+                this.axios.post(this.api.forum.topics, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         return;
                     }
-                    this.topicList = resp.data.topicList;
+                    this.topics = resp.data.topicList;
                     this.paging.total = resp.data.topicCount;
                 });
             },

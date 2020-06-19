@@ -90,7 +90,7 @@
                     id: this.$route.query.fid,
                     // page: this.paging.currentPage,
                 };
-                this.axios.post('/library/brief/fiction', params).then(response => {
+                this.axios.post(this.api.library.fictionBrief, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.$Message.error(resp.msg);
@@ -112,8 +112,8 @@
                         return;
                     }
                     this.newChapter.id = resp.data.id;
-                    this.newChapter.fictionId = resp.data.fictionId;
-                    this.newChapter.userId = this.$store.getters.getUser.id;
+                    // this.newChapter.fictionId = resp.data.fictionId;
+                    // this.newChapter.userId = this.$store.getters.getUser.id;
                     this.newChapter.number = resp.data.number;
                     this.newChapter.title = resp.data.title;
                     this.newChapter.content = resp.data.content;

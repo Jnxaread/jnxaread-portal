@@ -51,10 +51,9 @@
         },
         methods: {
             login() {
-                // let params = this.qs.stringify(this.form);
-                this.axios.post("/user/signIn", this.form).then(response => {
+                this.axios.post(this.api.user.signIn, this.form).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.instance('error', resp.msg);
                         return;
                     }

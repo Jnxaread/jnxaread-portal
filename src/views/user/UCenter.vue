@@ -133,7 +133,6 @@
                     userId: this.user.id,
                     page: this.paging.currentPage,
                 };
-                // let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.fictions, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -148,8 +147,7 @@
                 let params = {
                     userId: this.user.id,
                 };
-                // let params = this.qs.stringify(initParams);
-                this.axios.post('/library/list/comment', params).then(response => {
+                this.axios.post(this.api.library.comments, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.$Message.error(resp.msg);
@@ -163,10 +161,9 @@
                     userId: this.user.id,
                     page: this.paging.currentPage,
                 };
-                // let params = this.qs.stringify(initParams);
-                this.axios.post('/forum/list/topic', params).then(response => {
+                this.axios.post(this.api.forum.topics, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         return;
                     }

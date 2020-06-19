@@ -170,15 +170,14 @@
                 })
             },
             register() {
-                // let params = this.qs.stringify(this.form);
-                this.axios.post("/user/signUp", this.form).then(response => {
+                this.axios.post(this.api.user.signUp, this.form).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.instance('error', resp.msg);
                         return;
                     }
                     this.$store.commit('setUser', resp.data);
-                    let content = '<p style="font-size: 16px">你现在已经是一个红领巾啦，快去发帖庆祝吧。。。</p>';
+                    let content = "<p style='font-size: 16px'>你现在已经是一个红领巾啦，快去发帖庆祝吧。。。</p>";
                     this.instance('success', content);
                 })
             },

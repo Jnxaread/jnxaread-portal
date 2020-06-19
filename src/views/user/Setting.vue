@@ -104,7 +104,7 @@
                     return;
                 }*/
                 this.buttonShow = 1;
-                this.axios.post("/user/emailCode", {email: this.user.email}).then(response => {
+                this.axios.post(this.api.user.emailCode, {email: this.user.email}).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
@@ -134,9 +134,9 @@
                     signature: this.user.signature,
                     introduction: this.user.introduction
                 };
-                this.axios.post("/user/change/baseInfo", params).then(response => {
+                this.axios.post(this.api.user.editBaseInfo, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.instance('error', resp.msg);
                         return;
                     }
@@ -145,7 +145,7 @@
                 })
             },
             saveChangePwd() {
-                this.axios.post("/user/change/password", this.pwdForm).then(response => {
+                this.axios.post(this.api.user.editPassword, this.pwdForm).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
