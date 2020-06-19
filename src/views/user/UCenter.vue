@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="tabMain" v-else-if="tabMain===3">
-                <div class="topicInfo" v-for="(topic,index) in topicList" :key="index">
+                <div class="topicInfo" v-for="(topic,index) in topics" :key="index">
                     <div class="topic_title">【{{topic.label}}】{{topic.title}}</div>
                     <div class="topic_right">
                         <Icon class="count_icon" type="md-text" size="22"/>
@@ -104,7 +104,7 @@
                 tabMain: 1,
                 fictions: [],
                 comments: [],
-                topicList: [],
+                topics: [],
                 replies: [],
                 paging: {
                     currentPage: 1,
@@ -167,7 +167,7 @@
                         this.$Message.error(resp.msg);
                         return;
                     }
-                    this.topicList = resp.data.topicList;
+                    this.topics = resp.data.topicList;
                     this.paging.total = resp.data.topicCount;
                 });
             },

@@ -15,6 +15,7 @@ export default {
         fictionBrief: '/library/brief/fiction',
         chapterBrief: '/library/brief/chapter',
         newChapter: '/library/new/chapter',
+        newComment: '/library/new/comment',
         editChapter: '/library/edit/chapter',
     },
     forum: {

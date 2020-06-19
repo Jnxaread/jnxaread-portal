@@ -4,6 +4,12 @@
             <div class="detail">
                 <div class="title">{{fiction.title}}</div>
                 <div class="author">{{fiction.author}}</div>
+                <div class="middleBox">
+                    <span>章节 {{fiction.chapterCount}}</span>
+                    <span>字数 {{fiction.wordCount}}</span>
+                    <span>评论 {{fiction.commentCount}}</span>
+                    <span>点击 {{fiction.viewCount}}</span>
+                </div>
                 <div class="label_box">
                     <div class="label" v-for="tag in fiction.tags" :key="tag">
                         【{{tag}}】
@@ -68,10 +74,9 @@
             },
             getFiction() {
                 let params = {
-                    'id': this.$route.query.id,
+                    id: this.$route.query.id,
                     // 'page': this.paging.currentPage,
                 };
-                // let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.fictionDetail, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -80,29 +85,12 @@
                     }
                     this.fiction = resp.data.fiction;
                     this.comments = resp.data.comments;
-                    // this.getChapterBrief();
                 })
             },
-            /*getChapterBrief() {
-                let initParams = {
-                    fictionId: this.fiction.id,
-                    number: 1
-                };
-                let params = this.qs.stringify(initParams);
-                this.axios.post('/library/brief/chapter', params).then(response => {
-                    let resp = response.data;
-                    if (resp.status != 200) {
-                        this.instance('error', resp.msg);
-                        return;
-                    }
-                    this.chapter1 = resp.data;
-                })
-            },*/
             goReading() {
                 let params = {
                     fictionId: this.fiction.id,
                 };
-                // let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.chapters, params).then(response => {
                     let resp = response.data;
                     if (resp.status !== 200) {
@@ -130,8 +118,7 @@
                 }
                 this.newComment.fictionId = this.$route.query.id;
                 this.newComment.content = this.$store.getters.getContent;
-                // let params = this.qs.stringify(this.newComment);
-                this.axios.post('/library/new/comment', this.newComment).then(response => {
+                this.axios.post(this.api.library.newComment, this.newComment).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
                         this.instance('error', resp.msg);
@@ -147,7 +134,7 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .fiction {
         width: 100%;
     }
@@ -165,17 +152,27 @@
     }
 
     .title {
-        font-size: 1.8em;
+        font-size: 1.8rem;
         font-weight: bolder;
         text-align: center;
         margin: 10px 0;
     }
 
     .author {
-        font-size: 1.3em;
+        font-size: 1.2rem;
         font-weight: bold;
         text-align: center;
-        margin: 20px 0;
+        margin: 20px 0 10px 0;
+    }
+
+    .middleBox {
+        font-size: 1.1rem;
+        text-align: center;
+        margin-bottom: 5px;
+
+        span {
+            margin: 0 0.5rem;
+        }
     }
 
     .label_box {
@@ -186,7 +183,7 @@
         display: inline-block;
         font-size: 1.1em;
         font-weight: bolder;
-        margin: 15px 0;
+        margin: 5px 0;
     }
 
     .brief {
