@@ -1,6 +1,6 @@
 <template>
     <div class="manage">
-        <div class="fictionInfo" v-for="(fiction,index) in fictionList" :key="index">
+        <div class="fictionInfo" v-for="(fiction,index) in fictions" :key="index">
             <div class="briefInfo">
                 <div class="title">
                     <router-link :to="'/fiction?id='+fiction.id">
@@ -37,7 +37,7 @@
         name: "Manage",
         data() {
             return {
-                fictionList: [],
+                fictions: [],
                 paging: {
                     currentPage: 1,
                     pageSize: 30,
@@ -64,7 +64,6 @@
                 let params = {
                     page: this.paging.currentPage,
                 };
-                // let params = this.qs.stringify(initParams);
                 this.axios.post('/library/list/fiction/own', params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -72,15 +71,16 @@
                         this.$router.push('/signIn').then();
                         return;
                     }
-                    this.fictionList = resp.data.fictionList;
+                    this.fictions = resp.data.fictionList;
                     this.paging.total = resp.data.fictionCount;
+                    this.$store.commit('setOwnFictions', this.fictions);
                 });
             },
             goManageChapter(fictionId) {
                 this.$router.push({path: '/directory', query: {id: fictionId}}).then();
             },
             goNewChapter(fictionId) {
-                this.$router.push({path: '/new/chapter', query: {id: fictionId}}).then();
+                this.$router.push({path: '/new/chapter', query: {fid: fictionId}}).then();
             },
         }
     }
@@ -185,13 +185,5 @@
         /*border: 0;*/
         box-shadow: none;
         /*background-color: #999;*/
-    }
-
-    .ivu-btn:focus {
-        box-shadow: none;
-    }
-
-    .ivu-btn:active {
-        box-shadow: none;
     }
 </style>

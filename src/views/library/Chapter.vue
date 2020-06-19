@@ -234,14 +234,6 @@
         background-color: #ccc;
     }
 
-    .ivu-btn:focus {
-        box-shadow: none;
-    }
-
-    .ivu-btn:active {
-        box-shadow: none;
-    }
-
     .comment {
         width: 100%;
         background-color: #f5f5f5;

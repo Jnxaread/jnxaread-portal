@@ -105,7 +105,7 @@
                 // let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.chapters, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         return;
                     }
@@ -234,14 +234,6 @@
     .button_submit {
         border: 0;
         background-color: #ccc;
-    }
-
-    .ivu-btn:focus {
-        box-shadow: none;
-    }
-
-    .ivu-btn:active {
-        box-shadow: none;
     }
 
     .comment {

@@ -222,14 +222,6 @@
         background-color: #999;
     }
 
-    .ivu-btn:focus {
-        box-shadow: none;
-    }
-
-    .ivu-btn:active {
-        box-shadow: none;
-    }
-
     .emailCode_button {
         width: 100px;
     }

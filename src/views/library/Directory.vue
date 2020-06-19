@@ -36,9 +36,12 @@
                     <td class="chapter_commentCount">{{chapter.commentCount}}</td>
                     <td class="chapter_submitTime">{{chapter.createTime | dateFormat}}</td>
                     <td class="chapter_operate" v-if="isManage">
-                        <Button class="chapter_button" size="small" type="primary">修改</Button>
-                        <Button class="chapter_button" size="small" type="warning">隐藏</Button>
-                        <Button class="chapter_button" size="small" type="error">删除</Button>
+                        <Button class="chapter_button" size="small" type="primary" @click="editChapter(chapter)">修改
+                        </Button>
+                        <Button class="chapter_button" size="small" type="warning" @click="hideChapter(chapter.id)">隐藏
+                        </Button>
+                        <Button class="chapter_button" size="small" type="error" @click="deleteChapter(chapter.id)">删除
+                        </Button>
                     </td>
                 </tr>
             </table>
@@ -82,7 +85,6 @@
                     'id': this.$route.query.id,
                     // 'page': this.paging.currentPage,
                 };
-                // let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.fictionBrief, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -97,7 +99,6 @@
                 let params = {
                     fictionId: this.fiction.id,
                 };
-                // let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.chapters, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
@@ -109,6 +110,9 @@
                     sessionStorage.setItem(this.fiction.id, JSON.stringify(this.chapters));
                     // this.paging.total = resp.data.fictionCount;
                 });
+            },
+            editChapter(chapter) {
+                this.$router.push({path:'/new/chapter',query:{fid:chapter.fictionId,cid:chapter.id}}).then();
             }
         }
     }

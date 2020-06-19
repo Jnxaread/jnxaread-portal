@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         user: null,
-        content: ''
+        content: '',
+        ownFictions: [],
     },
     mutations: {
         setUser(state, user) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
         },
         setContent(state, content) {
             state.content = content;
+        },
+        setOwnFictions(state, ownFictions) {
+            state.ownFictions = ownFictions;
         }
     },
     getters: {
@@ -25,6 +29,9 @@ export default new Vuex.Store({
         },
         getContent(state) {
             return state.content;
+        },
+        getOwnFictions(state) {
+            return state.ownFictions;
         }
     },
     actions: {},

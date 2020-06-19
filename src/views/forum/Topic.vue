@@ -300,14 +300,6 @@
         background-color: #999;
     }
 
-    .ivu-btn:focus {
-        box-shadow: none;
-    }
-
-    .ivu-btn:active {
-        box-shadow: none;
-    }
-
     .modal_reply /deep/ .ivu-modal-body {
         padding: 45px 30px 30px 30px !important;
     }
