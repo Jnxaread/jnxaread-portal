@@ -32,7 +32,7 @@ axios.defaults.withCredentials = true;
 
 // http request 拦截器
 axios.interceptors.request.use(config => {
-    // config.data.terminal = navigator.userAgent;
+    config.headers['Access-Control-Allow-Origin']='*';
     config.data = qs.stringify(config.data);
     return config;
 }, error => {
