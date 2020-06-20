@@ -1,13 +1,22 @@
 exports.install = function (Vue) {
-    Vue.prototype.instance = function (type, content) {
+    Vue.prototype.instance = function (type, content,ok,cancel) {
         switch (type) {
             case 'success':
                 this.$Modal.success({
                     title: '操作成功！',
                     content: content,
+                });
+                break;
+            case 'warning':
+                this.$Modal.confirm({
+                    title: '警告',
+                    content: content,
                     onOk: () => {
-                        this.$router.push('/');
+                        ok();
                     },
+                    onCancel: () => {
+                        cancel();
+                    }
                 });
                 break;
             case 'error':
@@ -24,7 +33,7 @@ exports.install = function (Vue) {
         let validateC = validateB.replace(/<\/p>/g, '');
         let validateD = validateC.replace(/&nbsp;/g, '');
         let validateE = validateD.replace(/<br>/g, '');
-        if (validateE.length != 0) {
+        if (validateE.length !== 0) {
             return true;
         } else {
             return false;

@@ -38,7 +38,9 @@
                     <td class="chapter_operate" v-if="isManage">
                         <Button class="chapter_button" size="small" type="primary" @click="editChapter(chapter)">修改
                         </Button>
-                        <Button class="chapter_button" size="small" type="warning" @click="hideChapter(chapter.id)">隐藏
+                        <Button class="chapter_button" size="small" type="warning"
+                                @click="hideChapter(chapter.id,!chapter.hided)">
+                            {{chapter.hided===false?'隐藏':'显示'}}
                         </Button>
                         <Button class="chapter_button" size="small" type="error" @click="deleteChapter(chapter.id)">删除
                         </Button>
@@ -63,24 +65,23 @@
             if (from.path === '/manage') {
                 next(vm => {
                     vm.isManage = true;
+                    vm.getFictionBrief(1);
                 })
             } else {
-                next();
+                next(vm => {
+                    vm.init();
+                });
             }
         },
-        computed: {
-            isLogin: function () {
-                return this.$store.getters.isLogin;
-            },
-        },
+        computed: {},
         created() {
-            this.init();
+            // this.init();
         },
         methods: {
             init() {
-                this.getFictionBrief();
+                this.getFictionBrief(0);
             },
-            getFictionBrief() {
+            getFictionBrief(type) {
                 let params = {
                     'id': this.$route.query.id,
                     // 'page': this.paging.currentPage,
@@ -92,16 +93,17 @@
                         return;
                     }
                     this.fiction = resp.data;
-                    this.getChapters();
+                    this.getChapters(type);
                 })
             },
-            getChapters() {
+            getChapters(type) {
                 let params = {
                     fictionId: this.fiction.id,
+                    type: type
                 };
                 this.axios.post(this.api.library.chapters, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         this.$router.push('/signIn').then();
                         return;
@@ -112,8 +114,40 @@
                 });
             },
             editChapter(chapter) {
-                this.$router.push({path:'/new/chapter',query:{fid:chapter.fictionId,cid:chapter.id}}).then();
-            }
+                this.$router.push({path: '/new/chapter', query: {fid: chapter.fictionId, cid: chapter.id}}).then();
+            },
+            hideChapter(id, hide) {
+                let params = {
+                    id: id,
+                    hide: hide
+                };
+                this.axios.post(this.api.library.hideChapter, params).then(response => {
+                    let resp = response.data;
+                    if (resp.status !== 200) {
+                        this.$Message.error(resp.msg);
+                        this.$router.push('/').then();
+                        return;
+                    }
+                    this.getChapters(1);
+                    this.$Message.success('操作成功');
+                });
+            },
+            deleteChapter(id) {
+                let content='是否删除该章节？一旦删除则不可恢复';
+                this.instance('warning',content,()=>{
+                    let params = {id: id};
+                    this.axios.post(this.api.library.deleteChapter, params).then(response => {
+                        let resp = response.data;
+                        if (resp.status !== 200) {
+                            this.$Message.error(resp.msg);
+                            this.$router.push('/').then();
+                            return;
+                        }
+                        this.getChapters(1);
+                        this.$Message.success('删除成功');
+                    });
+                });
+            },
         }
     }
 </script>

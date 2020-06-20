@@ -17,6 +17,8 @@ export default {
         newChapter: '/library/new/chapter',
         newComment: '/library/new/comment',
         editChapter: '/library/edit/chapter',
+        hideChapter: '/library/hide/chapter',
+        deleteChapter: '/library/delete/chapter',
     },
     forum: {
         topics: '/forum/list/topic',
