@@ -90,6 +90,7 @@
             goReading() {
                 let params = {
                     fictionId: this.fiction.id,
+                    type: 0
                 };
                 this.axios.post(this.api.library.chapters, params).then(response => {
                     let resp = response.data;

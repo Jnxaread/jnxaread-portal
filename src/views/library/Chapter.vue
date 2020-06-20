@@ -2,7 +2,7 @@
     <div class="chapter">
         <div class="detail">
             <div class="titleBox">
-                <div class="title">第{{chapter.number}}章</div>
+                <div class="title">第{{noToChinese(chapter.number.toString())}}章</div>
                 <div class="title">{{chapter.title}}</div>
             </div>
             <div class="info">
@@ -24,7 +24,7 @@
                     <Button class="button_submit" type="primary" size="large" @click="goWriteComment()">发表评论</Button>
                 </div>
             </div>
-            <div class="comment" v-if="comments.length==0">
+            <div class="comment" v-if="comments.length===0">
                 <div class="comment_content">本章还没有评论，快来发表评论吧......</div>
             </div>
             <div class="comment" v-else v-for="(comment,index) in comments" :key="index">
@@ -68,10 +68,9 @@
                 let params = {
                     'id': this.$route.query.id,
                 };
-                // let params = this.qs.stringify(initParams);
-                this.axios.post('/library/detail/chapter', params).then(response => {
+                this.axios.post(this.api.library.chapterDetail, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         this.$router.push('/library').then();
                         return;
@@ -118,10 +117,9 @@
                 }
                 this.newComment.chapterId = this.$route.query.id;
                 this.newComment.content = this.$store.getters.getContent;
-                // let params = this.qs.stringify(this.newComment);
-                this.axios.post('/library/new/comment', this.newComment).then(response => {
+                this.axios.post(this.api.library.newComment, this.newComment).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.instance('error', resp.msg);
                         return;
                     }
@@ -161,7 +159,7 @@
 
     .title {
         display: inline-block;
-        margin: 0 10px;
+        margin: 0 6px;
     }
 
     .info {
@@ -183,7 +181,7 @@
     .turningBox {
         font-size: 1.3em;
         font-weight: bolder;
-        font-family: YouYuan,serif;
+        font-family: YouYuan, serif;
         text-align: center;
         margin: 60px 0 25px 0;
     }

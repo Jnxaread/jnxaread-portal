@@ -24,7 +24,7 @@
                     <th v-if="isManage">操作</th>
                 </tr>
                 <tr class="table_body" v-for="(chapter,index) in chapters" :key="index">
-                    <td class="chapter_number">{{chapter.number}}</td>
+                    <td class="chapter_number">第{{noToChinese(chapter.number.toString())}}章</td>
                     <td class="chapter_title">
                         <router-link :to="'/chapter?id='+chapter.id">
                             {{chapter.title}}
@@ -231,7 +231,7 @@
     }
 
     .chapter_number {
-        width: 6%;
+        width: 14%;
         font-size: 1.2em;
         font-weight: bold;
         text-align: center;

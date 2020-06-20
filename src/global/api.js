@@ -12,6 +12,7 @@ export default {
         chapters: '/library/list/chapter',
         comments: '/library/list/comment',
         fictionDetail: '/library/detail/fiction',
+        chapterDetail: '/library/detail/chapter',
         fictionBrief: '/library/brief/fiction',
         chapterBrief: '/library/brief/chapter',
         newChapter: '/library/new/chapter',
