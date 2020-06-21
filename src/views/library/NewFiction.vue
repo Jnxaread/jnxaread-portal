@@ -5,8 +5,8 @@
             <Form class="fiction_form" :model="form" label-position="right" :label-width="90">
                 <FormItem label="作品类别">
                     <Select v-model="form.categoryId" size="large" placeholder="请选择作品类别">
-                        <Option v-for="category in categoryList" :value="category.value" :key="category.value">
-                            {{category.label}}
+                        <Option v-for="category in categories" :value="category.id" :key="category.id">
+                            {{category.name}}
                         </Option>
                     </Select>
                 </FormItem>
@@ -45,16 +45,7 @@
                     tags: [],
                     restricted: 0,
                 },
-                categoryList: [
-                    {
-                        value: 1,
-                        label: '原创'
-                    },
-                    {
-                        value: 2,
-                        label: '同人'
-                    },
-                ],
+                categories: [],
                 tagTemp: '',
             }
         },
@@ -69,7 +60,19 @@
                         content: '只有登录后才能发帖'
                     });
                     this.$router.push('/signIn').then();
+                    return;
                 }
+                this.getCategories();
+            },
+            getCategories() {
+                this.axios.post(this.api.library.categories, this.form).then(response => {
+                    let resp = response.data;
+                    if (resp.status !== 200) {
+                        this.$Message.error(resp.msg);
+                        return;
+                    }
+                    this.categories = resp.data;
+                })
             },
             addTag() {
                 if (this.form.tags.length >= 3) {
@@ -105,10 +108,9 @@
                 this.form.tags.pop();
             },
             submitFiction() {
-                // let params = this.qs.stringify(this.form);
-                this.axios.post("/library/new/fiction", this.form).then(response => {
+                this.axios.post(this.api.library.newFiction, this.form).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         return;
                     }
