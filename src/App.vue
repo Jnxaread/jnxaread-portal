@@ -8,7 +8,7 @@
             </div>
             <div class="nav_module">
                 <div class="nav_item">
-                    <router-link to="/">
+                    <router-link to="/library">
                         文库
                     </router-link>
                 </div>

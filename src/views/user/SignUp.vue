@@ -179,6 +179,7 @@
                     this.$store.commit('setUser', resp.data);
                     let content = "<p style='font-size: 16px'>你现在已经是一个红领巾啦，快去发帖庆祝吧。。。</p>";
                     this.instance('success', content);
+                    this.$router.push('/').then();
                 })
             },
         }

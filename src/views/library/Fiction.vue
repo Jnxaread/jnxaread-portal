@@ -15,7 +15,9 @@
                         【{{tag}}】
                     </div>
                 </div>
-                <div class="brief">{{fiction.introduction}}</div>
+                <div class="brief">
+                    <pre class="brief_pre">{{fiction.introduction}}</pre>
+                </div>
             </div>
             <div class="turningBox">
                 <div class="turning" @click="goReading()">开始阅读</div>
@@ -188,9 +190,18 @@
     }
 
     .brief {
-        font-size: 1.2em;
-        text-align: center;
         margin: 20px 0;
+    }
+
+    .brief_pre{
+        all:initial;             /*清除继承样式*/
+        display:block;           /*设置布局流，避免换行导致的错误布局*/
+        white-space:pre-line;    /*保留换行符，设置溢出换行*/
+        font-size:1.1rem;
+        font-weight: lighter;
+        text-align: center;
+        color: #515a6e;
+        line-height: 32px;
     }
 
     .turningBox {

@@ -28,13 +28,13 @@ VueRouter.prototype.push = function push(location) {
 Vue.use(VueRouter);
 
 const routes = [
-    /*{
+    {
       path: '/',
       name: 'Home',
       component: Home
-    },*/
+    },
     {
-        path: '/',
+        path: '/library',
         name: 'Library',
         component: Library
     },

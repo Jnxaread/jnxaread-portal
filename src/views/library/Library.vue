@@ -56,7 +56,6 @@
                     userId: 0,
                     page: this.paging.currentPage,
                 };
-                // let params = this.qs.stringify(initParams);
                 this.axios.post(this.api.library.fictions, params).then(response => {
                     let resp = response.data;
                     if (resp.status != 200) {
