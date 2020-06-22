@@ -7,7 +7,11 @@
                     <Icon type="md-person" size="22"/>
                     <span>{{topic.username}}</span>
                 </div>
-                <div class="info_submitTime">发表于{{ topic.createTime | dateFormat }}</div>
+                <!--<div class="info_submitTime">发表于{{ topic.createTime | dateFormat }}</div>-->
+                <div class="info_submitTime">
+                    发表于
+                    <Time :time="topic.createTime"/>
+                </div>
                 <div class="info_floor">楼主</div>
             </div>
             <div class="content" v-html="topic.content"></div>
@@ -22,7 +26,11 @@
                         <Icon type="md-person" size="22"/>
                         <span>{{ reply.username }}</span>
                     </div>
-                    <div class="info_submitTime">{{ reply.createTime | dateFormat }}</div>
+                    <!--<div class="info_submitTime">{{ reply.createTime | dateFormat }}</div>-->
+                    <div class="info_submitTime">
+                        发表于
+                        <Time :time="reply.createTime"/>
+                    </div>
                     <div class="info_floor">{{ reply.floor }}楼</div>
                 </div>
                 <div class="content">
@@ -97,13 +105,12 @@
             },
             getTopic() {
                 let params = {
-                    'id': this.$route.query.id,
-                    'page': this.paging.currentPage,
+                    id: this.$route.query.id,
+                    page: this.paging.currentPage,
                 };
-                // let params = this.qs.stringify(initParams);
-                this.axios.post('/forum/detail/topic', params).then(response => {
+                this.axios.post(this.api.forum.topicDetail, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         this.$router.push('/').then();
                         return;
@@ -115,7 +122,7 @@
                 });
             },
             submitReply(num) {
-                if (num == 0) {
+                if (num === 0) {
                     this.$refs.editor.getContent();
                     this.newReply.quote = 0;
                 } else {
@@ -130,22 +137,20 @@
                 }
                 this.newReply.topicId = this.$route.query.id;
                 this.newReply.content = this.$store.getters.getContent;
-                // let params = this.qs.stringify(this.newReply);
-                this.axios.post('/forum/new/reply', this.newReply).then(response => {
+                this.axios.post(this.api.forum.newReply, this.newReply).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.instance('error', resp.msg);
                         return;
                     }
                     this.isClear = true;
                     this.$refs.editor.editorContent = '';
                     this.modal = false;
-                    this.quoteFloor = 0;
                     this.getTopic();
                 })
             },
             showModal(quotedReply) {
-                if (quotedReply == 0) {
+                if (quotedReply === 0) {
                     this.isShowQu = false;
                 } else {
                     this.isShowQu = true;

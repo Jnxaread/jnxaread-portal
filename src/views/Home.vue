@@ -5,7 +5,9 @@
             <div class="section_content" v-for="(fiction,index) in fictions" :key="index">
                 <div class="section_fiction">
                     <div class="fiction_left">
-                        <div class="fiction_title">{{fiction.title}}</div>
+                        <div class="fiction_title">
+                            <router-link :to="'/fiction?id='+fiction.id">{{fiction.title}}</router-link>
+                        </div>
                         <div class="fiction_brief">
                             <div class="fiction_tag" v-for="(tag,index) in fiction.tags" :key="index">
                                 {{tag}}
@@ -24,7 +26,9 @@
             <div class="section_content">
                 <div class="section_fiction" v-for="(topic,index) in topics" :key="index">
                     <div class="fiction_left">
-                        <div class="fiction_title">{{topic.title}}</div>
+                        <div class="fiction_title">
+                            <router-link :to="'/topic?id='+topic.id">{{topic.title}}</router-link>
+                        </div>
                         <div class="fiction_brief" v-html="topic.content"></div>
                     </div>
                     <div class="fiction_right">
@@ -78,7 +82,7 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .section {
         width: 100%;
         padding: 0.3rem 0.5rem;
@@ -111,6 +115,14 @@
         font-weight: bold;
         color: #505050;
         line-height: 27px;
+
+        a {
+            color: #515a6e;
+        }
+
+        a:hover {
+            color: #2d8cf0;
+        }
     }
 
     .fiction_brief {
