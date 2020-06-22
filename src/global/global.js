@@ -42,24 +42,24 @@ exports.install = function (Vue) {
     Vue.prototype.noToChinese = function (number) {
         let reg = /^\+?[1-9][0-9]*$/;
         if (!reg.test(number)) {
-            this.$Message.error('数字格式错误');
+            return '数字格式错误';
         }
         let ele_zh = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
         // let ele_no = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        let site = ['', '十', '百', '千', '万', '十万', '百万', '千万', '亿'];
+        let site = ['', '十', '百', '千', '万', '亿'];
         let numSplit = number.split('');
         //1515
         let chinese = '';
         let numSite = numSplit.length;
-        if (numSite === 2 && numSplit[0] === '1') {
+        if (number === '0') {
+            chinese = '零';
+        } else if (numSite === 2 && numSplit[0] === '1') {
             if (numSplit[1] === '0') {
                 chinese = '十';
             } else {
                 chinese = '十' + ele_zh[numSplit[1]];
             }
-        } else if (number === '0') {
-            chinese = '零';
-        } else {
+        } else if (numSite > 2 && numSite < 5) {
             for (let i = 0; i < numSplit.length; i++) {
                 if (numSite === 1 && numSplit[i] === '0') {
                     break;
@@ -82,6 +82,20 @@ exports.install = function (Vue) {
                 }
                 numSite--;
             }
+        } else if (numSite > 4 && numSite < 9) {
+            let wanSiteArr = numSplit.slice(0, numSplit.length - 4);
+            let wanSite = this.noToChinese(wanSiteArr.join(''));
+            let qianSiteArr = numSplit.slice(numSplit.length - 4, numSplit.length);
+            let qianSite = this.noToChinese(qianSiteArr.join(''));
+            chinese = wanSite + '万' + qianSite;
+        } else if (numSite > 8 && numSite < 13) {
+            let yiSiteArr = numSplit.slice(0, numSplit.length - 8);
+            let yiSite = this.noToChinese(yiSiteArr.join(''));
+            let wanSiteArr = numSplit.slice(numSplit.length - 8, numSplit.length);
+            let wanSite = this.noToChinese(wanSiteArr.join(''));
+            chinese = yiSite + '亿' + wanSite;
+        } else {
+            chinese = '数字位溢出，无法处理';
         }
         return chinese;
     };

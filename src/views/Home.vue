@@ -125,7 +125,7 @@
         overflow: hidden;
     }
 
-    .fiction_tag{
+    .fiction_tag {
         display: inline-block;
         margin: 0 0.1rem;
     }
