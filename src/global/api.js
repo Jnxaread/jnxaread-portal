@@ -25,10 +25,11 @@ export default {
         deleteChapter: '/library/delete/chapter',
     },
     forum: {
+        notices: '/forum/list/notice',
         topics: '/forum/list/topic',
         latestTopics: '/forum/list/topic/latest',
         topicDetail: '/forum/detail/topic',
         newTopic: '/forum/new/topic',
-        newReply:'/forum/new/reply',
+        newReply: '/forum/new/reply',
     }
 };
