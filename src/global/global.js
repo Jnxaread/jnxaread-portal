@@ -44,11 +44,9 @@ exports.install = function (Vue) {
         if (!reg.test(number)) {
             return '数字格式错误';
         }
-        let ele_zh = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-        // let ele_no = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        let site = ['', '十', '百', '千', '万', '亿'];
+        let ele_zh = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+        let site = ['', '十', '百', '千'];
         let numSplit = number.split('');
-        //1515
         let chinese = '';
         let numSite = numSplit.length;
         if (number === '0') {
@@ -95,7 +93,7 @@ exports.install = function (Vue) {
             let wanSite = this.noToChinese(wanSiteArr.join(''));
             chinese = yiSite + '亿' + wanSite;
         } else {
-            chinese = '数字位溢出，无法处理';
+            return '数字位溢出，无法处理';
         }
         return chinese;
     };
