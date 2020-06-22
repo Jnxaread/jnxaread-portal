@@ -96,7 +96,7 @@
         font-size: 1.2rem;
         font-weight: bold;
         color: #505050;
-        padding: 0.6rem 0.8rem;
+        padding: 0.7rem 0.9rem;
         border-bottom: 1px solid #c4c4c4;
     }
 
