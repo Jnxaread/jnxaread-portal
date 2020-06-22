@@ -21,7 +21,7 @@
                     <InputNumber :max="5" :min="0" size="large" v-model="topic.restricted"></InputNumber>
                 </div>
             </div>
-                <Button class="submit_button" type="primary" size="large" @click="submitTopic">发表帖子</Button>
+            <Button class="submit_button" type="primary" size="large" @click="submitTopic">发表帖子</Button>
         </div>
     </div>
 </template>
@@ -35,10 +35,11 @@
         data() {
             return {
                 topic: {
+                    boardId: 1,
                     label: '',
                     title: '',
                     content: '',
-                    restricted:0,
+                    restricted: 0,
                 }
             }
         },
@@ -81,10 +82,9 @@
                     return;
                 }
                 this.topic.content = this.$store.getters.getContent;
-                // let params = this.qs.stringify(this.topic);
-                this.axios.post('forum/new/topic', this.topic).then(response => {
+                this.axios.post(this.api.forum.newTopic, this.topic).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.instance('error', resp.msg);
                         return;
                     }
@@ -154,11 +154,11 @@
         background-color: #fff;
     }
 
-    .restrictedBox{
+    .restrictedBox {
         margin-bottom: 15px;
     }
 
-    .restrictedTitle{
+    .restrictedTitle {
         display: inline-block;
         font-size: 1.25rem;
         font-family: YouYuan, serif;
@@ -166,7 +166,7 @@
         margin-right: 1rem;
     }
 
-    .restrictedInput{
+    .restrictedInput {
         display: inline-block;
         vertical-align: bottom;
     }

@@ -20,36 +20,16 @@
             </div>
         </div>
         <div class="section">
-            <div class="section_title">站务管理</div>
+            <div class="section_title">日常交流</div>
             <div class="section_content">
-                <div class="section_fiction">
+                <div class="section_fiction" v-for="(topic,index) in topics" :key="index">
                     <div class="fiction_left">
-                        <div class="fiction_title">真是个不懂风韵的东西</div>
-                        <div class="fiction_brief">这里是斗气的世界，非常爽</div>
+                        <div class="fiction_title">{{topic.title}}</div>
+                        <div class="fiction_brief" v-html="topic.content"></div>
                     </div>
                     <div class="fiction_right">
-                        <div class="fiction_author">天蚕土豆</div>
-                        <div class="fiction_updateTime">2020-06-09 15:35:36</div>
-                    </div>
-                </div>
-                <div class="section_fiction">
-                    <div class="fiction_left">
-                        <div class="fiction_title">斗破苍穹</div>
-                        <div class="fiction_brief">这里是斗气的世界，非常爽</div>
-                    </div>
-                    <div class="fiction_right">
-                        <div class="fiction_author">天蚕土豆</div>
-                        <div class="fiction_updateTime">2020-06-09 15:35:36</div>
-                    </div>
-                </div>
-                <div class="section_fiction">
-                    <div class="fiction_left">
-                        <div class="fiction_title">斗破苍穹</div>
-                        <div class="fiction_brief">这里是斗气的世界，非常爽</div>
-                    </div>
-                    <div class="fiction_right">
-                        <div class="fiction_author">天蚕土豆</div>
-                        <div class="fiction_updateTime">2020-06-09 15:35:36</div>
+                        <div class="fiction_author">{{topic.lastReply}}</div>
+                        <div class="fiction_updateTime">{{topic.lastSubmit | dateFormat}}</div>
                     </div>
                 </div>
             </div>
@@ -75,8 +55,7 @@
                 this.getLatestTopics();
             },
             getLatestFictions() {
-                let params = {userId: 0};
-                this.axios.post(this.api.library.latestFictions, params).then(response => {
+                this.axios.post(this.api.library.latestFictions).then(response => {
                     let resp = response.data;
                     if (resp.status !== 200) {
                         this.instance('error', resp.msg);
@@ -86,7 +65,7 @@
                 })
             },
             getLatestTopics() {
-                this.axios.post(this.api.forum.latestTopics, this.form).then(response => {
+                this.axios.post(this.api.forum.latestTopics).then(response => {
                     let resp = response.data;
                     if (resp.status !== 200) {
                         this.instance('error', resp.msg);
@@ -135,9 +114,15 @@
     }
 
     .fiction_brief {
+        height: 25px;
         font-size: 1.0rem;
         color: #908d8d;
         line-height: 25px;
+        max-width: 220px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
     }
 
     .fiction_tag{

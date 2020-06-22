@@ -27,5 +27,6 @@ export default {
     forum: {
         topics: '/forum/list/topic',
         latestTopics: '/forum/list/topic/latest',
+        newTopic: 'forum/new/topic',
     }
 };
