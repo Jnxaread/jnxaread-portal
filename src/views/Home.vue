@@ -139,7 +139,8 @@
 
     .fiction_tag {
         display: inline-block;
-        margin: 0 0.1rem;
+        margin: 0 0.2rem;
+        font-style: italic;
     }
 
     .fiction_right {

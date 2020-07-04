@@ -93,7 +93,7 @@ exports.install = function (Vue) {
             let wanSite = this.noToChinese(wanSiteArr.join(''));
             chinese = yiSite + '亿' + wanSite;
         } else {
-            return '数字位溢出，无法处理';
+            return '数字位溢出，无法转换';
         }
         return chinese;
     };
