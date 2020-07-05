@@ -265,11 +265,10 @@
         z-index: 22000 !important;
     }
 </style>
-<style lang="scss">
+<style>
     .ivu-btn:focus {
         box-shadow: none;
     }
-
     .ivu-btn:active {
         box-shadow: none;
     }

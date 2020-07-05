@@ -101,4 +101,7 @@
         box-shadow: none;
         background-color: #999;
     }
+    .form /deep/ .ivu-input:focus {
+        box-shadow: none;
+    }
 </style>

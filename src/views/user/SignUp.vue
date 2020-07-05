@@ -232,5 +232,7 @@
             color: #f0ac19;
         }
     }
-
+    .form /deep/ .ivu-input:focus {
+        box-shadow: none;
+    }
 </style>
