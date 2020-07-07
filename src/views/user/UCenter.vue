@@ -135,7 +135,7 @@
                 };
                 this.axios.post(this.api.library.fictions, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         return;
                     }
@@ -149,7 +149,7 @@
                 };
                 this.axios.post(this.api.library.comments, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         return;
                     }
@@ -176,10 +176,9 @@
                     userId: this.user.id,
                     page: this.paging.currentPage,
                 };
-                // let params = this.qs.stringify(initParams);
                 this.axios.post('/forum/list/reply', params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         return;
                     }
