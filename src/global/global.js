@@ -27,6 +27,11 @@ exports.install = function (Vue) {
                 break;
         }
     };
+    /**
+     * 检查内容是否为空
+     * @param validate
+     * @returns {boolean}
+     */
     Vue.prototype.inspection = function (validate) {
         let validateA = validate.replace(/ /g, '');
         let validateB = validateA.replace(/<p>/g, '');
@@ -39,6 +44,12 @@ exports.install = function (Vue) {
             return false;
         }
     };
+    /**
+     * 将数字转换为汉字
+     * 参数为数字字符串
+     * @param number
+     * @returns {string}
+     */
     Vue.prototype.noToChinese = function (number) {
         let reg = /^\+?[1-9][0-9]*$/;
         if (!reg.test(number)) {
@@ -49,8 +60,8 @@ exports.install = function (Vue) {
         let numSplit = number.split('');
         let chinese = '';
         let numSite = numSplit.length;
-        if (number === '0') {
-            chinese = '零';
+        if (numSite === 1) {
+            chinese = ele_zh[number];
         } else if (numSite === 2 && numSplit[0] === '1') {
             if (numSplit[1] === '0') {
                 chinese = '十';

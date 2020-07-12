@@ -2,7 +2,9 @@
     <div class="chapter">
         <div class="detail">
             <div class="titleBox">
-                <div class="title">第{{noToChinese(chapter.number.toString())}}章</div>
+                <div class="title" v-if="chapter.number">
+                    第{{noToChinese(chapter.number.toString())}}章
+                </div>
                 <div class="title">{{chapter.title}}</div>
             </div>
             <div class="info">

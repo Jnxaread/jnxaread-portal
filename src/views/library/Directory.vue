@@ -24,13 +24,14 @@
                     <th v-if="isManage">操作</th>
                 </tr>
                 <tr class="table_body" v-for="(chapter,index) in chapters" :key="index">
-                    <td class="chapter_number">第{{noToChinese(chapter.number.toString())}}章</td>
+                    <td class="chapter_number">
+                        第{{noToChinese(chapter.number.toString())}}章
+                    </td>
                     <td class="chapter_title">
                         <router-link :to="'/chapter?id='+chapter.id">
                             {{chapter.title}}
                         </router-link>
                     </td>
-                    <!--<td class="chapter_brief">与你同在（2）林雨桐一口饭一口菜的往嘴</td>-->
                     <td class="chapter_wordCount">{{chapter.wordCount}}</td>
                     <td class="chapter_viewCount">{{chapter.viewCount}}</td>
                     <td class="chapter_commentCount">{{chapter.commentCount}}</td>
@@ -83,12 +84,12 @@
             },
             getFictionBrief(type) {
                 let params = {
-                    'id': this.$route.query.id,
-                    // 'page': this.paging.currentPage,
+                    id: this.$route.query.id,
+                    // page: this.paging.currentPage,
                 };
                 this.axios.post(this.api.library.fictionBrief, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         return;
                     }

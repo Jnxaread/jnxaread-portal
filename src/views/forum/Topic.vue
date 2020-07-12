@@ -10,7 +10,7 @@
                 <!--<div class="info_submitTime">发表于{{ topic.createTime | dateFormat }}</div>-->
                 <div class="info_submitTime">
                     发表于
-                    <Time :time="topic.createTime"/>
+                    <Time v-if="topic.createTime" :time="topic.createTime"/>
                 </div>
                 <div class="info_floor">楼主</div>
             </div>
@@ -206,6 +206,7 @@
     .info_submitTime {
         display: inline-block;
         padding: 0 15px;
+        color: #808695;
     }
 
     .info_floor {
