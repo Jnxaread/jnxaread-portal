@@ -66,7 +66,7 @@
             if (from.path === '/manage') {
                 next(vm => {
                     vm.isManage = true;
-                    vm.getFictionBrief(1);
+                    vm.init();
                 })
             } else {
                 next(vm => {
@@ -80,9 +80,9 @@
         },
         methods: {
             init() {
-                this.getFictionBrief(0);
+                this.getFictionBrief();
             },
-            getFictionBrief(type) {
+            getFictionBrief() {
                 let params = {
                     id: this.$route.query.id,
                     // page: this.paging.currentPage,
@@ -94,13 +94,12 @@
                         return;
                     }
                     this.fiction = resp.data;
-                    this.getChapters(type);
+                    this.getChapters();
                 })
             },
-            getChapters(type) {
+            getChapters() {
                 let params = {
                     fictionId: this.fiction.id,
-                    type: type
                 };
                 this.axios.post(this.api.library.chapters, params).then(response => {
                     let resp = response.data;
@@ -134,8 +133,8 @@
                 });
             },
             deleteChapter(id) {
-                let content='是否删除该章节？一旦删除则不可恢复';
-                this.instance('warning',content,()=>{
+                let content = '是否删除该章节？一旦删除则不可恢复';
+                this.instance('warning', content, () => {
                     let params = {id: id};
                     this.axios.post(this.api.library.deleteChapter, params).then(response => {
                         let resp = response.data;
