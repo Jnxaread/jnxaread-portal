@@ -109,7 +109,7 @@
                         return;
                     }
                     this.chapters = resp.data;
-                    sessionStorage.setItem(this.fiction.id, JSON.stringify(this.chapters));
+                    // sessionStorage.setItem(this.fiction.id, JSON.stringify(this.chapters));
                     // this.paging.total = resp.data.fictionCount;
                 });
             },

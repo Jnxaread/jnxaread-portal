@@ -14,9 +14,9 @@
             </div>
             <div class="content" v-html="chapter.content"></div>
             <div class="turningBox">
-                <div class="turing" @click="preChapter()">上一章</div>
+                <div class="turing" @click="getChapter(1)">上一章</div>
                 <div class="directory" @click="goDirectory()">目录</div>
-                <div class="turing" @click="nexChapter()">下一章</div>
+                <div class="turing" @click="getChapter(2)">下一章</div>
             </div>
         </div>
         <div class="commentArea">
@@ -64,13 +64,34 @@
         },
         methods: {
             init() {
-                this.getChapter();
+                this.getChapter(0);
             },
-            getChapter() {
-                let params = {
-                    'id': this.$route.query.id,
-                };
-                this.axios.post(this.api.library.chapterDetail, params).then(response => {
+            /**
+             * type：根据type决定请求参数
+             * 【0：参数为章节id；1：参数为作品id和章节id-1；2：参数为作品id和章节id+1】
+             */
+            getChapter(type) {
+                let params;
+                let api = this.api.library.chapterNumber;
+                if (type === 0) {
+                    params = {
+                        id: this.$route.query.id,
+                    };
+                    api = this.api.library.chapterDetail;
+                } else if (type === 1) {
+                    console.log(this.chapter.fictionId);
+                    console.log(this.chapter.number - 1);
+                    params = {
+                        fictionId: this.chapter.fictionId,
+                        number: this.chapter.number - 1,
+                    }
+                } else {
+                    params = {
+                        fictionId: this.chapter.fictionId,
+                        number: this.chapter.number + 1,
+                    }
+                }
+                this.axios.post(api, params).then(response => {
                     let resp = response.data;
                     if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
@@ -80,28 +101,6 @@
                     this.chapter = resp.data.chapter;
                     this.comments = resp.data.comments;
                 });
-            },
-            preChapter() {
-                let chapters = JSON.parse(sessionStorage.getItem(this.chapter.fictionId));
-                for (let i = 0; i < chapters.length; i++) {
-                    if (chapters[i].id === this.chapter.id) {
-                        if (i === 0) return;
-                        this.$router.push('/chapter?id=' + chapters[i - 1].id).then();
-                        this.getChapter();
-                        return;
-                    }
-                }
-            },
-            nexChapter() {
-                let chapters = JSON.parse(sessionStorage.getItem(this.chapter.fictionId));
-                for (let i = 0; i < chapters.length; i++) {
-                    if (chapters[i].id === this.chapter.id) {
-                        if (i === chapters.length - 1) return;
-                        this.$router.push('/chapter?id=' + chapters[i + 1].id).then();
-                        this.getChapter();
-                        return;
-                    }
-                }
             },
             goDirectory() {
                 this.$router.push('/directory?id=' + this.chapter.fictionId).then();

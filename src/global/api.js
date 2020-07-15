@@ -15,6 +15,7 @@ export default {
         latestFictions: '/library/list/fiction/latest',
         fictionDetail: '/library/detail/fiction',
         chapterDetail: '/library/detail/chapter',
+        chapterNumber: '/library/detail/chapter/number',
         fictionBrief: '/library/brief/fiction',
         chapterBrief: '/library/brief/chapter',
         newFiction: '/library/new/fiction',
