@@ -100,6 +100,9 @@
                     }
                     this.chapter = resp.data.chapter;
                     this.comments = resp.data.comments;
+                    //返回页面顶部
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
                 });
             },
             goDirectory() {
