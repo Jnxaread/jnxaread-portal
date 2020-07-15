@@ -102,7 +102,7 @@
         },
         created: function () {
             if (this.isMobile()) {
-                window.location.href = "http://inhive.net/mobile";
+                // window.location.href = "http://inhive.net/mobile";
             }
             //在页面加载时读取sessionStorage里的状态信息
             if (sessionStorage.getItem("store")) {
@@ -130,7 +130,7 @@
             logout() {
                 this.axios.post(this.api.user.logout).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.instance('error', resp.msg);
                         return;
                     }

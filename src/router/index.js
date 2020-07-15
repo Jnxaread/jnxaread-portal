@@ -20,7 +20,7 @@ import Setting from '../views/user/Setting'
 /**
  * 重写路由的push方法
  */
-const routerPush = VueRouter.prototype.push
+const routerPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
     return routerPush.call(this, location).catch(error => error)
 };
