@@ -85,6 +85,7 @@
                 topic: {},
                 replies: [],
                 newReply: {},
+                //存储打开模态框后要显示的被应用的回复
                 toQuote: {},
                 modal: false,
                 isShowQu: true,
@@ -151,7 +152,9 @@
             },
             showModal(quotedReply) {
                 if (quotedReply === 0) {
+                    //如果点击帖子下面的“回复”按钮，则弹出模态框并且不显示被引用的内容
                     this.isShowQu = false;
+                    this.toQuote = {id: 0};
                 } else {
                     this.isShowQu = true;
                     this.toQuote = quotedReply;
