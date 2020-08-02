@@ -6,7 +6,8 @@
                 <div class="topic_label">
                     <!--<InputNumber v-model="newChapter.number" :min="1" :max="10000" size="large" placeholder="章节号"
                                  style="width: 86px;"/>-->
-                    第 {{newChapter.number}} 章
+                    <span v-if="type===1">第 {{newChapter.number}} 章</span>
+                    <span v-else>序章</span>
                 </div>
                 <div class="topic_title">
                     <Input v-model="newChapter.title" maxlength="35" show-word-limit size="large" placeholder="请输入标题"
@@ -45,6 +46,7 @@
                     content: '',
                     restricted: 0,
                 },
+                type: this.$route.query.type,
                 isEdit: false,
             }
         },
@@ -92,12 +94,16 @@
                 };
                 this.axios.post(this.api.library.fictionBrief, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         return;
                     }
                     this.fiction = resp.data;
-                    this.newChapter.number = this.fiction.lastNumber + 1;
+                    if (this.type === 1) {
+                        this.newChapter.number = this.fiction.lastNumber + 1;
+                    } else {
+                        this.newChapter.number = 0;
+                    }
                 })
             },
             getChapter() {
@@ -209,8 +215,8 @@
 
     .topic_title {
         width: 80%;
-        margin-left: 15px;
         display: inline;
+        margin-left: 15px;
 
         Input {
             display: inline;
@@ -223,6 +229,13 @@
             line-height: 38px;
         }
     }
+
+    /*.prologue {
+        width: 100%;
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }*/
 
     .topic_content {
         width: 100%;

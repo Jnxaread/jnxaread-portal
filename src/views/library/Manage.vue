@@ -24,7 +24,16 @@
                 <div class="lastChapter">上次更新章节：<span>第{{fiction.lastNumber}}章 {{fiction.lastChapter}}</span></div>
                 <div class="operate">
                     <Button class="operate_button" type="info" @click="goManageChapter(fiction.id)">管理章节</Button>
-                    <Button class="operate_button" type="info" @click="goNewChapter(fiction.id)">发布章节</Button>
+                    <!--<Button class="operate_button" type="info" @click="goNewChapter(fiction.id)">发布章节</Button>-->
+                    <Dropdown class="operate_button">
+                        <Button type="info">
+                            发布章节
+                        </Button>
+                        <DropdownMenu slot="list">
+                            <DropdownItem @click.native="goNewChapter(fiction.id,1)">普通章节</DropdownItem>
+                            <DropdownItem @click.native="goNewChapter(fiction.id,0)">序章</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                     <Button class="operate_button" type="info">修改标签</Button>
                 </div>
             </div>
@@ -66,7 +75,7 @@
                 };
                 this.axios.post('/library/list/fiction/own', params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         this.$router.push('/signIn').then();
                         return;
@@ -79,8 +88,13 @@
             goManageChapter(fictionId) {
                 this.$router.push({path: '/directory', query: {id: fictionId}}).then();
             },
-            goNewChapter(fictionId) {
-                this.$router.push({path: '/new/chapter', query: {fid: fictionId}}).then();
+            /**
+             * 跳转到发布章节界面
+             * @param fictionId 作品id
+             * @param type 章节类型，【0：普通章节；1：楔子】
+             */
+            goNewChapter(fictionId, type) {
+                this.$router.push({path: '/new/chapter', query: {fid: fictionId, type: type}}).then();
             },
         }
     }
@@ -150,12 +164,12 @@
     .operateInfo {
         float: right;
         margin-right: 6px;
-        text-align: right;
     }
 
     .lastTime {
         font-size: 1.2em;
         line-height: 40px;
+        text-align: right;
 
         span {
             font-weight: bold;
@@ -166,6 +180,7 @@
         font-size: 1.2em;
         height: 35px;
         line-height: 35px;
+        text-align: right;
 
         span {
             font-weight: bold;

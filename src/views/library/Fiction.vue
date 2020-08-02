@@ -81,7 +81,7 @@
                 };
                 this.axios.post(this.api.library.fictionDetail, params).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.$Message.error(resp.msg);
                         return;
                     }
@@ -119,11 +119,11 @@
                     this.$Message.error('请输入内容！');
                     return;
                 }
-                this.newComment.fictionId = this.$route.query.id;
+                this.newComment.fictionId = this.fiction.id;
                 this.newComment.content = this.$store.getters.getContent;
                 this.axios.post(this.api.library.newComment, this.newComment).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status !== 200) {
                         this.instance('error', resp.msg);
                         return;
                     }
@@ -193,11 +193,11 @@
         margin: 20px 0;
     }
 
-    .brief_pre{
-        all:initial;             /*清除继承样式*/
-        display:block;           /*设置布局流，避免换行导致的错误布局*/
-        white-space:pre-line;    /*保留换行符，设置溢出换行*/
-        font-size:1.1rem;
+    .brief_pre {
+        all: initial; /*清除继承样式*/
+        display: block; /*设置布局流，避免换行导致的错误布局*/
+        white-space: pre-line; /*保留换行符，设置溢出换行*/
+        font-size: 1.1rem;
         font-weight: lighter;
         text-align: center;
         color: #515a6e;

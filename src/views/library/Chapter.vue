@@ -68,19 +68,22 @@
             },
             /**
              * type：根据type决定请求参数
-             * 【0：参数为章节id；1：参数为作品id和章节id-1；2：参数为作品id和章节id+1】
+             * 【
+             *      0：参数为章节id；
+             *      1：参数为作品id和章节id-1；
+             *      2：参数为作品id和章节id+1；
+             *      3：参数为章节id，但刷新页面后不返回页面顶部
+             *  】
              */
             getChapter(type) {
                 let params;
                 let api = this.api.library.chapterNumber;
-                if (type === 0) {
+                if (type === 0 || type === 3) {
                     params = {
                         id: this.$route.query.id,
                     };
                     api = this.api.library.chapterDetail;
                 } else if (type === 1) {
-                    console.log(this.chapter.fictionId);
-                    console.log(this.chapter.number - 1);
                     params = {
                         fictionId: this.chapter.fictionId,
                         number: this.chapter.number - 1,
@@ -100,9 +103,11 @@
                     }
                     this.chapter = resp.data.chapter;
                     this.comments = resp.data.comments;
-                    //返回页面顶部
-                    document.body.scrollTop = 0;
-                    document.documentElement.scrollTop = 0;
+                    if (type !== 3) {
+                        //返回页面顶部
+                        document.body.scrollTop = 0;
+                        document.documentElement.scrollTop = 0;
+                    }
                 });
             },
             goDirectory() {
@@ -119,7 +124,8 @@
                     this.$Message.error('请输入内容！');
                     return;
                 }
-                this.newComment.chapterId = this.$route.query.id;
+                this.newComment.fictionId = this.chapter.fictionId;
+                this.newComment.chapterId = this.chapter.id;
                 this.newComment.content = this.$store.getters.getContent;
                 this.axios.post(this.api.library.newComment, this.newComment).then(response => {
                     let resp = response.data;
@@ -130,7 +136,7 @@
                     this.isClear = true;
                     this.$refs.editor.editorContent = '';
                     this.modal = false;
-                    this.getChapter();
+                    this.getChapter(3);
                 })
             }
         }

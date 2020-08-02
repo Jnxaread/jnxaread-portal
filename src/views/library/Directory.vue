@@ -25,11 +25,12 @@
                 </tr>
                 <tr class="table_body" v-for="(chapter,index) in chapters" :key="index">
                     <td class="chapter_number">
-                        第{{noToChinese(chapter.number.toString())}}章
+                        <span v-if="chapter.number>0">第{{noToChinese(chapter.number.toString())}}章</span>
+                        <span v-else>—</span>
                     </td>
                     <td class="chapter_title">
                         <router-link :to="'/chapter?id='+chapter.id">
-                            {{chapter.title}}
+                            {{chapter.number!==0?chapter.title:'楔子'}}
                         </router-link>
                     </td>
                     <td class="chapter_wordCount">{{chapter.wordCount}}</td>
