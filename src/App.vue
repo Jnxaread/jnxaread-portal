@@ -48,7 +48,8 @@
                 <div class="userInfo" v-else>
                     <Dropdown>
                         <a href="javascript:void(0)">
-                            {{ user.username }}
+                            <!--                            <span class="username">{{ user.username }}</span>-->
+                            <div class="username">{{ user.username }}</div>
                             <Icon type="ios-arrow-down"></Icon>
                         </a>
                         <DropdownMenu slot="list">
@@ -234,6 +235,10 @@ export default {
     }
 }
 
+.username {
+    display: inline-block;
+}
+
 .main {
     width: 1200px;
     margin: 0 auto;
@@ -286,7 +291,11 @@ export default {
         margin: 0 5px;
         line-height: 40px;
     }
-    .signIn_signUp{
+    .nav_user {
+        width: 48%;
+        height: 40px;
+    }
+    .signIn_signUp {
         width: unset;
         margin-right: unset;
     }
@@ -295,6 +304,23 @@ export default {
         margin: 0 5px;
         line-height: 40px;
     }
+    .userInfo {
+        width: 100%;
+        height: 40px;
+        font-size: 1.4rem;
+        line-height: 40px;
+    }
+    .username {
+        max-width: 130px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .userInfo /deep/ .ivu-icon {
+        vertical-align: super;
+    }
+
     .main {
         width: 96%;
     }

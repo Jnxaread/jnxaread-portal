@@ -31,7 +31,7 @@
                     <Button class="button_submit" type="primary" size="large" @click="goWriteComment()">发表书评</Button>
                 </div>
             </div>
-            <div class="comment" v-if="this.comments.length==0">
+            <div class="comment" v-if="this.comments.length===0">
                 <div class="comment_content">还没有评论，快来评论吧！</div>
             </div>
             <div class="comment" v-else v-for="(comment,index) in comments" :key="index">
@@ -283,4 +283,10 @@ export default {
     padding: 45px 30px 30px 30px !important;
 }
 
+@media screen and (max-width: 600px) {
+    .turning {
+        width: 90%;
+        margin: 8px 0;
+    }
+}
 </style>
