@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="edit_container" ref="editor"></div>
+        <div id="globalEditor" class="edit_container" ref="editor"></div>
         <!--<button v-on:click="getContent">查看内容</button>-->
     </div>
 </template>
@@ -85,4 +85,12 @@
         text-align: left;
         margin-bottom: 20px;
     }
+</style>
+<style lang="scss">
+#globalEditor {
+    .w-e-toolbar {
+        // 给工具栏换行
+        flex-wrap: wrap;
+    }
+}
 </style>
