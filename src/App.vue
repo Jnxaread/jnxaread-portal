@@ -105,6 +105,7 @@ export default {
         if (this.isMobile()) {
             // window.location.href = "http://inhive.net/mobile";
         }
+
         //在页面加载时读取sessionStorage里的状态信息
         if (sessionStorage.getItem("store")) {
             this.$store.replaceState(Object.assign({}, this.$store.state, JSON.parse(sessionStorage.getItem("store"))));
@@ -114,6 +115,10 @@ export default {
         window.addEventListener("beforeunload", () => {
             sessionStorage.setItem("store", JSON.stringify(this.$store.state));
         });
+
+        //获取屏幕分辨率宽度并储存到vuex中
+        let screenWidth = window.screen.width;
+        this.$store.commit('setScreenWidth', screenWidth);
     },
     methods: {
         isMobile() {

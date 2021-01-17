@@ -8,6 +8,7 @@ export default new Vuex.Store({
         user: null,
         content: '',
         ownFictions: [],
+        screenWidth: 1920,
     },
     mutations: {
         setUser(state, user) {
@@ -18,7 +19,10 @@ export default new Vuex.Store({
         },
         setOwnFictions(state, ownFictions) {
             state.ownFictions = ownFictions;
-        }
+        },
+        setScreenWidth(state, screenWidth) {
+            state.screenWidth = screenWidth;
+        },
     },
     getters: {
         isLogin(state) {
@@ -32,7 +36,10 @@ export default new Vuex.Store({
         },
         getOwnFictions(state) {
             return state.ownFictions;
-        }
+        },
+        getScreenWidth(state) {
+            return state.screenWidth;
+        },
     },
     actions: {},
     modules: {}

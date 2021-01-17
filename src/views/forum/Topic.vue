@@ -118,7 +118,6 @@ export default {
     components: {Editor},
     data() {
         return {
-            screenWidth: null,
             topic: {},
             replies: [],
             newReply: {},
@@ -137,8 +136,10 @@ export default {
     created() {
         this.init();
     },
-    mounted() {
-        this.screenWidth = window.screen.width;
+    computed: {
+        screenWidth: function () {
+            return this.$store.getters.getScreenWidth;
+        }
     },
     methods: {
         init() {
@@ -365,7 +366,7 @@ export default {
     -webkit-box-orient: vertical;
 }
 
-.editor_qu{
+.editor_qu {
     margin-top: 25px;
 }
 
@@ -439,7 +440,7 @@ export default {
         font-size: 1.0rem;
     }
 
-    .editor_qu{
+    .editor_qu {
         margin-top: 15px;
     }
 }

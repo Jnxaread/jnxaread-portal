@@ -149,7 +149,7 @@ export default {
     name: "Forum",
     data() {
         return {
-            screenWidth: null,
+            // screenWidth: null,
             noticeList: [],
             topics: [],
             paging: {
@@ -163,13 +163,13 @@ export default {
             }*/
         }
     },
-    mounted() {
-        this.screenWidth = window.screen.width;
-    },
     computed: {
         isLogin: function () {
             return this.$store.getters.isLogin;
         },
+        screenWidth: function () {
+            return this.$store.getters.getScreenWidth;
+        }
     },
     created() {
         this.init();

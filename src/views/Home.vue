@@ -2,38 +2,78 @@
     <div class="pageView_home">
         <div class="section">
             <div class="section_title">原创作品</div>
-            <div class="section_content" v-for="(fiction,index) in fictions" :key="index">
-                <div class="section_fiction">
-                    <div class="fiction_left">
+            <div v-if="screenWidth>600">
+                <div class="section_content" v-for="(fiction,index) in fictions" :key="index">
+                    <div class="section_fiction">
+                        <div class="fiction_left">
+                            <div class="fiction_title">
+                                <router-link :to="'/fiction?id='+fiction.id">{{ fiction.title }}</router-link>
+                            </div>
+                            <div class="fiction_brief">
+                                <div class="fiction_tag" v-for="(tag,index) in fiction.tags" :key="index">
+                                    {{ tag }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fiction_right">
+                            <div class="fiction_author">{{ fiction.author }}</div>
+                            <div class="fiction_updateTime">{{ fiction.lastTime | dateFormat }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <div class="section_content" v-for="(fiction,index) in fictions" :key="index">
+                    <div>
+                        【<span v-for="(tag,index) in fiction.tags" :key="index">
+                            {{ tag }}
+                        </span>】
+                        <span>
+                            <Time v-if="fiction.lastTime" :time="fiction.lastTime"/>
+                        </span>
+                    </div>
+                    <div>
                         <div class="fiction_title">
                             <router-link :to="'/fiction?id='+fiction.id">{{ fiction.title }}</router-link>
                         </div>
-                        <div class="fiction_brief">
-                            <div class="fiction_tag" v-for="(tag,index) in fiction.tags" :key="index">
-                                {{ tag }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fiction_right">
                         <div class="fiction_author">{{ fiction.author }}</div>
-                        <div class="fiction_updateTime">{{ fiction.lastTime | dateFormat }}</div>
                     </div>
+                    <div class="fiction_brief">{{ fiction.introduction }}</div>
                 </div>
             </div>
         </div>
         <div class="section">
             <div class="section_title">日常交流</div>
-            <div class="section_content">
-                <div class="section_fiction" v-for="(topic,index) in topics" :key="index">
-                    <div class="fiction_left">
-                        <div class="fiction_title">
-                            <router-link :to="'/topic?id='+topic.id">{{ topic.title }}</router-link>
+            <div v-if="screenWidth>600">
+                <div class="section_content">
+                    <div class="section_fiction" v-for="(topic,index) in topics" :key="index">
+                        <div class="fiction_left">
+                            <div class="fiction_title">
+                                <router-link :to="'/topic?id='+topic.id">{{ topic.title }}</router-link>
+                            </div>
+                            <div class="fiction_brief" v-html="topic.content"></div>
+                        </div>
+                        <div class="fiction_right">
+                            <div class="fiction_author">{{ topic.lastReply }}</div>
+                            <div class="fiction_updateTime">{{ topic.lastSubmit | dateFormat }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <div class="section_content">
+                    <div class="section_fiction" v-for="(topic,index) in topics" :key="index">
+                        <div>
+                            <div class="topic_label">【{{ topic.label }}】</div>
+                            <div class="fiction_title">
+                                <router-link :to="'/topic?id='+topic.id">{{ topic.title }}</router-link>
+                            </div>
                         </div>
                         <div class="fiction_brief" v-html="topic.content"></div>
-                    </div>
-                    <div class="fiction_right">
-                        <div class="fiction_author">{{ topic.lastReply }}</div>
-                        <div class="fiction_updateTime">{{ topic.lastSubmit | dateFormat }}</div>
+                        <div>
+                            <span><Time v-if="topic.lastSubmit" :time="topic.lastSubmit"/></span>
+                            <span class="topic_lastReply">{{ topic.lastReply }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,6 +92,11 @@ export default {
     },
     created() {
         this.init();
+    },
+    computed: {
+        screenWidth: function () {
+            return this.$store.getters.getScreenWidth;
+        }
     },
     methods: {
         init() {
@@ -160,14 +205,26 @@ export default {
     color: #505050;
 }
 
-@media screen and (max-width: 600px){
-    .section {
-        width: 100%;
-        padding: 0.3rem 0.5rem;
-        background-color: #f5f5f5;
-        border: 1px solid #c4c4c4;
-        border-radius: 10px;
-        margin-bottom: 0.4rem;
+@media screen and (max-width: 600px) {
+    .section_content {
+        margin: 10px 0;
+    }
+    .fiction_title {
+        display: inline-block;
+    }
+    .fiction_author {
+        display: inline-block;
+        float: right;
+    }
+    .fiction_brief {
+        max-width: 100%;
+    }
+    .topic_label{
+        display: inline-block;
+        font-size: 1.0rem;
+    }
+    .topic_lastReply {
+        float: right;
     }
 }
 </style>
