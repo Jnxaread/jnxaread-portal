@@ -8,15 +8,15 @@ import qs from 'qs';
 import moment from 'moment';
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
-import global from './global/global.js'
-import API from './global/api'
+import api from './global/api';
+import global from './global/global';
 
 Vue.use(VueAxios, axios);
 Vue.prototype.qs = qs;
 Vue.use(ViewUI);
 Vue.use(global);
 
-Vue.prototype.api = API;
+Vue.prototype.api = api;
 Vue.config.productionTip = false;
 
 Vue.filter('dateFormat', function (tick) {
@@ -36,6 +36,11 @@ axios.interceptors.request.use(config => {
     return config;
 }, error => {
     return Promise.reject(error)
+});
+
+// 统计页面浏览次数
+router.afterEach(() => {
+    axios.post(api.access.pageView).then();
 });
 
 new Vue({

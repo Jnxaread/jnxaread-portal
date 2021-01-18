@@ -32,5 +32,8 @@ export default {
         topicDetail: '/forum/detail/topic',
         newTopic: '/forum/new/topic',
         newReply: '/forum/new/reply',
+    },
+    access: {
+        pageView: '/access/counter/pageView',
     }
 };
