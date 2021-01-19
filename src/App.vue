@@ -275,6 +275,8 @@ export default {
     z-index: 22000 !important;
 }
 
+</style>
+<style scoped lang="scss">
 @media screen and (max-width: 600px) {
     .header {
         height: 95px;
@@ -330,8 +332,8 @@ export default {
         width: 96%;
     }
 }
-
 </style>
+
 <style>
 .ivu-btn:focus {
     box-shadow: none;

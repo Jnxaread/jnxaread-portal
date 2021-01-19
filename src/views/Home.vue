@@ -204,7 +204,8 @@ export default {
     font-size: 0.95rem;
     color: #505050;
 }
-
+</style>
+<style scoped lang="scss">
 @media screen and (max-width: 600px) {
     .section_content {
         margin: 10px 0;
