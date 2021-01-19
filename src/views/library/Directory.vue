@@ -41,13 +41,14 @@
                         {{ chapter.createTime | dateFormat }}
                     </td>
                     <td class="chapter_operate" v-if="isManage">
-                        <Button class="chapter_button" size="small" type="primary" @click="editChapter(chapter)">修改
+                        <Button class="chapter_button" size="small" type="primary" @click="editChapter(chapter)">
+                            修改
                         </Button>
-                        <Button class="chapter_button" size="small" type="warning"
-                                @click="hideChapter(chapter.id,!chapter.hided)">
-                            {{ chapter.hided === false ? '隐藏' : '显示' }}
+                        <Button class="chapter_button" size="small" type="warning" @click="hideChapter(chapter)">
+                            {{ chapter.visible === 1 ? '隐藏' : '显示' }}
                         </Button>
-                        <Button class="chapter_button" size="small" type="error" @click="deleteChapter(chapter.id)">删除
+                        <Button class="chapter_button" size="small" type="error" @click="deleteChapter(chapter.id)">
+                            删除
                         </Button>
                     </td>
                 </tr>
@@ -145,12 +146,19 @@ export default {
             });
         },
         editChapter(chapter) {
-            this.$router.push({path: '/new/chapter', query: {fid: chapter.fictionId, cid: chapter.id}}).then();
+            const path = {
+                path: '/new/chapter',
+                query: {
+                    fid: this.fiction.id,
+                    cid: chapter.id,
+                }
+            };
+            this.$router.push(path).then();
         },
-        hideChapter(id, hide) {
+        hideChapter(chapter) {
             let params = {
-                id: id,
-                hide: hide
+                id: chapter.id,
+                hide: chapter.visible === 1,
             };
             this.axios.post(this.api.library.hideChapter, params).then(response => {
                 let resp = response.data;
@@ -330,10 +338,10 @@ export default {
     .chapter_title {
         font-size: 1.0rem;
     }
-    .count_icon{
+    .count_icon {
         margin-left: 3px;
     }
-    .chapter_submitTime{
+    .chapter_submitTime {
         width: unset;
         text-align: unset;
         float: right;
