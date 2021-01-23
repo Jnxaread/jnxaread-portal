@@ -7,17 +7,17 @@
                     <div class="section_fiction">
                         <div class="fiction_left">
                             <div class="fiction_title">
-                                <router-link :to="'/fiction?id='+fiction.id">{{ fiction.title }}</router-link>
+                                <router-link :to="'/fiction?id='+fiction.id">{{fiction.title}}</router-link>
                             </div>
                             <div class="fiction_brief">
                                 <div class="fiction_tag" v-for="(tag,index) in fiction.tags" :key="index">
-                                    {{ tag }}
+                                    {{tag}}
                                 </div>
                             </div>
                         </div>
                         <div class="fiction_right">
-                            <div class="fiction_author">{{ fiction.author }}</div>
-                            <div class="fiction_updateTime">{{ fiction.lastTime | dateFormat }}</div>
+                            <div class="fiction_author">{{fiction.author}}</div>
+                            <div class="fiction_updateTime">{{fiction.lastTime | dateFormat}}</div>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="section_content" v-for="(fiction,index) in fictions" :key="index">
                     <div>
                         【<span v-for="(tag,index) in fiction.tags" :key="index">
-                            {{ tag }}
+                            {{tag}}
                         </span>】
                         <span>
                             <Time v-if="fiction.lastTime" :time="fiction.lastTime"/>
@@ -34,11 +34,11 @@
                     </div>
                     <div>
                         <div class="fiction_title">
-                            <router-link :to="'/fiction?id='+fiction.id">{{ fiction.title }}</router-link>
+                            <router-link :to="'/fiction?id='+fiction.id">{{fiction.title}}</router-link>
                         </div>
-                        <div class="fiction_author">{{ fiction.author }}</div>
+                        <div class="fiction_author">{{fiction.author}}</div>
                     </div>
-                    <div class="fiction_brief">{{ fiction.introduction }}</div>
+                    <div class="fiction_brief">{{fiction.introduction}}</div>
                 </div>
             </div>
         </div>
@@ -49,13 +49,13 @@
                     <div class="section_fiction" v-for="(topic,index) in topics" :key="index">
                         <div class="fiction_left">
                             <div class="fiction_title">
-                                <router-link :to="'/topic?id='+topic.id">{{ topic.title }}</router-link>
+                                <router-link :to="'/topic?id='+topic.id">{{topic.title}}</router-link>
                             </div>
                             <div class="fiction_brief" v-html="topic.content"></div>
                         </div>
                         <div class="fiction_right">
-                            <div class="fiction_author">{{ topic.lastReply }}</div>
-                            <div class="fiction_updateTime">{{ topic.lastSubmit | dateFormat }}</div>
+                            <div class="fiction_author">{{topic.lastReply}}</div>
+                            <div class="fiction_updateTime">{{topic.lastSubmit | dateFormat}}</div>
                         </div>
                     </div>
                 </div>
@@ -64,15 +64,15 @@
                 <div class="section_content">
                     <div class="section_fiction" v-for="(topic,index) in topics" :key="index">
                         <div>
-                            <div class="topic_label">【{{ topic.label }}】</div>
+                            <div class="topic_label">【{{topic.label}}】</div>
                             <div class="fiction_title">
-                                <router-link :to="'/topic?id='+topic.id">{{ topic.title }}</router-link>
+                                <router-link :to="'/topic?id='+topic.id">{{topic.title}}</router-link>
                             </div>
                         </div>
                         <div class="fiction_brief" v-html="topic.content"></div>
                         <div>
                             <span><Time v-if="topic.lastSubmit" :time="topic.lastSubmit"/></span>
-                            <span class="topic_lastReply">{{ topic.lastReply }}</span>
+                            <span class="topic_lastReply">{{topic.lastReply}}</span>
                         </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@ export default {
     .fiction_brief {
         max-width: 100%;
     }
-    .topic_label{
+    .topic_label {
         display: inline-block;
         font-size: 1.0rem;
     }

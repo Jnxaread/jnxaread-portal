@@ -1,13 +1,13 @@
 <template>
     <div class="directory">
         <div class="fiction">
-            <div class="fiction_title">{{ fiction.title }}</div>
-            <div class="fiction_author">作者：<span>{{ fiction.author }}</span></div>
-            <div class="fiction_wordCount">字数：<span>{{ fiction.wordCount }}</span></div>
+            <div class="fiction_title">{{fiction.title}}</div>
+            <div class="fiction_author">作者：<span>{{fiction.author}}</span></div>
+            <div class="fiction_wordCount">字数：<span>{{fiction.wordCount}}</span></div>
             <div class="labelBox">
                 标签:
                 <div class="label" v-for="(tag,index) in fiction.tags" :key="index">
-                    【{{ tag }}】
+                    【{{tag}}】
                 </div>
             </div>
         </div>
@@ -25,27 +25,27 @@
                 <tr class="table_body" v-for="(chapter,index) in chapters" :key="index">
                     <td class="chapter_number">
                         <span v-if="chapter.number>0">
-                            第{{ noToChinese(chapter.number.toString()) }}章
+                            第{{noToChinese(chapter.number.toString())}}章
                         </span>
                         <span v-else>—</span>
                     </td>
                     <td class="chapter_title">
                         <router-link :to="'/chapter?id='+chapter.id">
-                            {{ chapter.number !== 0 ? chapter.title : '楔子' }}
+                            {{chapter.number !== 0 ? chapter.title : '楔子'}}
                         </router-link>
                     </td>
-                    <td class="chapter_wordCount">{{ chapter.wordCount }}</td>
-                    <td class="chapter_viewCount">{{ chapter.viewCount }}</td>
-                    <td class="chapter_commentCount">{{ chapter.commentCount }}</td>
+                    <td class="chapter_wordCount">{{chapter.wordCount}}</td>
+                    <td class="chapter_viewCount">{{chapter.viewCount}}</td>
+                    <td class="chapter_commentCount">{{chapter.commentCount}}</td>
                     <td class="chapter_submitTime">
-                        {{ chapter.createTime | dateFormat }}
+                        {{chapter.createTime | dateFormat}}
                     </td>
                     <td class="chapter_operate" v-if="isManage">
                         <Button class="chapter_button" size="small" type="primary" @click="editChapter(chapter)">
                             修改
                         </Button>
                         <Button class="chapter_button" size="small" type="warning" @click="hideChapter(chapter)">
-                            {{ chapter.visible === 1 ? '隐藏' : '显示' }}
+                            {{chapter.visible === 1 ? '隐藏' : '显示'}}
                         </Button>
                         <Button class="chapter_button" size="small" type="error" @click="deleteChapter(chapter.id)">
                             删除
@@ -58,22 +58,33 @@
             <div class="chapter_info" v-for="(chapter,index) in chapters" :key="index">
                 <div>
                     <span class="chapter_number" v-if="chapter.number>0">
-                        第 {{ chapter.number }} 章
+                        第 {{chapter.number}} 章
                     </span>
                     <span class="chapter_title">
                         <router-link :to="'/chapter?id='+chapter.id">
-                            {{ chapter.number !== 0 ? chapter.title : '楔子' }}
+                            {{chapter.number !== 0 ? chapter.title : '楔子'}}
                         </router-link>
                     </span>
                 </div>
                 <div>
                     <Icon custom="iconfont icon-entypopencil" size="16"/>
-                    {{ chapter.wordCount }}
+                    {{chapter.wordCount}}
                     <Icon class="count_icon" type="md-eye" size="16"/>
-                    {{ chapter.viewCount }}
+                    {{chapter.viewCount}}
                     <Icon class="count_icon" type="md-text" size="16"/>
-                    {{ chapter.commentCount }}
+                    {{chapter.commentCount}}
                     <Time class="chapter_submitTime" v-if="chapter.createTime" :time="chapter.createTime"/>
+                </div>
+                <div class="chapter_operate" v-if="isManage">
+                    <Button class="chapter_button" type="primary" @click="editChapter(chapter)">
+                        修改
+                    </Button>
+                    <Button class="chapter_button" type="warning" @click="hideChapter(chapter)">
+                        {{chapter.visible === 1 ? '隐藏' : '显示'}}
+                    </Button>
+                    <Button class="chapter_button" type="error" @click="deleteChapter(chapter.id)">
+                        删除
+                    </Button>
                 </div>
             </div>
         </div>
@@ -345,6 +356,13 @@ export default {
         width: unset;
         text-align: unset;
         float: right;
+    }
+    .chapter_operate {
+        width: unset;
+        text-align: unset;
+    }
+    .chapter_button {
+        margin: 0 5px;
     }
 }
 </style>
