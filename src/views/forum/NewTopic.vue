@@ -3,12 +3,17 @@
         <div class="container">
             <h2>发表帖子</h2>
             <div class="topic_top">
-                <div class="topic_label">
-                    <Input v-model="topic.label" maxlength="4" size="large" placeholder="四字标签" style="width: 86px;"/>
+                <div :class="screenWidth>600?'topic_label':''">
+                    <label>
+                        <Input class="input_label" v-model="topic.label" maxlength="4" size="large" placeholder="四字标签"/>
+                    </label>
+                    <span class="span_label" v-if="screenWidth<600">请输入标签</span>
                 </div>
                 <div class="topic_title">
-                    <Input v-model="topic.title" maxlength="35" show-word-limit size="large" placeholder="请输入标题"
-                           style="width: 60%;"/>
+                    <label>
+                        <Input class="input_title" v-model="topic.title" maxlength="35" show-word-limit size="large" placeholder="请输入标题"/>
+                    </label>
+                    <br v-if="screenWidth<600">
                     <span>最多输入35个字符</span>
                 </div>
             </div>
@@ -27,157 +32,189 @@
 </template>
 
 <script>
-    import Editor from '../../components/Editor';
+import Editor from '../../components/Editor';
 
-    export default {
-        name: "Submit",
-        components: {Editor},
-        data() {
-            return {
-                topic: {
-                    boardId: 1,
-                    label: '',
-                    title: '',
-                    content: '',
-                    restricted: 0,
-                }
+export default {
+    name: "Submit",
+    components: {Editor},
+    data() {
+        return {
+            topic: {
+                boardId: 1,
+                label: '',
+                title: '',
+                content: '',
+                restricted: 0,
+            }
+        }
+    },
+    created: function () {
+        this.init();
+    },
+    computed: {
+        screenWidth: function () {
+            return this.$store.getters.getScreenWidth;
+        }
+    },
+    methods: {
+        init() {
+            if (!this.$store.getters.isLogin) {
+                this.$Message['warning']({
+                    background: true,
+                    content: '只有登录后才能发帖'
+                });
+                this.$router.push('/signIn').then();
             }
         },
-        created: function () {
-            this.init();
+        submitTopic() {
+            this.$refs.editor.getContent();
+            if (this.topic.label === '') {
+                this.$Message.error('请输入帖子标签！');
+                return;
+            }
+            let reg = /^[\u4e00-\u9fa5]{2,4}$/;
+            if (!reg.test(this.topic.label)) {
+                this.$Message.error('标签为2至4位汉字');
+                return;
+            }
+            if (this.topic.title === '') {
+                this.$Message.error('请输入标题！');
+                return;
+            }
+            if (this.topic.title.length < 4) {
+                this.$Message.error('帖子标题的长度不得低于4个字符');
+                return
+            }
+            let validate = this.$store.getters.getContent;
+            let inspection = this.inspection(validate);
+            if (!inspection) {
+                this.$Message.error('请输入内容！');
+                return;
+            }
+            this.topic.content = this.$store.getters.getContent;
+            this.axios.post(this.api.forum.newTopic, this.topic).then(response => {
+                let resp = response.data;
+                if (resp.status !== 200) {
+                    this.instance('error', resp.msg);
+                    return;
+                }
+                this.$router.push({path: '/topic', query: {id: resp.data}}).then();
+            })
         },
-        methods: {
-            init() {
-                if (!this.$store.getters.isLogin) {
-                    this.$Message['warning']({
-                        background: true,
-                        content: '只有登录后才能发帖'
-                    });
-                    this.$router.push('/signIn').then();
-                }
-            },
-            submitTopic() {
-                this.$refs.editor.getContent();
-                if (this.topic.label === '') {
-                    this.$Message.error('请输入帖子标签！');
-                    return;
-                }
-                let reg = /^[\u4e00-\u9fa5]{2,4}$/;
-                if (!reg.test(this.topic.label)) {
-                    this.$Message.error('标签为2至4位汉字');
-                    return;
-                }
-                if (this.topic.title === '') {
-                    this.$Message.error('请输入标题！');
-                    return;
-                }
-                if (this.topic.title.length < 4) {
-                    this.$Message.error('帖子标题的长度不得低于4个字符');
-                    return
-                }
-                let validate = this.$store.getters.getContent;
-                let inspection = this.inspection(validate);
-                if (!inspection) {
-                    this.$Message.error('请输入内容！');
-                    return;
-                }
-                this.topic.content = this.$store.getters.getContent;
-                this.axios.post(this.api.forum.newTopic, this.topic).then(response => {
-                    let resp = response.data;
-                    if (resp.status !== 200) {
-                        this.instance('error', resp.msg);
-                        return;
-                    }
-                    this.$router.push({path: '/topic', query: {id: resp.data}}).then();
-                })
-            },
-        }
     }
+}
 </script>
 
 <style scoped lang="scss">
-    .submit {
-        width: 100%;
-        background-color: #f5f5f5;
-        border: 1px solid #c4c4c4;
-        border-radius: 6px;
-        margin-bottom: 6px;
+.submit {
+    width: 100%;
+    background-color: #f5f5f5;
+    border: 1px solid #c4c4c4;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.container {
+    width: 95%;
+    padding: 10px 30px;
+    margin: 20px auto;
+
+    h2 {
+        text-align: center;
     }
+}
 
-    .container {
-        width: 95%;
-        padding: 10px 30px;
-        margin: 20px auto;
+.topic_top {
+    width: 100%;
+    margin-top: 30px;
+}
 
-        h2 {
-            text-align: center;
-        }
-    }
+.topic_top /deep/ .ivu-input:focus {
+    box-shadow: none;
+}
 
-    .topic_top {
-        width: 100%;
-        margin-top: 30px;
-    }
+.topic_label {
+    width: 20%;
+    display: inline;
+}
 
-    .topic_top /deep/ .ivu-input:focus {
-        box-shadow: none;
-    }
+.topic_title {
+    width: 80%;
+    margin-left: 15px;
+    display: inline;
 
-    .topic_label {
-        width: 20%;
-        display: inline;
-    }
-
-    .topic_title {
-        width: 80%;
+    span {
+        font-size: 1.15em;
         margin-left: 15px;
-        display: inline;
+        line-height: 38px;
+    }
+}
 
-        Input {
-            display: inline;
-        }
+.input_label {
+    width: 86px;
+}
+
+.input_title {
+    width: 60%;
+}
+
+.topic_content {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.topic_content /deep/ .w-e-text {
+    background-color: #fff;
+}
+
+.restrictedBox {
+    margin-bottom: 15px;
+}
+
+.restrictedTitle {
+    display: inline-block;
+    font-size: 1.25rem;
+    font-family: YouYuan, serif;
+    line-height: 40px;
+    margin-right: 1rem;
+}
+
+.restrictedInput {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.submit_button {
+    width: 120px;
+}
+
+.ivu-btn {
+    border: 0;
+    box-shadow: none;
+    background-color: #999;
+}
+</style>
+<style scoped lang="scss">
+@media screen and (max-width: 600px) {
+    .container {
+        width: 98%;
+        padding: 10px;
+    }
+    .span_label {
+        margin-left: 10px;
+        font-size: 1.0rem;
+    }
+    .topic_title {
+        width: 100%;
+        margin-left: unset;
 
         span {
-            display: inline;
-            font-size: 1.15em;
-            margin-left: 15px;
-            line-height: 38px;
+            font-size: 1.0rem;
         }
     }
-
-    .topic_content {
+    .input_title {
         width: 100%;
         margin-top: 15px;
     }
-
-    .topic_content /deep/ .w-e-text {
-        background-color: #fff;
-    }
-
-    .restrictedBox {
-        margin-bottom: 15px;
-    }
-
-    .restrictedTitle {
-        display: inline-block;
-        font-size: 1.25rem;
-        font-family: YouYuan, serif;
-        line-height: 40px;
-        margin-right: 1rem;
-    }
-
-    .restrictedInput {
-        display: inline-block;
-        vertical-align: bottom;
-    }
-
-    .submit_button {
-        width: 120px;
-    }
-
-    .ivu-btn {
-        border: 0;
-        box-shadow: none;
-        background-color: #999;
-    }
+}
 </style>

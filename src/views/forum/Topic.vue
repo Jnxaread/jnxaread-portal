@@ -1,11 +1,11 @@
 <template>
     <div class="topic">
         <div class="detail">
-            <div class="title">【{{ topic.label }}】{{ topic.title }}</div>
+            <div class="title">【{{topic.label}}】{{topic.title}}</div>
             <div class="info">
                 <div class="info_author">
                     <Icon class="authorIcon" type="md-person" size="22"/>
-                    <span>{{ topic.username }}</span>
+                    <span>{{topic.username}}</span>
                 </div>
                 <!--<div class="info_submitTime">发表于{{ topic.createTime | dateFormat }}</div>-->
                 <div class="info_submitTime">
@@ -27,14 +27,14 @@
                 <div class="info">
                     <div class="info_author">
                         <Icon class="authorIcon" type="md-person" size="22"/>
-                        <span>{{ reply.username }}</span>
+                        <span>{{reply.username}}</span>
                     </div>
                     <!--<div class="info_submitTime">{{ reply.createTime | dateFormat }}</div>-->
                     <div class="info_submitTime">
                         发表于
                         <Time v-if="topic.createTime" :time="reply.createTime"/>
                     </div>
-                    <div class="info_floor">{{ reply.floor }}楼</div>
+                    <div class="info_floor">{{reply.floor}}楼</div>
                 </div>
                 <div class="content">
                     <div v-if="reply.quote!=0">
@@ -42,9 +42,9 @@
                             <div class="quote_icon_e">
                                 <div class="reply_quote_head">
                                 <span class="reply_quote_info">
-                                    {{ reply.quotedReply.username }} 发表于 {{ reply.quotedReply.submitTime | dateFormat }}
+                                    {{reply.quotedReply.username}} 发表于 {{reply.quotedReply.submitTime | dateFormat}}
                                 </span>
-                                    <span class="reply_quote_floor">{{ reply.quotedReply.floor }}楼</span>
+                                    <span class="reply_quote_floor">{{reply.quotedReply.floor}}楼</span>
                                 </div>
                                 <span v-html="reply.quotedReply.content"></span>
                             </div>
@@ -52,9 +52,9 @@
                         <div class="reply_quote" v-else>
                             <div class="reply_quote_head">
                                 <span class="font_quote">引用 @</span>
-                                <span class="reply_quote_info">{{ reply.quotedReply.username }}</span>
+                                <span class="reply_quote_info">{{reply.quotedReply.username}}</span>
                                 <span class="font_quote"> 发表的</span>
-                                <span class="reply_quote_floor">{{ reply.quotedReply.floor }}楼</span>
+                                <span class="reply_quote_floor">{{reply.quotedReply.floor}}楼</span>
                             </div>
                             <div class="modal_reply_overflow" v-html="reply.quotedReply.content"></div>
                         </div>
@@ -82,9 +82,9 @@
                 <div class="quote_icon_e">
                     <div class="reply_quote_head">
                         <span class="reply_quote_info">
-                            {{ toQuote.username }} 发表于 {{ toQuote.submitTime | dateFormat }}
+                            {{toQuote.username}} 发表于 {{toQuote.submitTime | dateFormat}}
                         </span>
-                        <span class="reply_quote_floor">{{ toQuote.floor }}楼</span>
+                        <span class="reply_quote_floor">{{toQuote.floor}}楼</span>
                     </div>
                     <div class="modal_reply_overflow" v-html="toQuote.content"></div>
                 </div>
@@ -97,9 +97,9 @@
                 <!--                <div class="quote_icon_e">-->
                 <div class="reply_quote_head">
                     <span class="font_quote">引用 @</span>
-                    <span class="reply_quote_info">{{ toQuote.username }}</span>
+                    <span class="reply_quote_info">{{toQuote.username}}</span>
                     <span class="font_quote"> 发表的</span>
-                    <span class="reply_quote_floor">{{ toQuote.floor }}楼</span>
+                    <span class="reply_quote_floor">{{toQuote.floor}}楼</span>
                 </div>
                 <div class="modal_reply_overflow" v-html="toQuote.content"></div>
                 <!--                </div>-->
@@ -369,7 +369,8 @@ export default {
 .editor_qu {
     margin-top: 25px;
 }
-
+</style>
+<style scoped lang="scss">
 @media screen and (max-width: 600px) {
     .title {
         font-size: 1.3rem;
