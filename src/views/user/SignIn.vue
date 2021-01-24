@@ -107,6 +107,9 @@ export default {
 }
 
 @media screen and (max-width: 600px) {
+    .signIn {
+        padding: 15px 10px;
+    }
     .container {
         width: 95%;
         padding-top: 15px;

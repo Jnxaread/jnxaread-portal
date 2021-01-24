@@ -128,7 +128,7 @@ export default {
             return flag;
         },
         goToUCenter() {
-            this.$router.push('/ucenter').then();
+            this.$router.push('/UCenter').then();
         },
         goToSetting() {
             this.$router.push('/setting').then();

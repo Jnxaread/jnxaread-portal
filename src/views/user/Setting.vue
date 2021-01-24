@@ -1,15 +1,21 @@
 <template>
     <div class="pageView_setting">
-        <div class="setting_menu">
+        <div v-if="screenWidth>600" class="setting_menu">
             <Menu :active-name="active">
                 <MenuItem name="baseInfo" @click.native="showPage('baseInfo')">基本信息</MenuItem>
                 <MenuItem name="changePwd" @click.native="showPage('changePwd')">修改密码</MenuItem>
             </Menu>
         </div>
-        <div class="setting_main">
+        <div v-else>
+            <Tabs v-model="active">
+                <TabPane label="基本信息" name="baseInfo"></TabPane>
+                <TabPane label="修改密码" name="changePwd"></TabPane>
+            </Tabs>
+        </div>
+        <div :class="screenWidth>600?'setting_main':''">
             <div class="baseInfo" v-if="active==='baseInfo'">
-                <div class="baseInfo_title">基本信息</div>
-                <Form class="baseInfo_form" :label-width="80">
+                <div class="baseInfo_title" v-if="screenWidth>600">基本信息</div>
+                <Form class="baseInfo_form" :label-position="labelPosition" :label-width="labelWidth">
                     <FormItem label="账号">
                         <Input v-model="user.account" disabled/>
                     </FormItem>
@@ -36,13 +42,13 @@
                         <Input v-model="user.introduction" :rows="6" maxlength="240" show-word-limit type="textarea"/>
                     </FormItem>
                     <FormItem>
-                        <Button type="primary" @click="saveBaseInfo()">保存</Button>
+                        <Button class="btn_save" type="primary" @click="saveBaseInfo()">保存</Button>
                     </FormItem>
                 </Form>
             </div>
             <div v-if="active==='changePwd'">
-                <div class="baseInfo_title">修改密码</div>
-                <Form class="changePwd_form" :label-width="80">
+                <div class="baseInfo_title" v-if="screenWidth>600">修改密码</div>
+                <Form class="changePwd_form" :label-position="labelPosition" :label-width="labelWidth">
                     <FormItem label="旧密码">
                         <Input v-model="pwdForm.oldPassword"/>
                     </FormItem>
@@ -67,7 +73,7 @@
                         </Input>
                     </FormItem>
                     <FormItem>
-                        <Button type="primary" @click="saveChangePwd()">保存</Button>
+                        <Button class="btn_save" type="primary" @click="saveChangePwd()">保存</Button>
                     </FormItem>
                 </Form>
             </div>
@@ -76,135 +82,165 @@
 </template>
 
 <script>
-    export default {
-        name: "Setting",
-        data() {
-            return {
-                active: 'baseInfo',
-                user: this.$store.getters.getUser,
-                pwdForm: {
-                    oldPassword: '',
-                    newPassword: '',
-                    checkPassword: '',
-                    emailCode: ''
-                },
-                buttonShow: 0,
-                timer: null,
-                timeCount: 120,
-            }
-        },
-        methods: {
-            showPage(active) {
-                this.active = active;
+export default {
+    name: "Setting",
+    data() {
+        return {
+            active: 'baseInfo',
+            user: this.$store.getters.getUser,
+            pwdForm: {
+                oldPassword: '',
+                newPassword: '',
+                checkPassword: '',
+                emailCode: ''
             },
-            getEmailCode: function () {
-                /*let reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-                if (!reg.test(this.form.email)) {
-                    this.$Message.error('邮箱格式错误！')
-                    return;
-                }*/
-                this.buttonShow = 1;
-                this.axios.post(this.api.user.emailCode, {email: this.user.email}).then(response => {
-                    let resp = response.data;
-                    if (resp.status != 200) {
-                        this.instance('error', resp.msg);
-                        this.buttonShow = 0;
-                        return;
-                    }
-                    this.$Message.success('验证码发送成功！');
-                    this.buttonShow = 2;
-                    const TIME_COUNT = 120;
-                    this.timer = setInterval(() => {
-                        if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
-                            this.timeCount--
-                        } else {
-                            this.buttonShow = 0;
-                            clearInterval(this.timer);
-                            this.timer = null;
-                            this.timeCount = 120;
-                        }
-                    }, 1000);
-                })
-            },
-            saveBaseInfo() {
-                let params = {
-                    id: this.user.id,
-                    gender: this.user.gender,
-                    comeFrom: this.user.comeFrom,
-                    signature: this.user.signature,
-                    introduction: this.user.introduction
-                };
-                this.axios.post(this.api.user.editBaseInfo, params).then(response => {
-                    let resp = response.data;
-                    if (resp.status !== 200) {
-                        this.instance('error', resp.msg);
-                        return;
-                    }
-                    this.$store.commit("setUser", resp.data);
-                    this.$Message.success('修改成功');
-                })
-            },
-            saveChangePwd() {
-                this.axios.post(this.api.user.editPassword, this.pwdForm).then(response => {
-                    let resp = response.data;
-                    if (resp.status != 200) {
-                        this.instance('error', resp.msg);
-                        return;
-                    }
-                    this.$Message.success('修改成功');
-                })
-            },
+            buttonShow: 0,
+            timer: null,
+            timeCount: 120,
+            labelPosition: 'right',
+            labelWidth: 80,
         }
+    },
+    created() {
+        if (this.screenWidth < 600) {
+            this.labelPosition = 'top';
+            this.labelWidth = null;
+        }
+    },
+    computed: {
+        screenWidth: function () {
+            return this.$store.getters.getScreenWidth;
+        },
+    },
+    methods: {
+        showPage(active) {
+            this.active = active;
+        },
+        getEmailCode: function () {
+            /*let reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if (!reg.test(this.form.email)) {
+                this.$Message.error('邮箱格式错误！')
+                return;
+            }*/
+            this.buttonShow = 1;
+            this.axios.post(this.api.user.emailCode, {email: this.user.email}).then(response => {
+                let resp = response.data;
+                if (resp.status != 200) {
+                    this.instance('error', resp.msg);
+                    this.buttonShow = 0;
+                    return;
+                }
+                this.$Message.success('验证码发送成功！');
+                this.buttonShow = 2;
+                const TIME_COUNT = 120;
+                this.timer = setInterval(() => {
+                    if (this.timeCount > 0 && this.timeCount <= TIME_COUNT) {
+                        this.timeCount--
+                    } else {
+                        this.buttonShow = 0;
+                        clearInterval(this.timer);
+                        this.timer = null;
+                        this.timeCount = 120;
+                    }
+                }, 1000);
+            })
+        },
+        saveBaseInfo() {
+            let params = {
+                id: this.user.id,
+                gender: this.user.gender,
+                comeFrom: this.user.comeFrom,
+                signature: this.user.signature,
+                introduction: this.user.introduction
+            };
+            this.axios.post(this.api.user.editBaseInfo, params).then(response => {
+                let resp = response.data;
+                if (resp.status !== 200) {
+                    this.instance('error', resp.msg);
+                    return;
+                }
+                this.$store.commit("setUser", resp.data);
+                this.$Message.success('修改成功');
+            })
+        },
+        saveChangePwd() {
+            this.axios.post(this.api.user.editPassword, this.pwdForm).then(response => {
+                let resp = response.data;
+                if (resp.status != 200) {
+                    this.instance('error', resp.msg);
+                    return;
+                }
+                this.$Message.success('修改成功');
+            })
+        },
     }
+}
 </script>
 
 <style scoped lang="scss">
+.pageView_setting {
+    width: 100%;
+    background-color: #f5f5f5;
+    border: 1px solid #c4c4c4;
+    border-radius: 6px;
+    padding: 30px 40px;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+
+.setting_menu {
+    float: left;
+}
+
+.setting_main {
+    float: right;
+    width: 75%;
+    padding: 20px 30px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.baseInfo_title {
+    font-size: 1.4rem;
+    font-weight: lighter;
+    font-family: YouYuan serif;
+    margin-bottom: 20px;
+}
+
+.baseInfo_form {
+    width: 80%;
+}
+
+.changePwd_form {
+    width: 60%;
+}
+
+.emailCode_button {
+    width: 100px;
+}
+
+.emailCode_button:hover {
+    width: 100px;
+
+    span {
+        color: #f0ac19;
+    }
+}
+</style>
+<style scoped lang="scss">
+@media screen and (max-width: 600px) {
     .pageView_setting {
-        width: 100%;
-        background-color: #f5f5f5;
-        border: 1px solid #c4c4c4;
-        border-radius: 6px;
-        padding: 30px 40px;
-        margin-bottom: 6px;
-        overflow: hidden;
+        padding: 15px 10px;
     }
-
-    .setting_menu {
-        float: left;
-    }
-
-    .setting_main {
-        float: right;
-        width: 75%;
-        padding: 20px 30px;
-        border-radius: 10px;
-        background-color: #fff;
-    }
-
-    .baseInfo_title {
-        font-size: 1.4rem;
-        font-weight: lighter;
-        font-family: YouYuan serif;
-        margin-bottom: 20px;
-    }
-
     .baseInfo_form {
-        width: 80%;
+        width: unset;
     }
-
     .changePwd_form {
-        width: 60%;
+        width: unset;
     }
-
-    .emailCode_button {
-        width: 100px;
+    .btn_save {
+        width: 100%;
+        margin: 0 auto;
     }
-
-    .emailCode_button:hover {
-        width: 100px;
-
-        span {
-            color: #f0ac19;
-        }
-    }
+}
 </style>

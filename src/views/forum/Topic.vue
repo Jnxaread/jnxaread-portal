@@ -37,7 +37,7 @@
                     <div class="info_floor">{{reply.floor}}楼</div>
                 </div>
                 <div class="content">
-                    <div v-if="reply.quote!=0">
+                    <div v-if="reply.quote!==0">
                         <div class="reply_quote" v-if="screenWidth>600">
                             <div class="quote_icon_e">
                                 <div class="reply_quote_head">

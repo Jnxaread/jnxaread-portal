@@ -13,23 +13,23 @@
                     </tr>
                     <tr class="tr_topic" v-for="(notice, index) in noticeList" :key="index">
                         <td :class="index===noticeList.length-1?'notice_label':'notice_label border_bottom'">
-                            【<span>{{ notice.label }}</span>】
+                            【<span>{{notice.label}}</span>】
                         </td>
                         <td :class="index===noticeList.length-1?'title':'title border_bottom'">
-                            <router-link :to="'/notice?id='+notice.id">{{ notice.title }}</router-link>
+                            <router-link :to="'/notice?id='+notice.id">{{notice.title}}</router-link>
                         </td>
                         <td :class="index===noticeList.length-1?'author':'author border_bottom'">
-                            <h3>{{ notice.username }}</h3>
+                            <h3>{{notice.username}}</h3>
                             <!--<p>{{ notice.createTime | dateFormat }}</p>-->
                             <Time class="time" :time="notice.createTime"/>
                         </td>
                         <td :class="index===noticeList.length-1?'reply_view':'reply_view border_bottom'">
-                            <p>{{ notice.viewCount }}</p>
+                            <p>{{notice.viewCount}}</p>
                         </td>
                         <td :class="index===noticeList.length-1?'latestReply':'latestReply border_bottom'">
-                            <h3>{{ notice.lastEdit }}</h3>
+                            <h3>{{notice.lastEdit}}</h3>
                             <!--<p>{{ notice.lastSubmitTime | dateFormat }}</p>-->
-                            <Time class="time" :time="notice.lastEdit"/>
+                            <Time class="time" :time="notice.lastTime"/>
                         </td>
                     </tr>
                 </table>
@@ -46,22 +46,22 @@
                     </tr>
                     <tr class="tr_topic" v-for="(topic, index) in topics" :key="index">
                         <td :class="index===topics.length-1?'label':'label border_bottom'">
-                            【<span>{{ topic.label }}</span>】
+                            【<span>{{topic.label}}</span>】
                         </td>
                         <td :class="index===topics.length-1?'title':'title border_bottom'">
-                            <router-link :to="'/topic?id='+topic.id">{{ topic.title }}</router-link>
+                            <router-link :to="'/topic?id='+topic.id">{{topic.title}}</router-link>
                         </td>
                         <td :class="index===topics.length-1?'author':'author border_bottom'">
-                            <h3>{{ topic.username }}</h3>
+                            <h3>{{topic.username}}</h3>
                             <!--<p>{{ topic.createTime | dateFormat }}</p>-->
                             <Time class="time" :time="topic.createTime"/>
                         </td>
                         <td :class="index===topics.length-1?'reply_view':'reply_view border_bottom'">
-                            <h3>{{ topic.replyCount }}</h3>
-                            <p>{{ topic.viewCount }}</p>
+                            <h3>{{topic.replyCount}}</h3>
+                            <p>{{topic.viewCount}}</p>
                         </td>
                         <td :class="index===topics.length-1?'latestReply':'latestReply border_bottom'">
-                            <h3>{{ topic.lastReply }}</h3>
+                            <h3>{{topic.lastReply}}</h3>
                             <!--<p>{{ topic.lastSubmit | dateFormat }}</p>-->
                             <Time class="time" :time="topic.lastSubmit"/>
                         </td>
@@ -84,20 +84,20 @@
                     <div :class="index===noticeList.length-1?'table_body':'table_body border_bottom'"
                          v-for="(notice, index) in noticeList" :key="index">
                         <div>
-                            【<span class="notice_label">{{ notice.label }}</span>】
-                            <span class="submitTime">{{ notice.submitTime | dateFormat }}</span>
+                            【<span class="notice_label">{{notice.label}}</span>】
+                            <span class="submitTime">{{notice.submitTime | dateFormat}}</span>
                         </div>
                         <div class="title">
-                            <router-link :to="'/toNotice?id='+notice.id">{{ notice.title }}</router-link>
+                            <router-link :to="'/notice?id='+notice.id">{{notice.title}}</router-link>
                         </div>
                         <div class="author_count">
                             <!--<span>{{ topic.username }}</span>
                             <span>{{ topic.replycount }}</span>-->
-                            <div class="author">{{ notice.username }}</div>
+                            <div class="author">{{notice.username}}</div>
                             <div class="count">
                                 <div class="count_view">
                                     <Icon type="md-eye"/>
-                                    <span> {{ notice.viewCount }}</span>
+                                    <span> {{notice.viewCount}}</span>
                                 </div>
                             </div>
                         </div>
@@ -114,22 +114,22 @@
                     <div :class="index===topics.length-1?'table_body':'table_body border_bottom'"
                          v-for="(topic, index) in topics" :key="index">
                         <div>
-                            【<span class="label">{{ topic.label }}</span>】
-                            <span class="submitTime">{{ topic.submitTime | dateFormat }}</span>
+                            【<span class="label">{{topic.label}}</span>】
+                            <span class="submitTime">{{topic.submitTime | dateFormat}}</span>
                         </div>
                         <div class="title">
-                            <router-link :to="'/topic?id='+topic.id">{{ topic.title }}</router-link>
+                            <router-link :to="'/topic?id='+topic.id">{{topic.title}}</router-link>
                         </div>
                         <div class="author_count">
-                            <div class="author">{{ topic.username }}</div>
+                            <div class="author">{{topic.username}}</div>
                             <div class="count">
                                 <div class="count_reply">
                                     <Icon type="md-text"/>
-                                    <span> {{ topic.replyCount }}</span>
+                                    <span> {{topic.replyCount}}</span>
                                 </div>
                                 <div class="count_view">
                                     <Icon type="md-eye"/>
-                                    <span> {{ topic.viewCount }}</span>
+                                    <span> {{topic.viewCount}}</span>
                                 </div>
                             </div>
                         </div>
@@ -242,6 +242,7 @@ export default {
 .notice_label {
     width: 8%;
     color: red;
+    text-align: center;
 }
 
 .table_topic {
