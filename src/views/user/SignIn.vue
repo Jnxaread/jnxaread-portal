@@ -53,7 +53,7 @@ export default {
         login() {
             this.axios.post(this.api.user.signIn, this.form).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.instance('error', resp.msg);
                     return;
                 }

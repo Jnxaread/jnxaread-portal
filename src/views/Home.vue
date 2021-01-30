@@ -106,7 +106,7 @@ export default {
         getLatestFictions() {
             this.axios.post(this.api.library.latestFictions).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.instance('error', resp.msg);
                     return;
                 }
@@ -116,7 +116,7 @@ export default {
         getLatestTopics() {
             this.axios.post(this.api.forum.latestTopics).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.instance('error', resp.msg);
                     return;
                 }

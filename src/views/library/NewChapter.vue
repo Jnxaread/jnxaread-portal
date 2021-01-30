@@ -94,7 +94,7 @@
                 };
                 this.axios.post(this.api.library.fictionBrief, params).then(response => {
                     let resp = response.data;
-                    if (resp.status !== 200) {
+                    if (resp.status !== "000000") {
                         this.$Message.error(resp.msg);
                         return;
                     }
@@ -112,7 +112,7 @@
                 };
                 this.axios.post(this.api.library.chapterBrief, params).then(response => {
                     let resp = response.data;
-                    if (resp.status !== 200) {
+                    if (resp.status !== "000000") {
                         this.$Message.error(resp.msg);
                         this.$router.push('/').then();
                         return;
@@ -153,7 +153,7 @@
                 }
                 this.axios.post(api, this.newChapter).then(response => {
                     let resp = response.data;
-                    if (resp.status !== 200) {
+                    if (resp.status !== "000000") {
                         this.instance('error', resp.msg);
                         return;
                     }

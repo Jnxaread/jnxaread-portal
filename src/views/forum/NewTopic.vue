@@ -94,7 +94,7 @@ export default {
             this.topic.content = this.$store.getters.getContent;
             this.axios.post(this.api.forum.newTopic, this.topic).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.instance('error', resp.msg);
                     return;
                 }

@@ -43,7 +43,7 @@ export default {
             // let params = this.qs.stringify(initParams);
             this.axios.post('/forum/detail/notice', params).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.$Message.error(resp.msg);
                     this.$router.push('/forum').then();
                     return;

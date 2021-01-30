@@ -78,7 +78,7 @@ export default {
         getCategories() {
             this.axios.post(this.api.library.categories, this.form).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.$Message.error(resp.msg);
                     return;
                 }
@@ -121,7 +121,7 @@ export default {
         submitFiction() {
             this.axios.post(this.api.library.newFiction, this.form).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.$Message.error(resp.msg);
                     return;
                 }

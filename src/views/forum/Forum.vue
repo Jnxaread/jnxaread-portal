@@ -186,7 +186,7 @@ export default {
             };
             this.axios.post(this.api.forum.notices, params).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.$Message.error(resp.msg);
                     return;
                 }
@@ -200,7 +200,7 @@ export default {
             };
             this.axios.post(this.api.forum.topics, params).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.$Message.error(resp.msg);
                     return;
                 }

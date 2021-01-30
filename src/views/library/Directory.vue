@@ -132,7 +132,7 @@ export default {
             };
             this.axios.post(this.api.library.fictionBrief, params).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.$Message.error(resp.msg);
                     return;
                 }
@@ -146,7 +146,7 @@ export default {
             };
             this.axios.post(this.api.library.chapters, params).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.$Message.error(resp.msg);
                     this.$router.push('/signIn').then();
                     return;
@@ -173,7 +173,7 @@ export default {
             };
             this.axios.post(this.api.library.hideChapter, params).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.$Message.error(resp.msg);
                     this.$router.push('/').then();
                     return;
@@ -188,7 +188,7 @@ export default {
                 let params = {id: id};
                 this.axios.post(this.api.library.deleteChapter, params).then(response => {
                     let resp = response.data;
-                    if (resp.status !== 200) {
+                    if (resp.status !== "000000") {
                         this.$Message.error(resp.msg);
                         this.$router.push('/').then();
                         return;

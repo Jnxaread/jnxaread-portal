@@ -81,7 +81,7 @@ export default {
             };
             this.axios.post(this.api.library.fictionDetail, params).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.$Message.error(resp.msg);
                     return;
                 }
@@ -96,7 +96,7 @@ export default {
             };
             this.axios.post(this.api.library.chapters, params).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.$Message.error(resp.msg);
                     return;
                 }
@@ -124,7 +124,7 @@ export default {
             this.newComment.content = this.$store.getters.getContent;
             this.axios.post(this.api.library.newComment, this.newComment).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.instance('error', resp.msg);
                     return;
                 }

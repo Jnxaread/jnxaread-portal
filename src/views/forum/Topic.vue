@@ -152,7 +152,7 @@ export default {
             };
             this.axios.post(this.api.forum.topicDetail, params).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.$Message.error(resp.msg);
                     this.$router.push('/').then();
                     return;
@@ -181,7 +181,7 @@ export default {
             this.newReply.content = this.$store.getters.getContent;
             this.axios.post(this.api.forum.newReply, this.newReply).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.instance('error', resp.msg);
                     return;
                 }

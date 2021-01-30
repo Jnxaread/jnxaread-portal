@@ -122,10 +122,9 @@ export default {
     },
     methods: {
         isMobile() {
-            let flag = navigator.userAgent.match(
+            return navigator.userAgent.match(
                     /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
             );
-            return flag;
         },
         goToUCenter() {
             this.$router.push('/UCenter').then();
@@ -136,7 +135,7 @@ export default {
         logout() {
             this.axios.post(this.api.user.logout).then(response => {
                 let resp = response.data;
-                if (resp.status !== 200) {
+                if (resp.status !== "000000") {
                     this.instance('error', resp.msg);
                     return;
                 }
@@ -247,7 +246,7 @@ export default {
 .main {
     width: 1200px;
     margin: 0 auto;
-    padding: 10px 0px;
+    padding: 10px 0;
 }
 
 .footer {

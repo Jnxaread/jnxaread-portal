@@ -149,7 +149,7 @@
                 this.buttonShow = 1;
                 this.axios.post("/user/emailCode", {email: this.form.email}).then(response => {
                     let resp = response.data;
-                    if (resp.status != 200) {
+                    if (resp.status != "000000") {
                         this.instance('error', resp.msg);
                         this.buttonShow = 0;
                         return;
@@ -172,7 +172,7 @@
             register() {
                 this.axios.post(this.api.user.signUp, this.form).then(response => {
                     let resp = response.data;
-                    if (resp.status !== 200) {
+                    if (resp.status !== "000000") {
                         this.instance('error', resp.msg);
                         return;
                     }
