@@ -31,11 +31,20 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 axios.defaults.withCredentials = true;
 
 // http request 拦截器
-axios.interceptors.request.use(config => {
-    config.data = qs.stringify(config.data);
-    return config;
+axios.interceptors.request.use(request => {
+    request.data = qs.stringify(request.data);
+    return request;
 }, error => {
     return Promise.reject(error)
+});
+
+// http response 拦截器
+axios.interceptors.response.use(response => {
+    let resp = response.data;
+    if (resp.status === "010001" || resp.status === "010002") {
+        router.push("/error").then();
+    }
+    return response;
 });
 
 // 统计页面浏览次数

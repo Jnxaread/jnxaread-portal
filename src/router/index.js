@@ -15,7 +15,8 @@ import NewTopic from '../views/forum/NewTopic';
 import NewFiction from '../views/library/NewFiction';
 import NewChapter from '../views/library/NewChapter';
 import Manage from '../views/library/Manage';
-import Setting from '../views/user/Setting'
+import Setting from '../views/user/Setting';
+import Error from "@/views/error/Error";
 
 /**
  * 重写路由的push方法
@@ -107,6 +108,11 @@ const routes = [
         path: '/setting',
         name: 'Setting',
         component: Setting
+    },
+    {
+        path: "/error",
+        name:"Error",
+        component: Error
     }
 ];
 
