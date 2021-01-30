@@ -49,7 +49,7 @@
                     <Dropdown>
                         <a href="javascript:void(0)">
                             <!--                            <span class="username">{{ user.username }}</span>-->
-                            <div class="username">{{ user.username }}</div>
+                            <div class="username">{{user.username}}</div>
                             <Icon type="ios-arrow-down"></Icon>
                         </a>
                         <DropdownMenu slot="list">
@@ -101,7 +101,7 @@ export default {
             return this.$store.getters.getUser;
         }
     },
-    created: function () {
+    created() {
         if (this.isMobile()) {
             // window.location.href = "http://inhive.net/mobile";
         }

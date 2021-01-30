@@ -34,15 +34,15 @@ axios.defaults.withCredentials = true;
 axios.interceptors.request.use(request => {
     request.data = qs.stringify(request.data);
     return request;
-}, error => {
-    return Promise.reject(error)
 });
 
 // http response 拦截器
 axios.interceptors.response.use(response => {
     let resp = response.data;
     if (resp.status === "010001" || resp.status === "010002") {
+        store.commit("setStatus", resp.status);
         router.push("/error").then();
+        return false;
     }
     return response;
 });

@@ -9,6 +9,7 @@ export default new Vuex.Store({
         content: '',
         ownFictions: [],
         screenWidth: 1920,
+        status: "000000",
     },
     mutations: {
         setUser(state, user) {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
         setScreenWidth(state, screenWidth) {
             state.screenWidth = screenWidth;
         },
+        setStatus(state, status) {
+            state.status = status;
+        }
     },
     getters: {
         isLogin(state) {
@@ -40,6 +44,9 @@ export default new Vuex.Store({
         getScreenWidth(state) {
             return state.screenWidth;
         },
+        getStatus(state) {
+            return state.status;
+        }
     },
     actions: {},
     modules: {}
