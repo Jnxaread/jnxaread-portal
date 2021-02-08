@@ -1,7 +1,7 @@
 export default {
     user: {
-        signIn: '/user/signIn',
-        signUp: '/user/signUp',
+        signIn: '/user/login',
+        signUp: '/user/signup',
         logout: '/user/logout',
         editBaseInfo: '/user/edit/baseInfo',
         editPassword: '/user/edit/password',
