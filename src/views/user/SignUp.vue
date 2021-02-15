@@ -236,3 +236,17 @@
         box-shadow: none;
     }
 </style>
+<style scoped lang="scss">
+@media screen and (max-width: 600px) {
+    .signUp {
+        padding: 15px 10px;
+    }
+    .container {
+        width: 95%;
+        padding-top: 15px;
+    }
+    .form {
+        margin: 15px auto;
+    }
+}
+</style>
