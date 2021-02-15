@@ -3,7 +3,7 @@
         <div class="header">
             <div class="logo" :style="{ width: logoWidth + 'px' }">
                 <router-link to="/">
-                    谨下阅读
+                    谨下网
                 </router-link>
             </div>
             <div class="nav_module">
@@ -74,7 +74,7 @@
                 |
                 <router-link to="/">侵权与投诉</router-link>
             </div>
-            <div class="website">Copyright © 2020 谨下阅读</div>
+            <div class="website">Copyright © 2020 谨下网</div>
         </div>
     </div>
 </template>
