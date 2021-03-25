@@ -125,7 +125,7 @@ export default {
             this.buttonShow = 1;
             this.axios.post(this.api.user.emailCode, {email: this.user.email}).then(response => {
                 let resp = response.data;
-                if (resp.status != "000000") {
+                if (resp.status !== "000000") {
                     this.instance('error', resp.msg);
                     this.buttonShow = 0;
                     return;
@@ -166,7 +166,7 @@ export default {
         saveChangePwd() {
             this.axios.post(this.api.user.editPassword, this.pwdForm).then(response => {
                 let resp = response.data;
-                if (resp.status != "000000") {
+                if (resp.status !== "000000") {
                     this.instance('error', resp.msg);
                     return;
                 }
