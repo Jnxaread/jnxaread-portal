@@ -1,22 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Library from '../views/library/Library';
-import Fiction from '../views/library/Fiction';
-import Chapter from '../views/library/Chapter';
-import Directory from '../views/library/Directory';
-import SignIn from '../views/user/SignIn';
-import SignUp from '../views/user/SignUp';
-import UCenter from '../views/user/UCenter';
-import Forum from '../views/forum/Forum';
-import Topic from '../views/forum/Topic';
-import Notice from '../views/forum/Notice'
-import NewTopic from '../views/forum/NewTopic';
-import NewFiction from '../views/library/NewFiction';
-import NewChapter from '../views/library/NewChapter';
-import Manage from '../views/library/Manage';
-import Setting from '../views/user/Setting';
-import Error from "@/views/error/Error";
+const Home = () => import("../views/Home.vue");
+const Library = () => import("../views/library/Library");
+const Fiction = () => import("../views/library/Fiction");
+const Chapter = () => import("../views/library/Chapter");
+const Directory = () => import("../views/library/Directory");
+const SignIn = () => import("../views/user/SignIn");
+const SignUp = () => import("../views/user/SignUp");
+const UCenter = () => import("../views/user/UCenter");
+const Forum = () => import("../views/forum/Forum");
+const Topic = () => import("../views/forum/Topic");
+const Notice = () => import("../views/forum/Notice");
+const NewTopic = () => import("../views/forum/NewTopic");
+const NewFiction = () => import("../views/library/NewFiction");
+const NewChapter = () => import("../views/library/NewChapter");
+const Manage = () => import("../views/library/Manage");
+const Setting = () => import("../views/user/Setting");
+const Error = () => import("@/views/error/Error");
 
 /**
  * 重写路由的push方法
@@ -30,9 +30,9 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-      path: '/',
-      name: 'Home',
-      component: Home
+        path: '/',
+        name: 'Home',
+        component: Home
     },
     {
         path: '/library',
@@ -111,7 +111,7 @@ const routes = [
     },
     {
         path: "/error",
-        name:"Error",
+        name: "Error",
         component: Error
     }
 ];
