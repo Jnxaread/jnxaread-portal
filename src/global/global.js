@@ -38,11 +38,7 @@ exports.install = function (Vue) {
         let validateC = validateB.replace(/<\/p>/g, '');
         let validateD = validateC.replace(/&nbsp;/g, '');
         let validateE = validateD.replace(/<br>/g, '');
-        if (validateE.length !== 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return validateE.length !== 0;
     };
     /**
      * 将数字转换为汉字
