@@ -75,6 +75,9 @@
                 <router-link to="/">侵权与投诉</router-link>
             </div>
             <div class="website">Copyright © 2020 谨下网</div>
+            <div class="about">
+                <a href="http://www.mtslash.me/forum.php">随缘居</a>
+            </div>
         </div>
     </div>
 </template>
