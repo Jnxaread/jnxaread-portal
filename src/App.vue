@@ -48,7 +48,7 @@
                 <div class="userInfo" v-else>
                     <Dropdown>
                         <a href="javascript:void(0)">
-                            <!--                            <span class="username">{{ user.username }}</span>-->
+                            <!--<span class="username">{{ user.username }}</span>-->
                             <div class="username">{{user.username}}</div>
                             <Icon type="ios-arrow-down"></Icon>
                         </a>
