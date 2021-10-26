@@ -92,7 +92,7 @@
                         </div>
                         <div class="author_count">
                             <!--<span>{{ topic.username }}</span>
-                            <span>{{ topic.replycount }}</span>-->
+                            <span>{{ topic.replyCount }}</span>-->
                             <div class="author">{{ notice.username }}</div>
                             <div class="count">
                                 <div class="count_view">
@@ -336,7 +336,7 @@ export default {
 
 .paging_box {
     float: right;
-    margin: 20px 0px 10px 0px;
+    margin: 20px 0 10px 0;
 }
 
 .time {
@@ -422,7 +422,7 @@ export default {
 
     .paging_box {
         float: right;
-        margin: 20px 0px 0px 0px;
+        margin: 20px 0 0 0;
     }
 }
 </style>
