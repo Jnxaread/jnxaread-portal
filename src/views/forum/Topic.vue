@@ -437,8 +437,9 @@ export default {
 
     .modal_reply_overflow {
         width: 100%;
-        height: 50px;
+        height: 40px;
         font-size: 1.0rem;
+        -webkit-line-clamp: 1;
     }
 
     .editor_qu {
