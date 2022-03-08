@@ -85,7 +85,7 @@
                          v-for="(notice, index) in noticeList" :key="index">
                         <div>
                             【<span class="notice_label">{{ notice.label }}</span>】
-                            <span class="submitTime">{{ notice.submitTime | dateFormat }}</span>
+                            <span class="submitTime">{{ notice.createTime | dateFormat }}</span>
                         </div>
                         <div class="title">
                             <router-link :to="'/notice?id='+notice.id">{{ notice.title }}</router-link>
@@ -115,7 +115,7 @@
                          v-for="(topic, index) in topics" :key="index">
                         <div>
                             【<span class="label">{{ topic.label }}</span>】
-                            <span class="submitTime">{{ topic.submitTime | dateFormat }}</span>
+                            <span class="submitTime">{{ topic.createTime | dateFormat }}</span>
                         </div>
                         <div class="title">
                             <router-link :to="'/topic?id='+topic.id">{{ topic.title }}</router-link>
