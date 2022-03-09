@@ -46,7 +46,7 @@
                                 </span>
                                     <span class="reply_quote_floor">{{ reply.quotedReply.floor }}楼</span>
                                 </div>
-                                <span v-html="reply.quotedReply.content"></span>
+                                <span class="modal_reply_overflow_page" v-html="reply.quotedReply.content"></span>
                             </div>
                         </div>
                         <div class="reply_quote" v-else>
@@ -356,9 +356,17 @@ export default {
     padding: 45px 30px 30px 30px !important;
 }
 
+.modal_reply_overflow_page {
+    width: 958px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 .modal_reply_overflow {
     width: 800px;
-    height: 40px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -437,9 +445,7 @@ export default {
 
     .modal_reply_overflow {
         width: 100%;
-        height: 40px;
         font-size: 1.0rem;
-        -webkit-line-clamp: 1;
     }
 
     .editor_qu {
