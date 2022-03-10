@@ -9,12 +9,12 @@ import moment from 'moment';
 import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 import api from './global/api';
-import global from './global/global';
+import method from './global/method';
 
 Vue.use(VueAxios, axios);
 Vue.prototype.qs = qs;
 Vue.use(ViewUI);
-Vue.use(global);
+Vue.use(method);
 
 Vue.prototype.api = api;
 Vue.config.productionTip = false;
