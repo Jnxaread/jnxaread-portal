@@ -77,7 +77,6 @@
             <div class="website">Copyright © 2020 谨下网</div>
             <div class="about">
                 <a href="http://www.mtslash.me/forum.php">随缘居</a>
-                <a href="http://www.hongchenqingshi.com/forum.php">红尘青史</a>
             </div>
         </div>
     </div>
