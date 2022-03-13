@@ -1,5 +1,9 @@
+import {Message, Modal} from 'view-design';
+
 export default {
     install(Vue) {
+        Vue.prototype.$Modal = Modal;
+        Vue.prototype.$Message = Message;
         Vue.prototype.instance = function (type, content, ok, cancel) {
             switch (type) {
                 case 'success':

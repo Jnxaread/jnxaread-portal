@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import {Form, FormItem, Select, Option, Input, Tag, Button} from 'view-design';
+import {Form, FormItem, Select, Option, Input, Tag, Button, InputNumber} from 'view-design';
 
 export default {
     components: {
@@ -43,6 +43,7 @@ export default {
         Select,
         Option,
         Input,
+        InputNumber,
         Tag,
         Button
     },
@@ -103,7 +104,7 @@ export default {
             }
             this.$Modal.confirm({
                 render: (h) => {
-                    return h('Input', {
+                    return h(Input, {
                         props: {
                             autofocus: true,
                             // size:'large',

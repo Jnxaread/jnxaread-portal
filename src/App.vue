@@ -83,13 +83,14 @@
 </template>
 
 <script>
-import {Dropdown, DropdownMenu, DropdownItem} from 'view-design';
+import {Dropdown, DropdownMenu, DropdownItem, Icon} from 'view-design';
 
 export default {
     components: {
         Dropdown,
         DropdownMenu,
-        DropdownItem
+        DropdownItem,
+        Icon
     },
     data() {
         return {
