@@ -1,4 +1,6 @@
 // vue.config.js
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
 module.exports = {
     publicPath: '/',
     outputDir: 'dist', // 打包的目录
@@ -12,16 +14,6 @@ module.exports = {
         hotOnly: false,
         proxy: null, // 设置代理
     },
-    /*css: {
-        // 是否提取css生成单独的文件 默认 true
-        extract: true,
-        // 使用 CSS source maps?
-        sourceMap: false,
-        // loader配置
-        loaderOptions: {},
-        // 使用 css Modules
-        modules: false
-    },*/
     // 配置webpack
     configureWebpack: config => {
         // 开启分离js
@@ -45,5 +37,14 @@ module.exports = {
                 }
             }
         };
+        // 配置compression-webpack-plugin压缩
+        config.plugins.push(
+            new CompressionWebpackPlugin({
+                algorithm: 'gzip',
+                test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+                threshold: 10240,
+                minRatio: 0.8
+            })
+        );
     }
 };
