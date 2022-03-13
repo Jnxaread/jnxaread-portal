@@ -112,10 +112,18 @@
 
 <script>
 import Editor from '../../components/Editor';
+import {Button, Icon, Modal, Page, Time} from "view-design";
 
 export default {
     name: "Topic",
-    components: {Editor},
+    components: {
+        Editor,
+        Icon,
+        Time,
+        Page,
+        Button,
+        Modal
+    },
     data() {
         return {
             topic: {},

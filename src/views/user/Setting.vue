@@ -68,7 +68,7 @@
                                 <span>正在发送验证码</span>
                             </Button>
                             <Button slot="append" v-else>
-                                <span>{{timeCount}}s 后获取验证码</span>
+                                <span>{{ timeCount }}s 后获取验证码</span>
                             </Button>
                         </Input>
                     </FormItem>
@@ -82,7 +82,21 @@
 </template>
 
 <script>
+import {Menu, MenuItem, Tabs, TabPane, Form, FormItem, Input, RadioGroup, Radio, Button} from 'view-design';
+
 export default {
+    components: {
+        Menu,
+        MenuItem,
+        Tabs,
+        TabPane,
+        Form,
+        FormItem,
+        Input,
+        RadioGroup,
+        Radio,
+        Button
+    },
     name: "Setting",
     data() {
         return {

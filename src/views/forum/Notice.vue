@@ -17,8 +17,14 @@
 </template>
 
 <script>
+import {Icon, Time} from "view-design";
+
 export default {
     name: "Notice",
+    components: {
+        Icon,
+        Time
+    },
     data() {
         return {
             notice: {},

@@ -2,21 +2,21 @@
     <div class="fiction">
         <div class="fiction_main">
             <div class="detail">
-                <div class="title">{{fiction.title}}</div>
-                <div class="author">{{fiction.author}}</div>
+                <div class="title">{{ fiction.title }}</div>
+                <div class="author">{{ fiction.author }}</div>
                 <div class="middleBox">
-                    <span>章节 {{fiction.chapterCount}}</span>
-                    <span>字数 {{fiction.wordCount}}</span>
-                    <span>评论 {{fiction.commentCount}}</span>
-                    <span>点击 {{fiction.viewCount}}</span>
+                    <span>章节 {{ fiction.chapterCount }}</span>
+                    <span>字数 {{ fiction.wordCount }}</span>
+                    <span>评论 {{ fiction.commentCount }}</span>
+                    <span>点击 {{ fiction.viewCount }}</span>
                 </div>
                 <div class="label_box">
                     <div class="label" v-for="tag in fiction.tags" :key="tag">
-                        【{{tag}}】
+                        【{{ tag }}】
                     </div>
                 </div>
                 <div class="brief">
-                    <pre class="brief_pre">{{fiction.introduction}}</pre>
+                    <pre class="brief_pre">{{ fiction.introduction }}</pre>
                 </div>
             </div>
             <div class="turningBox">
@@ -36,8 +36,8 @@
             </div>
             <div class="comment" v-else v-for="(comment,index) in comments" :key="index">
                 <div class="comment_header">
-                    <div class="comment_author">{{comment.username}}</div>
-                    <div class="comment_submitTime">{{comment.createTime | dateFormat}}</div>
+                    <div class="comment_author">{{ comment.username }}</div>
+                    <div class="comment_submitTime">{{ comment.createTime | dateFormat }}</div>
                 </div>
                 <div class="comment_content" v-html="comment.content"></div>
             </div>
@@ -51,10 +51,15 @@
 
 <script>
 import Editor from '../../components/Editor';
+import {Button, Modal} from 'view-design';
 
 export default {
     name: "Fiction",
-    components: {Editor},
+    components: {
+        Editor,
+        Button,
+        Modal
+    },
     data() {
         return {
             fiction: {

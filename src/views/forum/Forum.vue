@@ -145,8 +145,15 @@
 </template>
 
 <script>
+import {Icon, Page, Time} from "view-design";
+
 export default {
     name: "Forum",
+    components: {
+        Time,
+        Page,
+        Icon
+    },
     data() {
         return {
             // screenWidth: null,

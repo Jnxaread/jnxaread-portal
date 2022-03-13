@@ -49,7 +49,7 @@
                     <Dropdown>
                         <a href="javascript:void(0)">
                             <!--<span class="username">{{ user.username }}</span>-->
-                            <div class="username">{{user.username}}</div>
+                            <div class="username">{{ user.username }}</div>
                             <Icon type="ios-arrow-down"></Icon>
                         </a>
                         <DropdownMenu slot="list">
@@ -83,7 +83,14 @@
 </template>
 
 <script>
+import {Dropdown, DropdownMenu, DropdownItem} from 'view-design';
+
 export default {
+    components: {
+        Dropdown,
+        DropdownMenu,
+        DropdownItem
+    },
     data() {
         return {
             logoWidth: null,

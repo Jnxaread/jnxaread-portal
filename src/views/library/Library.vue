@@ -52,7 +52,13 @@
 </template>
 
 <script>
+import {Time, Icon} from 'view-design';
+
 export default {
+    components: {
+        Time,
+        Icon
+    },
     name: "Library",
     data() {
         return {

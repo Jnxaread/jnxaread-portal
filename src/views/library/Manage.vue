@@ -5,24 +5,25 @@
                 <div class="briefInfo">
                     <div class="title">
                         <router-link :to="'/fiction?id='+fiction.id">
-                            {{fiction.title}}
+                            {{ fiction.title }}
                         </router-link>
                     </div>
                     <div class="labelBox">
-                        <div class="label" v-for="(tag,index) in fiction.tags" :key="index">{{tag}}</div>
+                        <div class="label" v-for="(tag,index) in fiction.tags" :key="index">{{ tag }}</div>
                     </div>
                     <div class="count">
                         <Icon class="count_icon" custom="iconfont icon-entypopencil" size="18"/>
-                        {{fiction.wordCount}}
+                        {{ fiction.wordCount }}
                         <Icon class="count_icon" type="md-eye" size="18"/>
-                        {{fiction.viewCount}}
+                        {{ fiction.viewCount }}
                         <Icon class="count_icon" type="md-text" size="18"/>
-                        {{fiction.commentCount}}
+                        {{ fiction.commentCount }}
                     </div>
                 </div>
                 <div class="operateInfo">
-                    <div class="lastTime">上次更新时间：<span>{{fiction.lastTime | dateFormat}}</span></div>
-                    <div class="lastChapter">上次更新章节：<span>第{{fiction.lastNumber}}章 {{fiction.lastChapter}}</span></div>
+                    <div class="lastTime">上次更新时间：<span>{{ fiction.lastTime | dateFormat }}</span></div>
+                    <div class="lastChapter">上次更新章节：<span>第{{ fiction.lastNumber }}章 {{ fiction.lastChapter }}</span>
+                    </div>
                     <div class="operate">
                         <Button class="operate_button" type="info" @click="goManageChapter(fiction.id)">管理章节</Button>
                         <!--<Button class="operate_button" type="info" @click="goNewChapter(fiction.id)">发布章节</Button>-->
@@ -44,22 +45,23 @@
             <div class="fictionInfo" v-for="(fiction,index) in fictions" :key="index">
                 <div class="title">
                     <router-link :to="'/fiction?id='+fiction.id">
-                        {{fiction.title}}
+                        {{ fiction.title }}
                     </router-link>
                 </div>
                 <div>
-                    <div class="label" v-for="(tag,index) in fiction.tags" :key="index">{{tag}}</div>
+                    <div class="label" v-for="(tag,index) in fiction.tags" :key="index">{{ tag }}</div>
                     <div class="count">
                         <Icon class="count_icon" type="md-eye" size="16"/>
-                        {{fiction.viewCount}}
+                        {{ fiction.viewCount }}
                         <Icon class="count_icon" type="md-text" size="16"/>
-                        {{fiction.commentCount}}
+                        {{ fiction.commentCount }}
                     </div>
                 </div>
-                <div class="lastTime">上次更新时间：<span>{{fiction.lastTime | dateFormat}}</span></div>
-                <div class="lastChapter">上次更新章节：<span>第{{fiction.lastNumber}}章 {{fiction.lastChapter}}</span></div>
+                <div class="lastTime">上次更新时间：<span>{{ fiction.lastTime | dateFormat }}</span></div>
+                <div class="lastChapter">上次更新章节：<span>第{{ fiction.lastNumber }}章 {{ fiction.lastChapter }}</span></div>
                 <div class="operate">
-                    <Button class="operate_button" type="info" size="small" @click="goManageChapter(fiction.id)">管理章节</Button>
+                    <Button class="operate_button" type="info" size="small" @click="goManageChapter(fiction.id)">管理章节
+                    </Button>
                     <!--<Button class="operate_button" type="info" @click="goNewChapter(fiction.id)">发布章节</Button>-->
                     <Dropdown class="operate_button">
                         <Button type="info" size="small">
@@ -78,7 +80,16 @@
 </template>
 
 <script>
+import {Icon, Button, Dropdown, DropdownItem, DropdownMenu} from 'view-design';
+
 export default {
+    components: {
+        Icon,
+        Button,
+        Dropdown,
+        DropdownMenu,
+        DropdownItem
+    },
     name: "Manage",
     data() {
         return {

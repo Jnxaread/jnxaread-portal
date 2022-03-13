@@ -1,13 +1,13 @@
 <template>
     <div class="uCenter">
         <div class="userInfo">
-            <div class="username">{{user.username}}</div>
+            <div class="username">{{ user.username }}</div>
             <div class="middleBox">
-                <span>等级 Lv{{user.level}}</span>
-                <span>作品 {{user.fictionCount}}</span>
-                <span>章节 {{user.chapterCount}}</span>
+                <span>等级 Lv{{ user.level }}</span>
+                <span>作品 {{ user.fictionCount }}</span>
+                <span>章节 {{ user.chapterCount }}</span>
             </div>
-            <div class="signature">{{user.signature}}</div>
+            <div class="signature">{{ user.signature }}</div>
             <div class="introduction" v-html="user.introduction"></div>
         </div>
         <div class="worksInfo">
@@ -22,23 +22,23 @@
                     <div class="fictionInfo" v-for="(fiction,index) in fictions" :key="index">
                         <div class="updateInfo">
                             <div class="title">
-                                <router-link :to="'/fiction?id='+fiction.id">{{fiction.title}}</router-link>
+                                <router-link :to="'/fiction?id='+fiction.id">{{ fiction.title }}</router-link>
                             </div>
-                            <div class="chapter">第{{fiction.lastNumber}}章 {{fiction.lastChapter}}</div>
-                            <div class="updateTime">{{fiction.lastTime | dateFormat}}</div>
+                            <div class="chapter">第{{ fiction.lastNumber }}章 {{ fiction.lastChapter }}</div>
+                            <div class="updateTime">{{ fiction.lastTime | dateFormat }}</div>
                         </div>
                         <div class="briefInfo">
-                            <div class="author">{{fiction.author}}</div>
+                            <div class="author">{{ fiction.author }}</div>
                             <div class="count">
                                 <Icon class="count_icon" custom="iconfont icon-entypopencil" size="22"/>
-                                {{fiction.wordCount}}
+                                {{ fiction.wordCount }}
                                 <Icon class="count_icon" type="md-eye" size="22"/>
-                                {{fiction.viewCount}}
+                                {{ fiction.viewCount }}
                                 <Icon class="count_icon" type="md-text" size="22"/>
-                                {{fiction.commentCount}}
+                                {{ fiction.commentCount }}
                             </div>
                             <div class="labelBox">
-                                <div class="label" v-for="(tag,index) in fiction.tags" :key="index">{{tag}}</div>
+                                <div class="label" v-for="(tag,index) in fiction.tags" :key="index">{{ tag }}</div>
                             </div>
                         </div>
                     </div>
@@ -46,22 +46,22 @@
                 <div class="tabMain" v-else-if="tabMain===2">
                     <div class="commentInfo" v-for="(comment,index) in comments" :key="index">
                         <div class="comment_head">
-                            <div class="reply_title">{{comment.fictionTitle}}</div>
-                            <div class="comment_time">发表于 {{comment.createTime | dateFormat}}</div>
+                            <div class="reply_title">{{ comment.fictionTitle }}</div>
+                            <div class="comment_time">发表于 {{ comment.createTime | dateFormat }}</div>
                         </div>
                         <div class="comment_content" v-html="comment.content"></div>
                     </div>
                 </div>
                 <div class="tabMain" v-else-if="tabMain===3">
                     <div class="topicInfo" v-for="(topic,index) in topics" :key="index">
-                        <div class="topic_title">【{{topic.label}}】{{topic.title}}</div>
+                        <div class="topic_title">【{{ topic.label }}】{{ topic.title }}</div>
                         <div class="topic_right">
                             <Icon class="count_icon" type="md-text" size="22"/>
-                            {{topic.replyCount}}
+                            {{ topic.replyCount }}
                             <Icon class="count_icon" type="md-eye" size="22"/>
-                            {{topic.viewCount}}
+                            {{ topic.viewCount }}
                             <Icon class="count_icon" type="md-calendar" size="22"/>
-                            {{topic.createTime | dateFormat}}
+                            {{ topic.createTime | dateFormat }}
                         </div>
                     </div>
                 </div>
@@ -70,12 +70,12 @@
                         <div class="reply_head">
                             <div class="reply_title">
                                 <router-link :to="'/topic?id='+reply.topicId">
-                                    {{reply.topicTitle}}
+                                    {{ reply.topicTitle }}
                                 </router-link>
                             </div>
                             <div class="head_right">
-                                <div class="reply_time">发表于 {{reply.createTime | dateFormat}}</div>
-                                <div class="reply_floor">{{reply.floor}}楼</div>
+                                <div class="reply_time">发表于 {{ reply.createTime | dateFormat }}</div>
+                                <div class="reply_floor">{{ reply.floor }}楼</div>
                             </div>
                         </div>
                         <div class="reply_body">
@@ -83,9 +83,9 @@
                                 <div class="quote_icon_e">
                                     <div class="reply_quote_head">
                                     <span class="reply_quote_info">
-                                        {{reply.quotedReply.username}} 发表于 {{reply.quotedReply.submitTime | dateFormat}}
+                                        {{ reply.quotedReply.username }} 发表于 {{ reply.quotedReply.submitTime | dateFormat }}
                                     </span>
-                                        <span class="reply_quote_floor">{{reply.quotedReply.floor}}楼</span>
+                                        <span class="reply_quote_floor">{{ reply.quotedReply.floor }}楼</span>
                                     </div>
                                     <span v-html="reply.quotedReply.content"></span>
                                 </div>
@@ -100,21 +100,21 @@
                     <div class="fictionInfo" v-for="(fiction,index) in fictions" :key="index">
                         <div>
                             <span class="title">
-                                <router-link :to="'/fiction?id='+fiction.id">{{fiction.title}}</router-link>
+                                <router-link :to="'/fiction?id='+fiction.id">{{ fiction.title }}</router-link>
                             </span>
-                            <span class="author">{{fiction.author}}</span>
+                            <span class="author">{{ fiction.author }}</span>
                         </div>
                         <div class="updateInfo">
-                            <span class="chapter">第{{fiction.lastNumber}}章 {{fiction.lastChapter}}</span>
+                            <span class="chapter">第{{ fiction.lastNumber }}章 {{ fiction.lastChapter }}</span>
                             <Time class="updateTime" v-if="fiction.lastTime" :time="fiction.lastTime"/>
                         </div>
                         <div>
-                            <span v-for="(tag,index) in fiction.tags" :key="index"> {{tag}} </span>
+                            <span v-for="(tag,index) in fiction.tags" :key="index"> {{ tag }} </span>
                             <span class="count">
                                 <Icon class="count_icon" custom="iconfont icon-entypopencil" size="16"/>
-                                {{fiction.wordCount}}
+                                {{ fiction.wordCount }}
                                 <Icon class="count_icon" type="md-text" size="16"/>
-                                {{fiction.commentCount}}
+                                {{ fiction.commentCount }}
                             </span>
                         </div>
                     </div>
@@ -122,7 +122,7 @@
                 <div class="tabMain" v-else-if="tabMain===2">
                     <div class="commentInfo" v-for="(comment,index) in comments" :key="index">
                         <div class="comment_head">
-                            <div class="reply_title">{{comment.fictionTitle}}</div>
+                            <div class="reply_title">{{ comment.fictionTitle }}</div>
                             <div class="comment_time">
                                 <Time class="updateTime" v-if="comment.createTime" :time="comment.createTime"/>
                             </div>
@@ -132,12 +132,12 @@
                 </div>
                 <div class="tabMain" v-else-if="tabMain===3">
                     <div class="topicInfo" v-for="(topic,index) in topics" :key="index">
-                        <div class="topic_title">【{{topic.label}}】{{topic.title}}</div>
+                        <div class="topic_title">【{{ topic.label }}】{{ topic.title }}</div>
                         <div class="topic_right">
                             <Icon class="count_icon" type="md-text" size="16"/>
-                            {{topic.replyCount}}
+                            {{ topic.replyCount }}
                             <Icon class="count_icon" type="md-eye" size="16"/>
-                            {{topic.viewCount}}
+                            {{ topic.viewCount }}
                             <Icon class="count_icon" type="md-calendar" size="16"/>
                             <Time class="topic_time" v-if="topic.createTime" :time="topic.createTime"/>
                         </div>
@@ -148,23 +148,23 @@
                         <div class="reply_head">
                             <div class="reply_title">
                                 <router-link :to="'/topic?id='+reply.topicId">
-                                    {{reply.topicTitle}}
+                                    {{ reply.topicTitle }}
                                 </router-link>
                             </div>
                             <div class="head_right">
                                 <div class="reply_time">
                                     <Time v-if="reply.createTime" :time="reply.createTime"/>
                                 </div>
-                                <div class="reply_floor">{{reply.floor}}楼</div>
+                                <div class="reply_floor">{{ reply.floor }}楼</div>
                             </div>
                         </div>
                         <div class="reply_body">
                             <div class="reply_quote" v-if="reply.quote!=0">
                                 <div class="reply_quote_head">
                                     <span class="reply_quote_info">
-                                        {{reply.quotedReply.username}}
+                                        {{ reply.quotedReply.username }}
                                     </span>
-                                    <span class="reply_quote_floor">{{reply.quotedReply.floor}}楼</span>
+                                    <span class="reply_quote_floor">{{ reply.quotedReply.floor }}楼</span>
                                 </div>
                                 <span v-html="reply.quotedReply.content"></span>
                             </div>
@@ -178,7 +178,13 @@
 </template>
 
 <script>
+import {Icon, Time} from 'view-design';
+
 export default {
+    components: {
+        Icon,
+        Time
+    },
     name: "UCenter",
     data() {
         return {

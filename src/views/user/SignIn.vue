@@ -18,7 +18,15 @@
 </template>
 
 <script>
+import {Form, FormItem, Button, Input} from 'view-design';
+
 export default {
+    components: {
+        Form,
+        FormItem,
+        Input,
+        Button
+    },
     name: "Login",
     data() {
         const validateAccount = (rule, value, callback) => {

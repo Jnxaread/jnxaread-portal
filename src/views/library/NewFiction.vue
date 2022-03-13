@@ -6,7 +6,7 @@
                 <FormItem label="作品类别">
                     <Select v-model="form.categoryId" size="large" placeholder="请选择作品类别">
                         <Option v-for="category in categories" :value="category.id" :key="category.id">
-                            {{category.name}}
+                            {{ category.name }}
                         </Option>
                     </Select>
                 </FormItem>
@@ -18,7 +18,7 @@
                            placeholder="请输入作品简介"/>
                 </FormItem>
                 <FormItem label="作品标签">
-                    <Tag v-for="tag in form.tags" :key="tag" color="gold" size="large">{{tag}}</Tag>
+                    <Tag v-for="tag in form.tags" :key="tag" color="gold" size="large">{{ tag }}</Tag>
                     <Button type="dashed" @click="addTag()">+</Button>
                     <Button class="button_addTag" type="dashed" @click="clearTags()">-</Button>
                 </FormItem>
@@ -34,7 +34,18 @@
 </template>
 
 <script>
+import {Form, FormItem, Select, Option, Input, Tag, Button} from 'view-design';
+
 export default {
+    components: {
+        Form,
+        FormItem,
+        Select,
+        Option,
+        Input,
+        Tag,
+        Button
+    },
     name: "NewFiction",
     data() {
         return {

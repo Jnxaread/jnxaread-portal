@@ -46,10 +46,15 @@
 
 <script>
 import Editor from '../../components/Editor';
+import {Button, Modal} from "view-design";
 
 export default {
     name: "Chapter",
-    components: {Editor},
+    components: {
+        Editor,
+        Button,
+        Modal
+    },
     data() {
         return {
             chapter: {},

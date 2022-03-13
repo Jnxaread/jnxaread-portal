@@ -11,7 +11,8 @@
                 </div>
                 <div class="topic_title">
                     <label>
-                        <Input class="input_title" v-model="topic.title" maxlength="35" show-word-limit size="large" placeholder="请输入标题"/>
+                        <Input class="input_title" v-model="topic.title" maxlength="35" show-word-limit size="large"
+                               placeholder="请输入标题"/>
                     </label>
                     <br v-if="screenWidth<600">
                     <span>最多输入35个字符</span>
@@ -33,10 +34,16 @@
 
 <script>
 import Editor from '../../components/Editor';
+import {Button, Input, InputNumber} from "view-design";
 
 export default {
     name: "Submit",
-    components: {Editor},
+    components: {
+        Editor,
+        Input,
+        InputNumber,
+        Button
+    },
     data() {
         return {
             topic: {
