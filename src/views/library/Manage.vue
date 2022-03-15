@@ -21,7 +21,9 @@
                     </div>
                 </div>
                 <div class="operateInfo">
-                    <div class="lastTime">上次更新时间：<span>{{ fiction.lastTime | dateFormat }}</span></div>
+                    <div class="lastTime">
+                        上次更新时间：<span><Time :time="fiction.lastTime" type="datetime"/></span>
+                    </div>
                     <div class="lastChapter">上次更新章节：<span>第{{ fiction.lastNumber }}章 {{ fiction.lastChapter }}</span>
                     </div>
                     <div class="operate">
@@ -57,7 +59,9 @@
                         {{ fiction.commentCount }}
                     </div>
                 </div>
-                <div class="lastTime">上次更新时间：<span>{{ fiction.lastTime | dateFormat }}</span></div>
+                <div class="lastTime">
+                    上次更新时间：<span><Time :time="fiction.lastTime" type="datetime"/></span>
+                </div>
                 <div class="lastChapter">上次更新章节：<span>第{{ fiction.lastNumber }}章 {{ fiction.lastChapter }}</span></div>
                 <div class="operate">
                     <Button class="operate_button" type="info" size="small" @click="goManageChapter(fiction.id)">管理章节
@@ -80,12 +84,13 @@
 </template>
 
 <script>
-import {Icon, Button, Dropdown, DropdownItem, DropdownMenu} from 'view-design';
+import {Icon, Button, Dropdown, DropdownItem, DropdownMenu, Time} from 'view-design';
 
 export default {
     components: {
         Icon,
         Button,
+        Time,
         Dropdown,
         DropdownMenu,
         DropdownItem

@@ -7,7 +7,9 @@
                         <router-link :to="'/fiction?id='+fiction.id">{{ fiction.title }}</router-link>
                     </div>
                     <div class="chapter">第{{ fiction.lastNumber }}章 {{ fiction.lastChapter }}</div>
-                    <div class="updateTime">{{ fiction.lastTime | dateFormat }}</div>
+                    <div class="updateTime">
+                        <Time :time="fiction.lastTime" type="datetime"/>
+                    </div>
                 </div>
                 <div class="briefInfo">
                     <div class="author">{{ fiction.author }}</div>

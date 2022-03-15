@@ -17,7 +17,9 @@
                         </div>
                         <div class="fiction_right">
                             <div class="fiction_author">{{ fiction.author }}</div>
-                            <div class="fiction_updateTime">{{ fiction.lastTime | dateFormat }}</div>
+                            <div class="fiction_updateTime">
+                                <Time :time="fiction.lastTime" type="datetime"/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,7 +57,9 @@
                         </div>
                         <div class="fiction_right">
                             <div class="fiction_author">{{ topic.lastReply }}</div>
-                            <div class="fiction_updateTime">{{ topic.lastSubmit | dateFormat }}</div>
+                            <div class="fiction_updateTime">
+                                <Time :time="topic.lastSubmit" type="datetime"/>
+                            </div>
                         </div>
                     </div>
                 </div>

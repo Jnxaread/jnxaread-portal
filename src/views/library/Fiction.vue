@@ -37,7 +37,9 @@
             <div class="comment" v-else v-for="(comment,index) in comments" :key="index">
                 <div class="comment_header">
                     <div class="comment_author">{{ comment.username }}</div>
-                    <div class="comment_submitTime">{{ comment.createTime | dateFormat }}</div>
+                    <div class="comment_submitTime">
+                        <Time :time="comment.createTime" type="datetime" />
+                    </div>
                 </div>
                 <div class="comment_content" v-html="comment.content"></div>
             </div>
@@ -51,14 +53,15 @@
 
 <script>
 import Editor from '../../components/Editor';
-import {Button, Modal} from 'view-design';
+import {Button, Modal, Time} from 'view-design';
 
 export default {
     name: "Fiction",
     components: {
         Editor,
         Button,
-        Modal
+        Modal,
+        Time
     },
     data() {
         return {

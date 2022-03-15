@@ -20,7 +20,6 @@
                         </td>
                         <td :class="index===noticeList.length-1?'author':'author border_bottom'">
                             <h3>{{ notice.username }}</h3>
-                            <!--<p>{{ notice.createTime | dateFormat }}</p>-->
                             <Time class="time" :time="notice.createTime"/>
                         </td>
                         <td :class="index===noticeList.length-1?'reply_view':'reply_view border_bottom'">
@@ -28,7 +27,6 @@
                         </td>
                         <td :class="index===noticeList.length-1?'latestReply':'latestReply border_bottom'">
                             <h3>{{ notice.lastEdit }}</h3>
-                            <!--<p>{{ notice.lastSubmitTime | dateFormat }}</p>-->
                             <Time class="time" :time="notice.lastTime"/>
                         </td>
                     </tr>
@@ -53,7 +51,6 @@
                         </td>
                         <td :class="index===topics.length-1?'author':'author border_bottom'">
                             <h3>{{ topic.username }}</h3>
-                            <!--<p>{{ topic.createTime | dateFormat }}</p>-->
                             <Time class="time" :time="topic.createTime"/>
                         </td>
                         <td :class="index===topics.length-1?'reply_view':'reply_view border_bottom'">
@@ -62,7 +59,6 @@
                         </td>
                         <td :class="index===topics.length-1?'latestReply':'latestReply border_bottom'">
                             <h3>{{ topic.lastReply }}</h3>
-                            <!--<p>{{ topic.lastSubmit | dateFormat }}</p>-->
                             <Time class="time" :time="topic.lastSubmit"/>
                         </td>
                     </tr>
@@ -85,7 +81,9 @@
                          v-for="(notice, index) in noticeList" :key="index">
                         <div>
                             【<span class="notice_label">{{ notice.label }}</span>】
-                            <span class="submitTime">{{ notice.createTime | dateFormat }}</span>
+                            <span class="submitTime">
+                                <Time :time="notice.createTime" type="datetime"/>
+                            </span>
                         </div>
                         <div class="title">
                             <router-link :to="'/notice?id='+notice.id">{{ notice.title }}</router-link>
@@ -115,7 +113,9 @@
                          v-for="(topic, index) in topics" :key="index">
                         <div>
                             【<span class="label">{{ topic.label }}</span>】
-                            <span class="submitTime">{{ topic.createTime | dateFormat }}</span>
+                            <span class="submitTime">
+                                <Time :time="topic.createTime" type="datetime"/>
+                            </span>
                         </div>
                         <div class="title">
                             <router-link :to="'/topic?id='+topic.id">{{ topic.title }}</router-link>

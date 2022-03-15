@@ -10,7 +10,10 @@
             <div class="info">
                 <div class="info_item">作者：{{ chapter.author }}</div>
                 <div class="info_item">字数：{{ chapter.wordCount }}</div>
-                <div class="info_item">更新时间：{{ chapter.createTime | dateFormat }}</div>
+                <div class="info_item">
+                    更新时间：
+                    <Time :time="chapter.createTime" type="datetime"/>
+                </div>
             </div>
             <div class="content" v-html="chapter.content"></div>
             <div class="turningBox">
@@ -32,7 +35,9 @@
             <div class="comment" v-else v-for="(comment,index) in comments" :key="index">
                 <div class="comment_header">
                     <div class="comment_author">{{ comment.username }}</div>
-                    <div class="comment_submitTime">{{ comment.createTime | dateFormat }}</div>
+                    <div class="comment_submitTime">
+                        <Time :time="comment.createTime" type="datetime"/>
+                    </div>
                 </div>
                 <div class="comment_content" v-html="comment.content"></div>
             </div>
@@ -46,12 +51,13 @@
 
 <script>
 import Editor from '../../components/Editor';
-import {Button, Modal} from "view-design";
+import {Button, Modal, Time} from "view-design";
 
 export default {
     name: "Chapter",
     components: {
         Editor,
+        Time,
         Button,
         Modal
     },

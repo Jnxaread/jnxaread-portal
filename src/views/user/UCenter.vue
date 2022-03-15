@@ -25,7 +25,9 @@
                                 <router-link :to="'/fiction?id='+fiction.id">{{ fiction.title }}</router-link>
                             </div>
                             <div class="chapter">第{{ fiction.lastNumber }}章 {{ fiction.lastChapter }}</div>
-                            <div class="updateTime">{{ fiction.lastTime | dateFormat }}</div>
+                            <div class="updateTime">
+                                <Time :time="fiction.lastTime" type="datetime"/>
+                            </div>
                         </div>
                         <div class="briefInfo">
                             <div class="author">{{ fiction.author }}</div>
@@ -47,7 +49,10 @@
                     <div class="commentInfo" v-for="(comment,index) in comments" :key="index">
                         <div class="comment_head">
                             <div class="reply_title">{{ comment.fictionTitle }}</div>
-                            <div class="comment_time">发表于 {{ comment.createTime | dateFormat }}</div>
+                            <div class="comment_time">
+                                发表于
+                                <Time :time="comment.createTime" type="datetime"/>
+                            </div>
                         </div>
                         <div class="comment_content" v-html="comment.content"></div>
                     </div>
@@ -61,7 +66,7 @@
                             <Icon class="count_icon" type="md-eye" size="22"/>
                             {{ topic.viewCount }}
                             <Icon class="count_icon" type="md-calendar" size="22"/>
-                            {{ topic.createTime | dateFormat }}
+                            <Time :time="topic.createTime" type="datetime"/>
                         </div>
                     </div>
                 </div>
@@ -74,7 +79,10 @@
                                 </router-link>
                             </div>
                             <div class="head_right">
-                                <div class="reply_time">发表于 {{ reply.createTime | dateFormat }}</div>
+                                <div class="reply_time">
+                                    发表于
+                                    <Time :time="reply.createTime" type="datetime"/>
+                                </div>
                                 <div class="reply_floor">{{ reply.floor }}楼</div>
                             </div>
                         </div>
@@ -83,7 +91,8 @@
                                 <div class="quote_icon_e">
                                     <div class="reply_quote_head">
                                     <span class="reply_quote_info">
-                                        {{ reply.quotedReply.username }} 发表于 {{ reply.quotedReply.submitTime | dateFormat }}
+                                        {{ reply.quotedReply.username }} 发表于
+                                        <Time :time="reply.quoteReply.createTime" type="datetime"/>
                                     </span>
                                         <span class="reply_quote_floor">{{ reply.quotedReply.floor }}楼</span>
                                     </div>

@@ -7,7 +7,6 @@
                     <Icon class="authorIcon" type="md-person" size="22"/>
                     <span>{{ topic.username }}</span>
                 </div>
-                <!--<div class="info_submitTime">发表于{{ topic.createTime | dateFormat }}</div>-->
                 <div class="info_submitTime">
                     发表于
                     <Time v-if="topic.createTime" :time="topic.createTime"/>
@@ -29,7 +28,6 @@
                         <Icon class="authorIcon" type="md-person" size="22"/>
                         <span>{{ reply.username }}</span>
                     </div>
-                    <!--<div class="info_submitTime">{{ reply.createTime | dateFormat }}</div>-->
                     <div class="info_submitTime">
                         发表于
                         <Time v-if="topic.createTime" :time="reply.createTime"/>
@@ -42,7 +40,8 @@
                             <div class="quote_icon_e">
                                 <div class="reply_quote_head">
                                 <span class="reply_quote_info">
-                                    {{ reply.quotedReply.username }} 发表于 {{ reply.quotedReply.submitTime | dateFormat }}
+                                    {{ reply.quotedReply.username }} 发表于
+                                    <Time :time="reply.quotedReply.createTime" type="datetime"/>
                                 </span>
                                     <span class="reply_quote_floor">{{ reply.quotedReply.floor }}楼</span>
                                 </div>
@@ -82,7 +81,7 @@
                 <div class="quote_icon_e">
                     <div class="reply_quote_head">
                         <span class="reply_quote_info">
-                            {{ toQuote.username }} 发表于 {{ toQuote.submitTime | dateFormat }}
+                            {{ toQuote.username }} 发表于 <Time :time="toQuote.createTime" type="datetime"/>
                         </span>
                         <span class="reply_quote_floor">{{ toQuote.floor }}楼</span>
                     </div>

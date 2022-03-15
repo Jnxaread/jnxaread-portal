@@ -38,7 +38,7 @@
                     <td class="chapter_viewCount">{{ chapter.viewCount }}</td>
                     <td class="chapter_commentCount">{{ chapter.commentCount }}</td>
                     <td class="chapter_submitTime">
-                        {{ chapter.createTime | dateFormat }}
+                        <Time :time="chapter.createTime" type="datetime" />
                     </td>
                     <td class="chapter_operate" v-if="isManage">
                         <Button class="chapter_button" size="small" type="primary" @click="editChapter(chapter)">

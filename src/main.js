@@ -5,7 +5,6 @@ import store from './store'
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import qs from 'qs';
-import moment from 'moment';
 import 'view-design/dist/styles/iview.css';
 import api from './global/api';
 import method from './global/method';
@@ -16,10 +15,6 @@ Vue.use(method);
 
 Vue.prototype.api = api;
 Vue.config.productionTip = false;
-
-Vue.filter('dateFormat', function (tick) {
-    return moment(tick).format("YYYY-MM-DD HH:mm:ss");
-});
 
 axios.defaults.baseURL = process.env.VUE_APP_SERVER;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
