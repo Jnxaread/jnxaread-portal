@@ -92,7 +92,7 @@
                                     <div class="reply_quote_head">
                                     <span class="reply_quote_info">
                                         {{ reply.quotedReply.username }} 发表于
-                                        <Time :time="reply.quoteReply.createTime" type="datetime"/>
+                                        <Time :time="reply.quotedReply.createTime" type="datetime"/>
                                     </span>
                                         <span class="reply_quote_floor">{{ reply.quotedReply.floor }}楼</span>
                                     </div>

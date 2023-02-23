@@ -30,7 +30,7 @@
                     </div>
                     <div class="info_submitTime">
                         发表于
-                        <Time v-if="topic.createTime" :time="reply.createTime"/>
+                        <Time v-if="reply.createTime" :time="reply.createTime"/>
                     </div>
                     <div class="info_floor">{{ reply.floor }}楼</div>
                 </div>
@@ -81,7 +81,7 @@
                 <div class="quote_icon_e">
                     <div class="reply_quote_head">
                         <span class="reply_quote_info">
-                            {{ toQuote.username }} 发表于 <Time :time="toQuote.createTime" type="datetime"/>
+                            {{ toQuote.username }} 发表于 <Time v-if="toQuote.createTime" :time="toQuote.createTime" type="datetime"/>
                         </span>
                         <span class="reply_quote_floor">{{ toQuote.floor }}楼</span>
                     </div>
