@@ -110,7 +110,7 @@ export default {
     background-color: #999;
 }
 
-.form /deep/ .ivu-input:focus {
+.form ::v-deep .ivu-input:focus {
     box-shadow: none;
 }
 

@@ -335,7 +335,7 @@ export default {
         text-overflow: ellipsis;
     }
 
-    .userInfo /deep/ .ivu-icon {
+    .userInfo ::v-deep .ivu-icon {
         vertical-align: super;
     }
 

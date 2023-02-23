@@ -359,7 +359,7 @@ export default {
     background-color: #999;
 }
 
-.modal_reply /deep/ .ivu-modal-body {
+.modal_reply ::v-deep .ivu-modal-body {
     padding: 45px 30px 30px 30px !important;
 }
 
@@ -446,7 +446,7 @@ export default {
         font-size: 1.0rem;
     }
 
-    .modal_reply /deep/ .ivu-modal-body {
+    .modal_reply ::v-deep .ivu-modal-body {
         padding: 35px 15px 15px 15px !important;
     }
 

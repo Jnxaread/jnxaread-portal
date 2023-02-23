@@ -244,7 +244,7 @@ export default {
     }
 }
 
-.form /deep/ .ivu-input:focus {
+.form ::v-deep .ivu-input:focus {
     box-shadow: none;
 }
 </style>

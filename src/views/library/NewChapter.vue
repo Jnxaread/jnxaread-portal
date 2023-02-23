@@ -200,15 +200,15 @@ export default {
     margin-top: 30px;
 }
 
-/*.topic_top /deep/ .ivu-input {
+/*.topic_top ::v-deep .ivu-input {
     background-color: #f5f5f5;
 }
 
-.topic_top /deep/ .ivu-input-word-count {
+.topic_top ::v-deep .ivu-input-word-count {
     background-color: #f5f5f5;
 }*/
 
-.topic_top /deep/ .ivu-input:focus {
+.topic_top ::v-deep .ivu-input:focus {
     box-shadow: none;
 }
 
@@ -248,7 +248,7 @@ export default {
     margin-top: 15px;
 }
 
-.topic_content /deep/ .w-e-text {
+.topic_content ::v-deep .w-e-text {
     background-color: #fff;
 }
 

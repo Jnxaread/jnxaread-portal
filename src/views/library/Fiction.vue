@@ -287,7 +287,7 @@ export default {
     line-height: 38px;
 }
 
-.modal_comment /deep/ .ivu-modal-body {
+.modal_comment ::v-deep .ivu-modal-body {
     padding: 45px 30px 30px 30px !important;
 }
 </style>

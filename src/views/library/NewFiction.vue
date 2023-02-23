@@ -169,11 +169,11 @@ export default {
     font-family: YouYuan, serif;
 }
 
-.fiction_form /deep/ .ivu-form-item-label {
+.fiction_form ::v-deep .ivu-form-item-label {
     font-size: 1.3em;
 }
 
-.fiction_form /deep/ .ivu-input:focus {
+.fiction_form ::v-deep .ivu-input:focus {
     box-shadow: none;
 }
 
